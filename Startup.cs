@@ -56,7 +56,6 @@ namespace CinemaProject
                 endpoints.MapControllerRoute(
                    
                     pattern: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Session", action= "Index"},
                     constraints: new { id  = "int" },
                     name: "MyRoute"
                     );

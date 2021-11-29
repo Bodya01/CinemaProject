@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaProject.Controllers
 {
-    public class SessionControlller : Controller
+    public class SessionController : Controller
     {
         // GET: Session
         public ActionResult Index()
