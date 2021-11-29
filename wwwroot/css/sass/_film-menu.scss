@@ -1,0 +1,85 @@
+.main {
+  display: grid;
+  grid-template-columns: 334px 290px 290px 290px 290px 334px;
+  grid-template-rows: 400px 400px 400px;
+  align-content: center;
+  justify-content: center;
+  gap: 10px 15px;
+  margin: 100px 0 100px 0;
+  .first-left-grid {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    background-image: url("../images/folder/3.jpg");
+    background-position: center;
+  }
+  .first-right-grid {
+    grid-column-start: 6;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    background-image: url("../images/folder/777.jpg");
+    background-position: center;
+  }
+  &-first-film {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    .main-first-film-img {
+      background-image: url("../images/folder/ФОРСАЖ1.png");
+      width: 269px;
+      height: 300px;
+      margin: 0 auto;
+    }
+    .main-first-film-info {
+      width: 269px;
+      height: 50px;
+      margin: 0 auto;
+      background-color: #008dc1;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: $Medium;
+    }
+    .main-first-film-text {
+      color: black;
+      font-family: $Medium;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &-second-film {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    .main-second-film-img {
+      background-image: url("../images/folder/2.jpg");
+      width: 269px;
+      height: 300px;
+      margin: 0 auto;
+    }
+    .main-second-film-info {
+      width: 269px;
+      height: 50px;
+      margin: 0 auto;
+      background-color: #f0e130;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: $Medium;
+    }
+    .main-second-film-text {
+      color: black;
+      font-family: $Medium;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
