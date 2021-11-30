@@ -8,35 +8,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/main.css" />
+    <link href="/css/main.css" rel="stylesheet" />
   </head>
-  <body class="sign-in-page-background">
-    <div class="sign-in-main">
-      <h1>sign-in</h1>
+  <body class="sign-up-page-background">
+    <div class="sign-up-main">
+      <h1>sign-up</h1>
       <form method="post">
-        <div class="sign-in-main-txt">
-          <input type="email" type="text" required />
+        <div class="sign-up-main-txt">
+          <input type="text" required />
+          <span></span>
+          <label>Name</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input type="text" required />
+          <span></span>
+          <label>Surname</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input type="email" required />
           <span></span>
           <label>E-mail</label>
         </div>
 
-        <div class="sign-in-main-txt">
+        <div class="sign-up-main-txt">
+          <input type="number" required />
+          <label>Phone</label>
+        </div>
+
+        <div class="sign-up-main-txt">
           <input minlength="8" type="password" required />
-          <span></span>
           <label>Password</label>
         </div>
 
-        <div class="pass">
-          <a href="forgotpassword.html"> Forgot Password?</a>
+        <div class="sign-up-main-txt">
+          <input minlength="8" type="password" required />
+          <label>Password</label>
         </div>
+
         <input type="submit" value="Login" />
-        <div class="signup_link">
-          Not a member? <a href="signup.html">Signup</a>
-        </div>
       </form>
     </div>
   </body>
 </html>
+
 
 
 
