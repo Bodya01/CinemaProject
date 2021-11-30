@@ -23,7 +23,7 @@ namespace CinemaProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(User user)
+        public ActionResult SignIn(User user)
         {
            
             return View();
