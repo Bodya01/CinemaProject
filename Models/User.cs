@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
 namespace CinemaProject.Data
 {
     [Table("User")]
+    [Index(nameof(UserEmail), IsUnique = true)]
     public partial class User
     {
+
         public User()
         {
             Carts = new HashSet<Cart>();
@@ -18,8 +19,11 @@ namespace CinemaProject.Data
             UserRoles = new HashSet<UserRole>();
         }
 
+
+        
         [Key]
         [Column("userId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long UserId { get; set; }
         [Required]
         [Column("userName")]

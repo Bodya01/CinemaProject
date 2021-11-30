@@ -93,8 +93,10 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Category", b =>
                 {
                     b.Property<long>("CategoryId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("categoryId");
+                        .HasColumnName("categoryId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryDescription")
                         .IsRequired()
@@ -124,8 +126,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Cinema", b =>
                 {
                     b.Property<long>("CinemaId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("cinemaId");
 
                     b.Property<string>("Adrees")
                         .IsRequired()
@@ -147,8 +149,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.City", b =>
                 {
                     b.Property<long>("CityId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("cityId");
 
                     b.Property<string>("CityName")
                         .IsRequired()
@@ -165,8 +167,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Demonstration", b =>
                 {
                     b.Property<long>("DemonstrationId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("demonstrationId");
 
                     b.Property<double>("Cof")
                         .HasColumnType("float")
@@ -224,7 +226,6 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Location", b =>
                 {
                     b.Property<long>("LocationId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint")
@@ -256,8 +257,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Movie", b =>
                 {
                     b.Property<long>("MovieId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("movieId");
 
                     b.Property<int>("AgeRestriction")
                         .HasColumnType("int")
@@ -346,8 +347,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Permission", b =>
                 {
                     b.Property<long>("PermissionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("permissionId");
 
                     b.Property<string>("PermissionDescription")
                         .IsRequired()
@@ -371,8 +372,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Product", b =>
                 {
                     b.Property<long>("ProductId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("productId");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -394,8 +395,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Promocode", b =>
                 {
                     b.Property<long>("PromocodeId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("promocodeId");
 
                     b.Property<int>("CountUse")
                         .HasColumnType("int")
@@ -423,8 +424,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Reciept", b =>
                 {
                     b.Property<long>("RecieptId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("recieptId");
 
                     b.Property<string>("PaymentType")
                         .IsRequired()
@@ -448,8 +449,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.ReservedTicket", b =>
                 {
                     b.Property<long>("ReservedTicketId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("reservedTicketId");
 
                     b.HasKey("ReservedTicketId");
 
@@ -459,8 +460,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Role", b =>
                 {
                     b.Property<long>("RoleId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("roleId");
 
                     b.Property<string>("RoleDescription")
                         .IsRequired()
@@ -586,8 +587,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Subcategory", b =>
                 {
                     b.Property<long>("SubcategoryId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("subcategoryId");
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint")
@@ -680,8 +681,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.User", b =>
                 {
                     b.Property<long>("UserId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("userId");
 
                     b.Property<string>("UserEmail")
                         .IsRequired()
@@ -718,6 +719,9 @@ namespace CinemaProject.Migrations
                         .IsFixedLength(true);
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserEmail")
+                        .IsUnique();
 
                     b.ToTable("User");
                 });

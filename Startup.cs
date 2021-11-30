@@ -1,13 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CinemaProject
 {
@@ -41,8 +36,11 @@ namespace CinemaProject
             }
             app.UseStaticFiles();
             app.UseRouting();
+
             app.UseAuthorization();
-            app.UseAuthentication();
+
+
+
 
 
             app.UseEndpoints(endpoints =>
@@ -50,8 +48,8 @@ namespace CinemaProject
                 endpoints.MapControllerRoute(
                    
                     pattern: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Session", action= "Index"},
-                    constraints: new { id  = "int" },
+                    constraints: new { id = "int" },
+                    defaults: new {Controller = "Home",Action = "Index"},
                     name: "MyRoute"
                     );
             });

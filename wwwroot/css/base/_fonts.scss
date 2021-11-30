@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "ExtraBold";
+  src: url("./fonts/Overpass-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Medium";
+  src: url("./fonts/Ubuntu-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Regular";
+  src: url("./fonts/Overpass-Regular.ttf");
+}
+
+@font-face {
+  font-family: "LightItalic";
+  src: url("./fonts/Ubuntu-LightItalic.ttf");
+}
+
+$ExtraBold: "ExtraBold";
+$Medium: "Medium";
+$Regular: "Regular";
+$LightItalic: "LightItalic";
