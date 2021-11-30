@@ -1,18 +1,23 @@
 ﻿using CinemaProject.Data;
-using Microsoft.AspNetCore.Http;
+using CinemaProject.Models.SessionModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
     public class SessionController : Controller
     {
+        ApplicationDbContext data = new();
+
+
         // GET: Session
         public ActionResult Index()
         {
             return View();
         }
 
-            
+
         public ActionResult Login()
         {
             return View();
@@ -21,70 +26,32 @@ namespace CinemaProject.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
+            if (ModelState.IsValid & user != null)
+            {
+                data.Users.Add(user);
+                data.SaveChanges();
+                return Index();
+            }
+         
+
+                
+
             return View(user);
         }
 
-        // GET: Session/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Session/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [AllowAnonymous, HttpGet("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPassword model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                //code here 
 
-        // GET: Session/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+                ModelState.Clear();
+                model.EmailSent = true;
+            }
 
-        // POST: Session/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Session/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Session/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }

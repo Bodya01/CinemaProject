@@ -1,6 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -46,8 +45,8 @@ namespace CinemaProject.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
- 
-                optionsBuilder.UseSqlServer("Server= DESKTOP-GL1TEJO;Database=Cinema;Trusted_Connection=True;");
+
+                optionsBuilder.UseSqlServer("Server= DESKTOP-GL1TEJO;Database=CinemaProject;Trusted_Connection=True;");
             }
         }
 
@@ -71,6 +70,7 @@ namespace CinemaProject.Data
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cart_User");
+               
             });
 
             modelBuilder.Entity<CartProduct>(entity =>
@@ -93,7 +93,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.Property(e => e.CategoryId).ValueGeneratedNever();
+                entity.Property(e => e.CategoryId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CategoryDescription)
                     .IsUnicode(false)
@@ -106,7 +106,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Cinema>(entity =>
             {
-                entity.Property(e => e.CinemaId).ValueGeneratedNever();
+                entity.Property(e => e.CinemaId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Adrees).IsFixedLength(true);
 
@@ -119,14 +119,14 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<City>(entity =>
             {
-                entity.Property(e => e.CityId).ValueGeneratedNever();
+                entity.Property(e => e.CityId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CityName).IsFixedLength(true);
             });
 
             modelBuilder.Entity<Demonstration>(entity =>
             {
-                entity.Property(e => e.DemonstrationId).ValueGeneratedNever();
+                entity.Property(e => e.DemonstrationId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DemonstrationName)
                     .IsUnicode(false)
@@ -152,7 +152,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Location>(entity =>
             {
-                entity.Property(e => e.LocationId).ValueGeneratedNever();
+                entity.Property(e => e.LocationId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.District)
                     .IsUnicode(false)
@@ -171,7 +171,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Movie>(entity =>
             {
-                entity.Property(e => e.MovieId).ValueGeneratedNever();
+                entity.Property(e => e.MovieId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.MovieDescription).IsFixedLength(true);
 
@@ -218,7 +218,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Permission>(entity =>
             {
-                entity.Property(e => e.PermissionId).ValueGeneratedNever();
+                entity.Property(e => e.PermissionId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.PermissionDescription).IsFixedLength(true);
 
@@ -227,7 +227,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.ProductId).ValueGeneratedNever();
+                entity.Property(e => e.ProductId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.ProductName)
                     .IsUnicode(false)
@@ -236,7 +236,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Promocode>(entity =>
             {
-                entity.Property(e => e.PromocodeId).ValueGeneratedNever();
+                entity.Property(e => e.PromocodeId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.PromocodeDescription).IsFixedLength(true);
 
@@ -245,7 +245,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Reciept>(entity =>
             {
-                entity.Property(e => e.RecieptId).ValueGeneratedNever();
+                entity.Property(e => e.RecieptId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.PaymentType).IsFixedLength(true);
 
@@ -254,12 +254,12 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<ReservedTicket>(entity =>
             {
-                entity.Property(e => e.ReservedTicketId).ValueGeneratedNever();
+                entity.Property(e => e.ReservedTicketId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.Property(e => e.RoleId).ValueGeneratedNever();
+                entity.Property(e => e.RoleId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.RoleDescription).IsFixedLength(true);
 
@@ -321,7 +321,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Subcategory>(entity =>
             {
-                entity.Property(e => e.SubcategoryId).ValueGeneratedNever();
+                entity.Property(e => e.SubcategoryId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.SubcategoryDescription)
                     .IsUnicode(false)
@@ -364,7 +364,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId).ValueGeneratedNever();
+                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.UserEmail).IsFixedLength(true);
 
@@ -375,6 +375,11 @@ namespace CinemaProject.Data
                 entity.Property(e => e.UserPhone).IsFixedLength(true);
 
                 entity.Property(e => e.UserSurname).IsFixedLength(true);
+
+                entity.HasIndex(e => e.UserEmail).IsUnique();
+
+
+
             });
 
             modelBuilder.Entity<UserRole>(entity =>
