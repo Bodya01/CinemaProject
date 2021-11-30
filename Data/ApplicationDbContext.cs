@@ -46,7 +46,7 @@ namespace CinemaProject.Data
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server= DESKTOP-GL1TEJO;Database=CinemaProject;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server= DESKTOP-1FI14L0;Database=CinemaProject;Trusted_Connection=True;");
             }
         }
 

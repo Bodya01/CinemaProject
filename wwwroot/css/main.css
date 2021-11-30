@@ -639,18 +639,18 @@ table {
           align-items: center;
 }
 
-.login-page-background {
+.sign-in-page-background {
   margin: 0;
   padding: 0;
   background: #008dc1;
   background: to right, #ec2f4b, #008dc1;
-  background: -webkit-gradient(linear, left top, right top, from(#ec2f4b), to(#008dc1));
-  background: linear-gradient(to right, #ec2f4b, #008dc1);
+  background: -webkit-gradient(linear, left top, right top, from(#bbb), to(#008dc1));
+  background: linear-gradient(to right, #bbb, #008dc1);
   height: 100vh;
   overflow: hidden;
 }
 
-.login-main {
+.sign-in-main {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -663,7 +663,7 @@ table {
           box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
 }
 
-.login-main h1 {
+.sign-in-main h1 {
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid silver;
@@ -671,19 +671,19 @@ table {
   font-size: 33px;
 }
 
-.login-main form {
+.sign-in-main form {
   padding: 0 40px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-form .txt_field {
+.sign-in-main form .sign-in-main-txt {
   position: relative;
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
 
-.txt_field input {
+.sign-in-main .sign-in-main-txt input {
   width: 100%;
   padding: 0 5px;
   height: 40px;
@@ -694,7 +694,19 @@ form .txt_field {
   font-family: "Medium";
 }
 
-.txt_field label {
+.sign-in-main .sign-in-main-txt input:focus ~ label,
+.sign-in-main .sign-in-main-txt input:valid ~ label {
+  top: -5px;
+  font-family: "Medium";
+  color: #008dc1;
+}
+
+.sign-in-main .sign-in-main-txt input:focus ~ span::before,
+.sign-in-main .sign-in-main-txt input:valid ~ span::before {
+  width: 100%;
+}
+
+.sign-in-main .sign-in-main-txt label {
   font-family: "Medium";
   position: absolute;
   top: 50%;
@@ -708,7 +720,7 @@ form .txt_field {
   transition: 0.5s;
 }
 
-.txt_field span::before {
+.sign-in-main .sign-in-main-txt span::before {
   content: "";
   position: absolute;
   top: 40px;
@@ -720,63 +732,301 @@ form .txt_field {
   transition: 0.5s;
 }
 
-.txt_field input:focus ~ label,
-.txt_field input:valid ~ label {
-  top: -5px;
-  font-family: "Regular";
-  color: #008dc1;
-}
-
-.txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before {
-  width: 100%;
-}
-
-.pass {
-  margin: -5px 0 20px 5px;
+.sign-in-main .pass {
+  text-align: center;
   color: #a6a6a6;
-  cursor: pointer;
   font-family: "LightItalic";
+  text-decoration: none;
+  margin: 0 0 20px 0;
 }
 
-.pass:hover {
+.sign-in-main .pass a {
+  text-decoration: none;
+}
+
+.sign-in-main .pass a:hover {
   text-decoration: underline;
 }
 
-input[type="submit"] {
+.sign-in-main input[type="submit"] {
   width: 100%;
   height: 50px;
   border: 1px solid;
   background: #008dc1;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 27px;
   color: #e9f4fb;
-  font-weight: 700;
+  font-family: "ExtraBold";
   cursor: pointer;
   outline: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-input[type="submit"]:hover {
+.sign-in-main input[type="submit"]:hover {
   border-color: #008dc1;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.signup_link {
+.sign-in-main .signup_link {
   margin: 30px 0;
   text-align: center;
   font-size: 16px;
-  font-family: "ExtraBold";
   color: black;
+  font-family: "ExtraBold";
 }
 
-.signup_link a {
-  color: #008dc1;
+.sign-in-main .signup_link a {
+  color: #2691d9;
   text-decoration: none;
   font-family: "LightItalic";
 }
 
-.signup_link a:hover {
+.sign-in-main .signup_link a:hover {
   text-decoration: underline;
+}
+
+.sign-up-page-background {
+  margin: 0;
+  padding: 0;
+  background: #008dc1;
+  background: to right, #ec2f4b, #008dc1;
+  background: -webkit-gradient(linear, left top, right top, from(#ec2f4b), to(#008dc1));
+  background: linear-gradient(to right, #ec2f4b, #008dc1);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sign-up-main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+          box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.sign-up-main h1 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+  font-family: "ExtraBold";
+  font-size: 33px;
+}
+
+.sign-up-main form {
+  padding: 0 40px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.sign-up-main form .sign-up-main-txt {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+
+.sign-up-main .sign-up-main-txt input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+  font-family: "Medium";
+}
+
+.sign-up-main .sign-up-main-txt input:focus ~ label,
+.sign-up-main .sign-up-main-txt input:valid ~ label {
+  top: -5px;
+  font-family: "Medium";
+  color: #008dc1;
+}
+
+.sign-up-main .sign-up-main-txt input:focus ~ span::before,
+.sign-up-main .sign-up-main-txt input:valid ~ span::before {
+  width: 100%;
+}
+
+.sign-up-main .sign-up-main-txt label {
+  font-family: "Medium";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.sign-up-main .sign-up-main-txt span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #008dc1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.sign-up-main input[type="submit"] {
+  width: 100%;
+  height: 50px;
+  border: 1px solid;
+  background: #008dc1;
+  border-radius: 25px;
+  font-size: 27px;
+  color: #e9f4fb;
+  cursor: pointer;
+  outline: none;
+  margin: 0 0 30px 0;
+  font-family: "ExtraBold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.sign-up-main input[type="submit"]:hover {
+  border-color: #008dc1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.forgot-password-page-background {
+  margin: 0;
+  padding: 0;
+  background: #008dc1;
+  background: to right, #ec2f4b, #008dc1;
+  background: -webkit-gradient(linear, left top, right top, from(#bbb), to(#008dc1));
+  background: linear-gradient(to right, #bbb, #008dc1);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.forgot-password-main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+          box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.forgot-password-main h1 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+  font-family: "ExtraBold";
+  font-size: 33px;
+}
+
+.forgot-password-main form {
+  padding: 0 40px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.forgot-password-main form .forgot-password-main-txt {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+
+.forgot-password-main .forgot-password-main-txt input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+  font-family: "Medium";
+}
+
+.forgot-password-main .forgot-password-main-txt input:focus ~ label,
+.forgot-password-main .forgot-password-main-txt input:valid ~ label {
+  top: -5px;
+  font-family: "Medium";
+  color: #008dc1;
+}
+
+.forgot-password-main .forgot-password-main-txt input:focus ~ span::before,
+.forgot-password-main .forgot-password-main-txt input:valid ~ span::before {
+  width: 100%;
+}
+
+.forgot-password-main .forgot-password-main-txt label {
+  font-family: "Medium";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.forgot-password-main .forgot-password-main-txt span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #008dc1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.forgot-password-main input[type="submit"] {
+  width: 100%;
+  height: 50px;
+  border: 1px solid;
+  background: #008dc1;
+  border-radius: 25px;
+  font-size: 27px;
+  color: #e9f4fb;
+  font-family: "ExtraBold";
+  cursor: pointer;
+  outline: none;
+  line-height: 50px;
+  margin: 0 0 30px 0;
+}
+
+.forgot-password-main input[type="submit"]:hover {
+  border-color: #008dc1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 /*# sourceMappingURL=main.css.map */
