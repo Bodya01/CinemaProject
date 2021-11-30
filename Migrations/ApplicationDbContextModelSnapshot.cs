@@ -127,7 +127,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("CinemaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Adrees")
                         .IsRequired()
@@ -150,7 +150,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("CityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CityName")
                         .IsRequired()
@@ -168,7 +168,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("DemonstrationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<double>("Cof")
                         .HasColumnType("float")
@@ -225,7 +225,7 @@ namespace CinemaProject.Migrations
 
             modelBuilder.Entity("CinemaProject.Data.Location", b =>
                 {
-                    b.Property<long>("LocationId")
+                    b.Property<long>("LocationId");
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint")
@@ -258,7 +258,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("MovieId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("AgeRestriction")
                         .HasColumnType("int")
@@ -348,7 +348,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("PermissionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("PermissionDescription")
                         .IsRequired()
@@ -373,7 +373,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -396,7 +396,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("PromocodeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("CountUse")
                         .HasColumnType("int")
@@ -425,7 +425,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("RecieptId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("PaymentType")
                         .IsRequired()
@@ -450,7 +450,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("ReservedTicketId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ReservedTicketId");
 
@@ -461,7 +461,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("RoleDescription")
                         .IsRequired()
@@ -588,7 +588,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("SubcategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint")
@@ -682,7 +682,7 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("UserEmail")
                         .IsRequired()

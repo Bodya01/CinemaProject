@@ -32,10 +32,6 @@ namespace CinemaProject.Controllers
                 data.SaveChanges();
                 return Index();
             }
-         
-
-                
-
             return View(user);
         }
 
