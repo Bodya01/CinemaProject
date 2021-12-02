@@ -8,7 +8,7 @@ namespace CinemaProject.Controllers
 {
     public class SessionController : Controller
     {
-  
+
 
 
         // GET: Session
@@ -25,7 +25,7 @@ namespace CinemaProject.Controllers
         [HttpPost]
         public ActionResult SignIn(User user)
         {
-           
+
             return View();
         }
 

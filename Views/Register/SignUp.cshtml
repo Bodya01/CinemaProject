@@ -1,91 +1,50 @@
-﻿@{
-    Layout = null;
+﻿@model User
+
+@{
+    Layout = "_AufLayout";
 }
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="/css/main.css" rel="stylesheet" />
-  </head>
-  <body class="sign-up-page-background">
-    <div class="sign-up-main">
+
+    <div class="sign-up-main sign-in-main">
       <h1>sign-up</h1>
-      <form method="post">
+      <form asp-action="SignUp" method="post" >
         <div class="sign-up-main-txt">
-          <input type="text" required />
+          <input type="text" asp-for="UserName" required/>
           <span></span>
           <label>Name</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input type="text" required />
+          <input type="text" asp-for="UserSurname" required />
           <span></span>
           <label>Surname</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input type="email" required />
+          <input type="email" asp-for="UserEmail" required />
           <span></span>
           <label>E-mail</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input type="number" required />
+          <input type="number" asp-for="UserPhone" required />
           <label>Phone</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input minlength="8" type="password" required />
+          <input minlength="8" type="password" asp-for="UserPassword" required />
           <label>Password</label>
         </div>
-
-        <div class="sign-up-main-txt">
-          <input minlength="8" type="password" required />
-          <label>Password</label>
-        </div>
-
         <input type="submit" value="Login" />
-      </form>
+          <div class="pass">
+       <div class="signup_link">
+      <a asp-action="SignIn" asp-controller="Session">Вхід</a>
+      </div>
+      </div>
+      </form>    
     </div>
-  </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*@model User
-
-@{
-    Layout = null;
-}
 
 
 @*Here Register*@
-
-
-
-
-
-
-
-
-
-
-
-
 
 @*@model User
 
