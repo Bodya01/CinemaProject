@@ -20,7 +20,7 @@ namespace CinemaProject.Data
         }
 
 
-        
+
         [Key]
         [Column("userId")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

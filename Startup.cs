@@ -44,7 +44,7 @@ namespace CinemaProject
                    
                     pattern: "{controller}/{action}/{id?}",
                     constraints: new { id = "int" },
-                    defaults: new {Controller = "Home",Action = "Index"},
+                    defaults: new { Controller = "Home", Action = "Index" },
                     name: "MyRoute"
                     );
             });

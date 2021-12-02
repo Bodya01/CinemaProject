@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -70,7 +69,7 @@ namespace CinemaProject.Data
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cart_User");
-               
+
             });
 
             modelBuilder.Entity<CartProduct>(entity =>
