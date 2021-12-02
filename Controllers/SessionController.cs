@@ -8,7 +8,7 @@ namespace CinemaProject.Controllers
 {
     public class SessionController : Controller
     {
-        ApplicationDbContext data = new();
+  
 
 
         // GET: Session
@@ -17,14 +17,13 @@ namespace CinemaProject.Controllers
             return View();
         }
 
-
-        public ActionResult Login()
+        public ActionResult SignIn()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult SignIn(User user)
         {
             if (ModelState.IsValid & user != null)
             {
@@ -32,6 +31,10 @@ namespace CinemaProject.Controllers
                 data.SaveChanges();
                 return Index();
             }
+         
+
+                
+
             return View(user);
         }
 

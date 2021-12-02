@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/css/main.css" rel="stylesheet" />
+  </head>
+  <body class="sign-up-page-background">
+    <div class="sign-up-main">
+      <h1>sign-up</h1>
+      <form method="post">
+        <div class="sign-up-main-txt">
+          <input type="text" required />
+          <span></span>
+          <label>Name</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input type="text" required />
+          <span></span>
+          <label>Surname</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input type="email" required />
+          <span></span>
+          <label>E-mail</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input type="number" required />
+          <label>Phone</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input minlength="8" type="password" required />
+          <label>Password</label>
+        </div>
+
+        <div class="sign-up-main-txt">
+          <input minlength="8" type="password" required />
+          <label>Password</label>
+        </div>
+
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model User
+
+@{
+    Layout = null;
+}
+
+
+@*Here Register*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model User
+
+
+<form asp-action="Login" method="post" >
+		<div>
+			<label asp-for="UserName"></label>
+			<div>
+				<input asp-for="UserName" />
+				<span asp-validation-for="UserName"></span>
+			</div>
+		</div>
+
+		<div>
+			<label asp-for="UserSurname"></label>
+			<div class="col-md-5">
+				<input asp-for="UserSurname" />
+				<span asp-validation-for="UserSurname" ></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="UserEmail"></label>
+			<div>
+				<input asp-for="UserEmail" />
+				<span asp-validation-for="UserEmail" ></span>
+			</div>
+		</div>
+
+		<div>
+			<label asp-for="UserPassword"></label>
+			<div >
+				<input asp-for="UserPassword" />
+				<span asp-validation-for="UserPassword" ></span>
+			</div>
+		</div>
+
+		<div >
+			<label asp-for="UserPhone"></label>
+			<div>
+				<input asp-for="UserPhone"  />
+				<span asp-validation-for="UserPhone"></span>
+			</div>
+		</div>
+		<input class="btn btn-success" type ="submit" value="Зареєструватися" />
+	</form>	
+
+	<a asp-action="ForgotPassword" asp-controller="Session">Востановити пароль</a>*@
