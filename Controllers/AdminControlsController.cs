@@ -1,13 +1,15 @@
 ﻿using CinemaProject.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CinemaProject.Controllers
 {
     public class AdminControlsController : Controller
     {
         private ApplicationDbContext data = new ApplicationDbContext();
-        private List<Subcategory> Subcategories = new List<Subcategory>();
+        private List<Subcategory> subcategories = new List<Subcategory>();
 
         // GET: AdminControls
         public ActionResult Index()
@@ -24,6 +26,7 @@ namespace CinemaProject.Controllers
         // GET: AdminControls/Create
         public ActionResult Create()
         {
+            ViewBag.Subcategories = new SelectList(subcategories, "SubcategoryId", "SubcategoryName");
             return View();
         }
 
@@ -58,6 +61,9 @@ namespace CinemaProject.Controllers
             return View(movie);
         }
 
-       
+        private void GetSubcategoryList()
+        {
+            subcategories = data.Subcategories.ToList();
+        }
     }
 }
