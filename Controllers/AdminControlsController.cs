@@ -1,11 +1,13 @@
 ﻿using CinemaProject.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CinemaProject.Controllers
 {
     public class AdminControlsController : Controller
     {
-        ApplicationDbContext data = new ApplicationDbContext();
+        private ApplicationDbContext data = new ApplicationDbContext();
+        private List<Subcategory> Subcategories = new List<Subcategory>();
 
         // GET: AdminControls
         public ActionResult Index()
@@ -55,5 +57,7 @@ namespace CinemaProject.Controllers
             }
             return View(movie);
         }
+
+       
     }
 }

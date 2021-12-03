@@ -1,15 +1,16 @@
-﻿@model Movie
+﻿@using CinemaProject.Models.AdminModels
+@model AddMovie;
 @{
     Layout = "_Layout";
 }
 
 <main>
     <form id="AddMovieForm" asp-action="AddMovie">
-        <input type="text" placeholder="Movie name" asp-for="NameMovie"/>
-        <input type="text" placeholder="Age restrcition" asp-for="AgeRestriction"/>
-        <input type="text" placeholder="Creation date" asp-for="CreateAt" />
+        <input type="text" placeholder="Movie name" asp-for="Movie.NameMovie"/>
+        <input type="text" placeholder="Age restrcition" asp-for="Movie.AgeRestriction"/>
+        <input type="text" placeholder="Creation date" asp-for="Movie.CreateAt" />
         <div id="CategorySelects">
-            <select></select>
+            <select asp-for="SubcategoryId"></select>
         </div>
         <button type="button" id="AddCategorySelect">Add category list</button>
         <div id="SubcategorySelects">
@@ -18,6 +19,6 @@
         <button type="button" id="AddSubcategorySelect">Add subcategory list</button>
         <input type="submit" value="Add"/>
     </form>
-    <textarea placeholder="Movie description" form="AddMovieForm" asp-for="MovieDescription"></textarea>    
+    <textarea placeholder="Movie description" form="AddMovieForm" asp-for="Movie.MovieDescription"></textarea>    
 </main>
 <script src="~/js/AddMovie.js"></script>
