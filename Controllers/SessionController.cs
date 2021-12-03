@@ -27,10 +27,6 @@ namespace CinemaProject.Controllers
         {
             
             this.userManager = userManager;
-
-            
-
-
             this.signInManager = signInManager;
            
         }
@@ -42,21 +38,40 @@ namespace CinemaProject.Controllers
             return View();
         }
 
-        public ActionResult SignIn()
+
+        [HttpGet]
+        public IActionResult SignIn(string returnUrl = "/Home/Index")
         {
 
-            return View();
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public ActionResult SignIn(User model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignIn(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-             
+                var result =
+                    await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                }
             }
-
-            return View();
+            return View(model);
         }
 
 
@@ -100,22 +115,14 @@ namespace CinemaProject.Controllers
         }
 
 
-        private async Task Authenticate(string userName)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
         {
-            // создаем один claim
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
-            };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+           
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
-
-
-
-        
 
 
         [AllowAnonymous, HttpGet("forgot-password")]
@@ -123,8 +130,7 @@ namespace CinemaProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                //code here 
-
+               
                 ModelState.Clear();
                 model.EmailSent = true;
             }
