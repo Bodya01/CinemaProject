@@ -1,6 +1,8 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Models.AdminModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +28,6 @@ namespace CinemaProject.Controllers
         // GET: AdminControls/Create
         public ActionResult Create()
         {
-            ViewBag.Subcategories = new SelectList(subcategories, "SubcategoryId", "SubcategoryName");
             return View();
         }
 
@@ -46,16 +47,24 @@ namespace CinemaProject.Controllers
 
         public ActionResult AddMovie()
         {
+            GetSubcategoryList();
+            ViewBag.Subcategories = new SelectList(subcategories, "SubcategoryId", "SubcategoryName");
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddMovie(Movie movie)
+        public ActionResult AddMovie(AddMovie movie)
         {
             if (ModelState.IsValid & movie != null)
             {
-                data.Movies.Add(movie);
+                data.Movies.Add(movie.Movie);
                 data.SaveChanges();
+                var movieId = data.Movies.FirstOrDefault(x => x.NameMovie == movie.Movie.NameMovie).MovieId;
+                data.MovieSubcategories.Add(new MovieSubcategory
+                {
+                    MovieId = movieId,
+                    SubcategoryId = movie.SubcategoryId
+                });
                 return Index();
             }
             return View(movie);

@@ -1,7 +1,7 @@
 ﻿$("#AddCategorySelect").click(function () {
-    $("#CategorySelects").append("<select></select>")
+    $("#CategorySelects").append('<select id="SubcategorySelect" asp-for="SubcategoryId" asp-items="ViewBag.Subcategories"></select>')
 });
 
 $("#AddSubcategorySelect").click(function () {
-    $("#SubcategorySelects").append("<select></select>")
+    $("#SubcategorySelects").append('<select id="SubcategorySelect" asp-for="SubcategoryId" asp-items="ViewBag.Subcategories"></select>')
 });
