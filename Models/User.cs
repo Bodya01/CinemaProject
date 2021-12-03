@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,8 +10,9 @@ namespace CinemaProject.Data
 {
     [Table("User")]
     [Index(nameof(UserEmail), IsUnique = true)]
-    public partial class User
+    public class User : IdentityUser
     {
+
 
         public User()
         {
@@ -25,6 +27,7 @@ namespace CinemaProject.Data
         [Column("userId")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long UserId { get; set; }
+
         [Required]
         [Column("userName")]
         [StringLength(20)]

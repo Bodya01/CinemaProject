@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
 namespace CinemaProject.Data
 {
-    public partial class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
         {
@@ -51,6 +52,7 @@ namespace CinemaProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");
 
             modelBuilder.Entity<Cart>(entity =>
@@ -67,6 +69,7 @@ namespace CinemaProject.Data
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.UserId)
+                    .HasPrincipalKey(x => x.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cart_User");
 
@@ -194,6 +197,7 @@ namespace CinemaProject.Data
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.MovieRatings)
                     .HasForeignKey(d => d.UserId)
+                     .HasPrincipalKey(x => x.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MovieRating_User");
             });
@@ -378,7 +382,6 @@ namespace CinemaProject.Data
                 entity.HasIndex(e => e.UserEmail).IsUnique();
 
 
-
             });
 
             modelBuilder.Entity<UserRole>(entity =>
@@ -394,11 +397,13 @@ namespace CinemaProject.Data
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserRoles)
                     .HasForeignKey(d => d.UserId)
+                     .HasPrincipalKey(x => x.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserRoles_User");
             });
 
             OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
