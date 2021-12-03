@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model RegisterViewModel
 
 @{
     Layout = "_AufLayout";
@@ -6,7 +6,8 @@
 
     <div class="sign-up-main sign-in-main">
       <h1>sign-up</h1>
-      <form asp-action="SignUp" method="post" >
+      <form asp-action="SignUp" asp-controller="Session" method="post" >
+		   <div asp-validation-summary="ModelOnly"></div>
         <div class="sign-up-main-txt">
           <input type="text" asp-for="UserName" required/>
           <span></span>
@@ -14,32 +15,38 @@
         </div>
 
         <div class="sign-up-main-txt">
-          <input type="text" asp-for="UserSurname" required />
+          <input type="text" asp-for="Surname" required />
           <span></span>
           <label>Surname</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input type="email" asp-for="UserEmail" required />
+          <input type="email" asp-for="Email" required />
           <span></span>
           <label>E-mail</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input type="number" asp-for="UserPhone" required />
+          <input type="number" asp-for="Phone" required />
           <label>Phone</label>
         </div>
 
         <div class="sign-up-main-txt">
-          <input minlength="8" type="password" asp-for="UserPassword" required />
+          <input minlength="8" type="password" asp-for="Password" required />
           <label>Password</label>
+        </div>
+
+		 <div class="sign-up-main-txt">
+          <input minlength="8" type="password" asp-for="PasswordConfirm" required />
+          <label>Confirm Password</label>
         </div>
         <input type="submit" value="Login" />
           <div class="pass">
        <div class="signup_link">
       <a asp-action="SignIn" asp-controller="Session">Вхід</a>
       </div>
-      </div>	v
+      </div>	
+
       </form>    
     </div>
 

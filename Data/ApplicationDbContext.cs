@@ -373,7 +373,7 @@ namespace CinemaProject.Data
 
                 entity.Property(e => e.UserName).IsFixedLength(true);
 
-                entity.Property(e => e.UserPassword).IsFixedLength(true);
+              
 
                 entity.Property(e => e.UserPhone).IsFixedLength(true);
 

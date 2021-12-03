@@ -1,4 +1,6 @@
+using CinemaProject;
 using CinemaProject.Data;
+using CinemaProject.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,10 +8,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using System;
+
 
 namespace CinemaProject
 {
+    
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,12 +28,11 @@ namespace CinemaProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
+         
+           services.AddDbContext<ApplicationDbContext>();
             services.AddSession();
-            services.AddDbContext<ApplicationDbContext>();
-            services.AddIdentity<User, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Account/AccessDenied";
@@ -40,6 +45,25 @@ namespace CinemaProject
             });
 
 
+         
+
+
+
+
+
+            services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.User.RequireUniqueEmail = false;
+                
+                   
+                })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+          
+
+            
+
+
             services.AddControllersWithViews();
             services.AddMvc();
 
@@ -49,6 +73,9 @@ namespace CinemaProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+           
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,8 +1,11 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Models.ModelViews;
 using CinemaProject.Models.SessionModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -13,9 +16,27 @@ namespace CinemaProject.Controllers
     public class SessionController : Controller
     {
 
+        private readonly UserManager<User> userManager;
+
+        private readonly SignInManager<User> signInManager;
+
         ApplicationDbContext data = new();
 
-        // GET: Session
+        public SessionController(UserManager<User> userManager,
+            SignInManager<User> signInManager)
+        {
+            
+            this.userManager = userManager;
+
+            
+
+
+            this.signInManager = signInManager;
+           
+        }
+
+
+        // GET: Session     
         public ActionResult Index()
         {
             return View();
@@ -28,11 +49,11 @@ namespace CinemaProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignIn(User user)
+        public ActionResult SignIn(User model)
         {
             if (ModelState.IsValid)
             {
-                
+             
             }
 
             return View();
@@ -46,17 +67,36 @@ namespace CinemaProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp(User user)
+        public async Task<IActionResult> SignUp(RegisterViewModel model)
         {
-            if (ModelState.IsValid & user != null)
+            if (ModelState.IsValid & model != null)
             {
-                data.Users.Add(user);
-                data.SaveChanges();
-                await Authenticate(user.Email);
-                return RedirectToAction("Index", "Home");
+                var user = new User
+                {
+                    UserName = model.Email,
+                    UserEmail = model.Email,               
+                    UserSurname = model.Surname,
+                  
+                    
+                };
+                var result = await userManager.CreateAsync(user, model.Password);
+                
+                if (result.Succeeded)
+                {
+                    await signInManager.SignInAsync(user,  false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                }
             }
 
-            return View(user);
+            return View(model);
         }
 
 
