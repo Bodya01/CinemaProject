@@ -1,0 +1,23 @@
+﻿@model Movie
+@{
+    Layout = "_Layout";
+}
+
+<main>
+    <form id="AddMovieForm" asp-action="AddMovie">
+        <input type="text" placeholder="Movie name" asp-for="NameMovie"/>
+        <input type="text" placeholder="Age restrcition" asp-for="AgeRestriction"/>
+        <input type="text" placeholder="Creation date" asp-for="CreateAt" />
+        <div id="CategorySelects">
+            <select></select>
+        </div>
+        <button type="button" id="AddCategorySelect">Add category list</button>
+        <div id="SubcategorySelects">
+            <select></select>
+        </div>
+        <button type="button" id="AddSubcategorySelect">Add subcategory list</button>
+        <input type="submit" value="Add"/>
+    </form>
+    <textarea placeholder="Movie description" form="AddMovieForm" asp-for="MovieDescription"></textarea>    
+</main>
+<script src="~/js/AddMovie.js"></script>
