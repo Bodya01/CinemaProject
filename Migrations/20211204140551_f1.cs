@@ -11,7 +11,11 @@ namespace CinemaProject.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    roleId = table.Column<long>(type: "bigint", nullable: false),
+                    roleName = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
+                    roleDescription = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -25,9 +29,9 @@ namespace CinemaProject.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    userId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<long>(type: "bigint", nullable: false),
                     userSurname = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
                     userEmail = table.Column<string>(type: "nchar(50)", fixedLength: true, maxLength: 50, nullable: false),
                     userPassword = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: true),
@@ -182,26 +186,12 @@ namespace CinemaProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    roleId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    roleName = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
-                    roleDescription = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.roleId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -222,7 +212,7 @@ namespace CinemaProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -244,7 +234,7 @@ namespace CinemaProject.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -261,8 +251,8 @@ namespace CinemaProject.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -285,7 +275,7 @@ namespace CinemaProject.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -299,6 +289,31 @@ namespace CinemaProject.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    userId = table.Column<long>(type: "bigint", nullable: false),
+                    roleId = table.Column<long>(type: "bigint", nullable: false),
+                    userRolesID = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.userId, x.roleId, x.userRolesID });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Role",
+                        column: x => x.roleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_User",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "userId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -392,6 +407,31 @@ namespace CinemaProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RolePermissions",
+                columns: table => new
+                {
+                    rolePermissionsId = table.Column<long>(type: "bigint", nullable: false),
+                    roleId = table.Column<long>(type: "bigint", nullable: false),
+                    permissionId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rolePermissions", x => new { x.rolePermissionsId, x.roleId, x.permissionId });
+                    table.ForeignKey(
+                        name: "FK_rolePermissions_Permission",
+                        column: x => x.permissionId,
+                        principalTable: "Permission",
+                        principalColumn: "permissionId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_rolePermissions_Role",
+                        column: x => x.roleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cart",
                 columns: table => new
                 {
@@ -414,56 +454,6 @@ namespace CinemaProject.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cart_User",
-                        column: x => x.userId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RolePermissions",
-                columns: table => new
-                {
-                    rolePermissionsId = table.Column<long>(type: "bigint", nullable: false),
-                    roleId = table.Column<long>(type: "bigint", nullable: false),
-                    permissionId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_rolePermissions", x => new { x.rolePermissionsId, x.roleId, x.permissionId });
-                    table.ForeignKey(
-                        name: "FK_rolePermissions_Permission",
-                        column: x => x.permissionId,
-                        principalTable: "Permission",
-                        principalColumn: "permissionId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_rolePermissions_Role",
-                        column: x => x.roleId,
-                        principalTable: "Role",
-                        principalColumn: "roleId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserRoles",
-                columns: table => new
-                {
-                    userId = table.Column<long>(type: "bigint", nullable: false),
-                    roleId = table.Column<long>(type: "bigint", nullable: false),
-                    userRolesID = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.userId, x.roleId, x.userRolesID });
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Role",
-                        column: x => x.roleId,
-                        principalTable: "Role",
-                        principalColumn: "roleId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserRoles_User",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "userId",
@@ -846,9 +836,6 @@ namespace CinemaProject.Migrations
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
@@ -867,7 +854,7 @@ namespace CinemaProject.Migrations
                 name: "Session");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Category");
