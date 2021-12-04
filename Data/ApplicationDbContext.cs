@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 #nullable disable
 
 namespace CinemaProject.Data
 {
-    public partial class ApplicationDbContext : IdentityDbContext<User>
+    public partial class ApplicationDbContext : IdentityDbContext<User,Role, long>
     {
         public ApplicationDbContext()
         {

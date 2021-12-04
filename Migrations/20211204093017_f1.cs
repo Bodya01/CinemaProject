@@ -28,11 +28,10 @@ namespace CinemaProject.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     userId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userName = table.Column<string>(type: "nchar(256)", fixedLength: true, maxLength: 256, nullable: false),
                     userSurname = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
                     userEmail = table.Column<string>(type: "nchar(50)", fixedLength: true, maxLength: 50, nullable: false),
-                    userPassword = table.Column<string>(type: "nchar(1000)", fixedLength: true, maxLength: 1000, nullable: false),
-                    userPhone = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: true),
+                    userPassword = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: true),
+                    UserName = table.Column<string>(type: "nchar(256)", fixedLength: true, maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -104,7 +103,8 @@ namespace CinemaProject.Migrations
                     nameMovie = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
                     ageRestriction = table.Column<int>(type: "int", nullable: false),
                     movieDescription = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
-                    createAt = table.Column<DateTime>(type: "date", nullable: false)
+                    createAt = table.Column<DateTime>(type: "date", nullable: false),
+                    MoviePhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -132,7 +132,8 @@ namespace CinemaProject.Migrations
                     productId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     productName = table.Column<string>(type: "char(50)", unicode: false, fixedLength: true, maxLength: 50, nullable: false),
-                    productPrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false)
+                    productPrice = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    ProductPhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,0 +1,125 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.navbar-admin-page {
+}
+
+
+.left-admin-panel {
+    width: 255px;
+    height: 100vh;
+    background: #363740;
+    display: flex;
+    justify-content: center;
+    float: left;
+}
+
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+    .admin-dashboard li {
+        width: 255px;
+        height: 56px;
+        list-style: none;
+    }
+
+        .admin-dashboard li:hover {
+            background: #9FA2B4;
+        }
+
+            .admin-dashboard li:hover a {
+                color: #DDE2FF;
+                opacity: 1;
+            }
+
+
+
+.dashboard-admin-kit {
+    padding-top: 41px;
+    display: flex;
+    padding-bottom: 61px;
+}
+
+    .dashboard-admin-kit img {
+        width: 32px;
+        height: 32px;
+        margin-left: 29px;
+        margin-right: 12px;
+    }
+
+    .dashboard-admin-kit h3 {
+        font-size: 19px;
+        line-height: 24px;
+        letter-spacing: 0.4px;
+        color: #A4A6B3;
+        opacity: 0.7;
+        align-self: center;
+    }
+
+
+.admin-dashboard li a {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+    color: #A4A6B3;
+    height: 74px;
+    padding-left: 32px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+
+
+.icons-admin-panel {
+    color: white;
+    font-size: 20px;
+    margin-right: 24px;
+    float: left;
+}
+
+.navbar-admin-page {
+}
+
+.page-admin-panel {
+    margin-left: 27px;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.3px;
+    color: #252733;
+    align-self: center;
+}
+
+.account-admin-panel {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 33px;
+    padding-top: 30px;
+}
+
+.user-admin-panel {
+    display: flex;
+    align-self: center;
+    margin-right: 14px;
+}
+
+    .user-admin-panel span {
+        align-self: center;
+        margin-right: 14px;
+    }
+
+
+.right-admin-page {
+    display: flex;
+    padding-left: 30px;
+    padding-top: 54px;
+    flex-direction: column;
+}

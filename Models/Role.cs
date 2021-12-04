@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,9 +9,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data
 {
     [Table("Role")]
-    public partial class Role
+    public partial class Role : IdentityRole<long>
     {
-        public Role()
+        public Role() : base()
         {
             RolePermissions = new HashSet<RolePermission>();
             UserRoles = new HashSet<UserRole>();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,11 +14,11 @@ namespace CinemaProject.Data
 {
     [Table("User")]
     [Index(nameof(UserEmail), IsUnique = true)]
-    public class User : IdentityUser
+    public class User : IdentityUser<long>
     {
 
 
-        public User()
+        public User() : base()
         {
             Carts = new HashSet<Cart>();
             MovieRatings = new HashSet<MovieRating>();

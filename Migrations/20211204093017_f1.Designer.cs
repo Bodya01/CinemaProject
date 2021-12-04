@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211203194759_f2")]
-    partial class f2
+    [Migration("20211204093017_f1")]
+    partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -288,6 +288,10 @@ namespace CinemaProject.Migrations
                         .HasColumnName("movieDescription")
                         .IsFixedLength(true);
 
+                    b.Property<string>("MoviePhotoPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NameMovie")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -399,6 +403,9 @@ namespace CinemaProject.Migrations
                         .HasColumnType("char(50)")
                         .HasColumnName("productName")
                         .IsFixedLength(true);
+
+                    b.Property<string>("ProductPhotoPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,0)")

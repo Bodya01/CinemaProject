@@ -23,6 +23,7 @@ namespace CinemaProject.Data
         public string ProductName { get; set; }
         [Column("productPrice", TypeName = "decimal(18, 0)")]
         public decimal ProductPrice { get; set; }
+        public string ProductPhotoPath { get; set; }
 
         [InverseProperty(nameof(CartProduct.Product))]
         public virtual ICollection<CartProduct> CartProducts { get; set; }

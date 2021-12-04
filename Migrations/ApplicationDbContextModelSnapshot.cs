@@ -127,7 +127,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("CinemaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("cinemaId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Adrees")
                         .IsRequired()
@@ -150,7 +152,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("CityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("cityId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CityName")
                         .IsRequired()
@@ -168,7 +172,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("DemonstrationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("demonstrationId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("Cof")
                         .HasColumnType("float")
@@ -225,7 +231,10 @@ namespace CinemaProject.Migrations
 
             modelBuilder.Entity("CinemaProject.Data.Location", b =>
                 {
-                    b.Property<long>("LocationId");
+                    b.Property<long>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint")
@@ -258,7 +267,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("MovieId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("movieId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AgeRestriction")
                         .HasColumnType("int")
@@ -274,6 +285,10 @@ namespace CinemaProject.Migrations
                         .HasColumnType("nchar(10)")
                         .HasColumnName("movieDescription")
                         .IsFixedLength(true);
+
+                    b.Property<string>("MoviePhotoPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameMovie")
                         .IsRequired()
@@ -348,7 +363,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("PermissionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("permissionId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("PermissionDescription")
                         .IsRequired()
@@ -373,7 +390,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("productId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -382,6 +401,9 @@ namespace CinemaProject.Migrations
                         .HasColumnType("char(50)")
                         .HasColumnName("productName")
                         .IsFixedLength(true);
+
+                    b.Property<string>("ProductPhotoPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,0)")
@@ -396,7 +418,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("PromocodeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("promocodeId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CountUse")
                         .HasColumnType("int")
@@ -425,7 +449,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("RecieptId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("recieptId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("PaymentType")
                         .IsRequired()
@@ -450,7 +476,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("ReservedTicketId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("reservedTicketId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("ReservedTicketId");
 
@@ -461,7 +489,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("roleId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("RoleDescription")
                         .IsRequired()
@@ -588,7 +618,9 @@ namespace CinemaProject.Migrations
                 {
                     b.Property<long>("SubcategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("subcategoryId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint")

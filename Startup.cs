@@ -51,7 +51,7 @@ namespace CinemaProject
 
 
 
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, Role>(options =>
                 {
                     options.User.RequireUniqueEmail = false;
                 
