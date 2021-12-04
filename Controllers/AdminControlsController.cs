@@ -58,16 +58,16 @@ namespace CinemaProject.Controllers
         {
             if (ModelState.IsValid & movie != null)
             {
-                data.Movies.Add(movie.Movies);
-                data.SaveChanges();
-                var movieId = data.Movies.ToList()[^1].MovieId;
-                data.MovieSubcategories.Add(new MovieSubcategory
+                await data.Movies.AddAsync(movie.Movies);
+                await data.SaveChangesAsync();
+                var movieId = data.Movies.OrderBy(x => x.MovieId).Last().MovieId;
+                await data.MovieSubcategories.AddAsync(new MovieSubcategory
                 {
                     MovieId = movieId,
                     SubcategoryId = movie.SubcategoryId
                 });
-                data.SaveChanges();
-                return AddMovie();
+                await data.SaveChangesAsync();
+                return RedirectToAction("AddMovie", "AdminControls");
             }
             return View(movie);
         }
