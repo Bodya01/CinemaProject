@@ -5,7 +5,7 @@ namespace CinemaProject.Models.AdminModels
 {
     public class AddMovie
     {
-        public Movie Movie { get; set; }
+        public Movie Movies { get; set; }
         public int SubcategoryId { get; set; }
     }
 }

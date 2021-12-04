@@ -5,15 +5,18 @@
 }
 
 <main>
-    <form asp-action="AddMovie" asp-controller="AdminControls">
-        <input type="text" placeholder="Movie name" asp-for="Movie.NameMovie" name="NameMovie"/>
-        <input type="text" placeholder="Age restrcition" asp-for="Movie.AgeRestriction" name="AgeRestriction"/>
-        <input type="text" placeholder="Creation date" asp-for="Movie.CreateAt" name="CreateAt"/>
+    <form method="post" asp-action="AddMovie" asp-controller="AdminControls">
+        <input type="text" placeholder="Movie name" asp-for="Movies.NameMovie"/>
+        <input type="text" placeholder="Age restrcition" asp-for="Movies.AgeRestriction" />
+        <input type="text" placeholder="Creation date" asp-for="Movies.CreateAt" />
+
         <div id="SubcategorySelects">
-            <select id="SubcategorySelect" asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" name="Subcategory"></select>
+            <select  asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" ></select>
         </div>
+            <textarea placeholder="Movie description" asp-for="Movies.MovieDescription"></textarea>
+
         <input type="submit" value="Add"/>
     </form>
-    <textarea placeholder="Movie description" form="AddMovieForm" asp-for="Movie.MovieDescription" name="MovieDescription"></textarea>    
+    
 </main>
 <script src="~/js/AddMovie.js"></script>

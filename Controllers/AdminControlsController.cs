@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
@@ -53,19 +54,20 @@ namespace CinemaProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddMovie(AddMovie movie)
+        public async Task<IActionResult> AddMovie(AddMovie movie)
         {
             if (ModelState.IsValid & movie != null)
             {
-                data.Movies.Add(movie.Movie);
+                data.Movies.Add(movie.Movies);
                 data.SaveChanges();
-                var movieId = data.Movies.FirstOrDefault(x => x.NameMovie == movie.Movie.NameMovie).MovieId;
+                var movieId = data.Movies.ToList()[^1].MovieId;
                 data.MovieSubcategories.Add(new MovieSubcategory
                 {
                     MovieId = movieId,
                     SubcategoryId = movie.SubcategoryId
                 });
-                return Index();
+                data.SaveChanges();
+                return AddMovie();
             }
             return View(movie);
         }
