@@ -14,15 +14,15 @@ namespace CinemaProject.Data
 {
     [Table("User")]
     [Index(nameof(UserEmail), IsUnique = true)]
-    public class User : IdentityUser<long> ,IUser<long>
+    public class User : IdentityUser<long>
     {
 
 
-        public User() : base()
+        public User() 
         {
             Carts = new HashSet<Cart>();
             MovieRatings = new HashSet<MovieRating>();
-            UserRoles = new HashSet<UserRole>();
+           
         }
 
         [Key]
@@ -47,10 +47,9 @@ namespace CinemaProject.Data
         public virtual ICollection<Cart> Carts { get; set; }
         [InverseProperty(nameof(MovieRating.User))]
         public virtual ICollection<MovieRating> MovieRatings { get; set; }
-        [InverseProperty(nameof(UserRole.User))]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        
 
         
-        long IUser<long>.Id => UserId;
+       
     }
 }

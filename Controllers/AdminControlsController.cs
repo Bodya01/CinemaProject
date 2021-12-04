@@ -91,6 +91,24 @@ namespace CinemaProject.Controllers
             
             return View(model);
         }
+        [HttpGet]
+        public ActionResult GetListUsers()
+        {
+           var list = data.Users.ToList();
+            return Json(new { data = list });
+        } 
+        public IActionResult ControlUsers()
+        {
+            EditUserViewModel model = new EditUserViewModel();
+            model.Users = data.Users.ToList();
+            return View(model);
+        }
+       
+
+
+
+
+
 
     }
 }

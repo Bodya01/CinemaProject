@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211204140551_f1")]
+    [Migration("20211204151439_f1")]
     partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -534,30 +534,6 @@ namespace CinemaProject.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("CinemaProject.Data.RolePermission", b =>
-                {
-                    b.Property<long>("RolePermissionsId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("rolePermissionsId");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("roleId");
-
-                    b.Property<long>("PermissionId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("permissionId");
-
-                    b.HasKey("RolePermissionsId", "RoleId", "PermissionId")
-                        .HasName("PK_rolePermissions");
-
-                    b.HasIndex("PermissionId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("RolePermissions");
-                });
-
             modelBuilder.Entity("CinemaProject.Data.Seat", b =>
                 {
                     b.Property<long>("SeatId")
@@ -827,27 +803,6 @@ namespace CinemaProject.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("CinemaProject.Data.UserRole", b =>
-                {
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("userId");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("roleId");
-
-                    b.Property<long>("UserRolesId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("userRolesID");
-
-                    b.HasKey("UserId", "RoleId", "UserRolesId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
                 {
                     b.Property<int>("Id")
@@ -1059,25 +1014,6 @@ namespace CinemaProject.Migrations
                     b.Navigation("Subcategory");
                 });
 
-            modelBuilder.Entity("CinemaProject.Data.RolePermission", b =>
-                {
-                    b.HasOne("CinemaProject.Data.Permission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_rolePermissions_Permission")
-                        .IsRequired();
-
-                    b.HasOne("CinemaProject.Data.Role", "Role")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_rolePermissions_Role")
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("CinemaProject.Data.Seat", b =>
                 {
                     b.HasOne("CinemaProject.Data.Hall", "Hall")
@@ -1153,26 +1089,6 @@ namespace CinemaProject.Migrations
                     b.Navigation("Seat");
 
                     b.Navigation("Session");
-                });
-
-            modelBuilder.Entity("CinemaProject.Data.UserRole", b =>
-                {
-                    b.HasOne("CinemaProject.Data.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_UserRoles_Role")
-                        .IsRequired();
-
-                    b.HasOne("CinemaProject.Data.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK_UserRoles_User")
-                        .HasPrincipalKey("UserId")
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -1271,11 +1187,6 @@ namespace CinemaProject.Migrations
                     b.Navigation("Sessions");
                 });
 
-            modelBuilder.Entity("CinemaProject.Data.Permission", b =>
-                {
-                    b.Navigation("RolePermissions");
-                });
-
             modelBuilder.Entity("CinemaProject.Data.Product", b =>
                 {
                     b.Navigation("CartProducts");
@@ -1284,13 +1195,6 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Promocode", b =>
                 {
                     b.Navigation("Carts");
-                });
-
-            modelBuilder.Entity("CinemaProject.Data.Role", b =>
-                {
-                    b.Navigation("RolePermissions");
-
-                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("CinemaProject.Data.Seat", b =>
@@ -1313,8 +1217,6 @@ namespace CinemaProject.Migrations
                     b.Navigation("Carts");
 
                     b.Navigation("MovieRatings");
-
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

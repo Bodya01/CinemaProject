@@ -1,95 +1,103 @@
 ﻿using CinemaProject.Data;
-using Microsoft.AspNet.Identity;
+using CinemaProject.Models.AdminModels;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
     public class UserProfileController : Controller
     {
-        private UserManager<User, long> _userManager;
-
-        public UserProfileController(UserManager<User, long> userManager)
+        private readonly UserManager<User> _userManager;
+        
+        public UserProfileController(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
 
         public IActionResult Index() => View(_userManager.Users);
-
         public IActionResult Create() => View();
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(CreateUserViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
-        //        var result = await _userManager.CreateAsync(user, model.Password);
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            foreach (var error in result.Errors)
-        //            {
-        //                ModelState.AddModelError(string.Empty, error.Description);
-        //            }
-        //        }
-        //    }
-        //    return View(model);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel model)
+        {
 
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    User user = await _userManager.FindByIdAsync(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Year = user.Year };
-        //    return View(model);
-        //}
+            if (ModelState.IsValid)
+            {
+                User user = new User { Email = model.UserEmail, UserName = model.UserName, UserSurname = model.UserSurname,UserPhone = model.UserPhone };
+                
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(EditUserViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        User user = await _userManager.FindByIdAsync(model.Id);
-        //        if (user != null)
-        //        {
-        //            user.Email = model.Email;
-        //            user.UserName = model.Email;
-        //            user.Year = model.Year;
+        public async Task<IActionResult> Edit(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            EditUserViewModel model = new EditUserViewModel { UserEmail = user.UserEmail, UserName = user.UserName, UserSurname = user.UserSurname, UserPhone = user.UserPhone };
+        
+            return View(model);
+        }
 
-        //            var result = await _userManager.UpdateAsync(user);
-        //            if (result.Succeeded)
-        //            {
-        //                return RedirectToAction("Index");
-        //            }
-        //            else
-        //            {
-        //                foreach (var error in result.Errors)
-        //                {
-        //                    ModelState.AddModelError(string.Empty, error.Description);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return View(model);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    user.Email = model.UserEmail;
+                    user.UserName = model.UserName;
+                    user.UserSurname = model.UserSurname;
+                    user.UserPhone = model.UserPhone;
 
-        //[HttpPost]
-        //public async Task<ActionResult> Delete(string id)
-        //{
-        //    User user = await _userManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        IdentityResult result = await _userManager.DeleteAsync(user);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+                    var result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await _userManager.DeleteAsync(user);
+            }
+            return RedirectToAction("Index");
+        }
 
 
 

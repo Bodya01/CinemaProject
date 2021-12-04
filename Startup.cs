@@ -40,6 +40,7 @@ namespace CinemaProject
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
                 options.LoginPath = "/Session/SignIn";
+                options.LogoutPath = "/Session/Logout";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
             });
@@ -52,11 +53,11 @@ namespace CinemaProject
 
 
             services.AddIdentity<User, Role>(options =>
-                {
-                    options.User.RequireUniqueEmail = false;
-                
-                   
-                })
+            {
+                options.User.RequireUniqueEmail = false;
+               
+
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
           
@@ -73,8 +74,8 @@ namespace CinemaProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
            
+
 
             if (env.IsDevelopment())
             {

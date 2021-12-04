@@ -6,7 +6,7 @@ using System;
 
 namespace CinemaProject.Data
 {
-    public partial class ApplicationDbContext : IdentityDbContext<User,Role, long>
+    public partial class ApplicationDbContext : IdentityDbContext<User,Role,long>
     {
         public ApplicationDbContext()
         {
@@ -34,14 +34,14 @@ namespace CinemaProject.Data
         public virtual DbSet<Reciept> Reciepts { get; set; }
         public virtual DbSet<ReservedTicket> ReservedTickets { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<RolePermission> RolePermissions { get; set; }
+      
         public virtual DbSet<Seat> Seats { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Subcategory> Subcategories { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-
+      
+     
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -270,23 +270,7 @@ namespace CinemaProject.Data
                 entity.Property(e => e.RoleName).IsFixedLength(true);
             });
 
-            modelBuilder.Entity<RolePermission>(entity =>
-            {
-                entity.HasKey(e => new { e.RolePermissionsId, e.RoleId, e.PermissionId })
-                    .HasName("PK_rolePermissions");
-
-                entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.RolePermissions)
-                    .HasForeignKey(d => d.PermissionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_rolePermissions_Permission");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.RolePermissions)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_rolePermissions_Role");
-            });
+          
 
             modelBuilder.Entity<Seat>(entity =>
             {
@@ -374,8 +358,6 @@ namespace CinemaProject.Data
 
                 entity.Property(e => e.UserName).IsFixedLength(true);
 
-              
-
                 entity.Property(e => e.UserPhone).IsFixedLength(true);
 
                 entity.Property(e => e.UserSurname).IsFixedLength(true);
@@ -385,24 +367,7 @@ namespace CinemaProject.Data
 
             });
 
-            modelBuilder.Entity<UserRole>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId, e.UserRolesId });
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserRoles_Role");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.UserId)
-                     .HasPrincipalKey(x => x.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserRoles_User");
-            });
-
+   
             OnModelCreatingPartial(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }

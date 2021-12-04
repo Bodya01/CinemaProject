@@ -88,9 +88,11 @@ namespace CinemaProject.Controllers
             {
                 var user = new User
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     UserEmail = model.Email,               
                     UserSurname = model.Surname,
+                    UserPhone = model.Phone,
+
                   
                     
                 };
