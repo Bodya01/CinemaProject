@@ -1,23 +1,29 @@
 ﻿@*Here Login*@
 
-@model User
+@model LoginViewModel
 @{
     Layout = "_AufLayout";
 }
 
     <div class="sign-in-main">
       <h1>sign-in</h1>
-      <form method="post">
+      <form method="post" asp-controller="Session" asp-route-returnUrl="@Model.ReturnUrl" 
+      asp-action="SignIn">
+           <div asp-validation-summary="ModelOnly"></div>
         <div class="sign-in-main-txt">
-          <input type="email" type="text" required />
+          <input type="email" type="text" asp-for="Email" required />
           <span></span>
           <label>E-mail</label>
         </div>
 
         <div class="sign-in-main-txt">
-          <input minlength="8" type="password" required />
+          <input minlength="8" type="password"  asp-for="Password" required />
           <span></span>
           <label>Password</label>
+        </div>
+        <div>
+            <label asp-for="RememberMe"></label><br />
+            <input asp-for="RememberMe" />
         </div>
 
         <div class="pass">

@@ -1,7 +1,7 @@
 ﻿@using CinemaProject.Models.AdminModels
 @model AddMovie;
 @{
-    Layout = "_Layout";
+    Layout = "_AdminLayout";
 }
 
 <main>
@@ -9,14 +9,11 @@
         <input type="text" placeholder="Movie name" asp-for="Movies.NameMovie"/>
         <input type="text" placeholder="Age restrcition" asp-for="Movies.AgeRestriction" />
         <input type="text" placeholder="Creation date" asp-for="Movies.CreateAt" />
-
         <div id="SubcategorySelects">
             <select  asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" ></select>
         </div>
-            <textarea placeholder="Movie description" asp-for="Movies.MovieDescription"></textarea>
-
         <input type="submit" value="Add"/>
     </form>
-    
+    <textarea placeholder="Movie description" form="AddMovieForm" asp-for="Movie.MovieDescription" name="MovieDescription"></textarea>    
 </main>
 <script src="~/js/AddMovie.js"></script>

@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaProject.Controllers
 {
-    //[Authorize(Roles = "admin")]
-
-    public class HomeController : Controller
+    public class CartController : Controller
     {
-        // GET: HomeController
-     
+        
         public ActionResult Index()
         {
             return View();
         }
 
+       
+        
     }
 }

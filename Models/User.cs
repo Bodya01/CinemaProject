@@ -1,7 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 #nullable disable
 
@@ -9,26 +14,22 @@ namespace CinemaProject.Data
 {
     [Table("User")]
     [Index(nameof(UserEmail), IsUnique = true)]
-    public partial class User
+    public class User : IdentityUser<long> ,IUser<long>
     {
 
-        public User()
+
+        public User() : base()
         {
             Carts = new HashSet<Cart>();
             MovieRatings = new HashSet<MovieRating>();
             UserRoles = new HashSet<UserRole>();
         }
 
-
-
         [Key]
         [Column("userId")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long UserId { get; set; }
-        [Required]
-        [Column("userName")]
-        [StringLength(20)]
-        public string UserName { get; set; }
+
         [Required]
         [Column("userSurname")]
         [StringLength(30)]
@@ -37,12 +38,9 @@ namespace CinemaProject.Data
         [Column("userEmail")]
         [StringLength(50)]
         public string UserEmail { get; set; }
-        [Required]
+      
         [Column("userPassword")]
-        [StringLength(1000)]
-        public string UserPassword { get; set; }
-        [Column("userPhone")]
-        [StringLength(30)]
+        [StringLength(100)]
         public string UserPhone { get; set; }
 
         [InverseProperty(nameof(Cart.User))]
@@ -51,5 +49,8 @@ namespace CinemaProject.Data
         public virtual ICollection<MovieRating> MovieRatings { get; set; }
         [InverseProperty(nameof(UserRole.User))]
         public virtual ICollection<UserRole> UserRoles { get; set; }
+
+        
+        long IUser<long>.Id => UserId;
     }
 }

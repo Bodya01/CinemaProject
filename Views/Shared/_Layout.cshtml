@@ -31,9 +31,20 @@
       </nav>
       <div class="menu__login">
         <ul>
-          <li><a asp-action="SignIn" asp-controller="Session">Вхід</a></li>
-          <li><p>|</p></li>
-          <li><a asp-action="SignUp" asp-controller="Register">Реєстрація</a></li>
+          @if(User.Identity.IsAuthenticated)
+          { 
+              <p>@User.Identity.Name</p>
+ 
+             <form method="post" asp-controller="Account" asp-action="Logout">
+                 <input type="submit" value="Выход" />
+             </form>                
+          }
+          else
+          {
+              <li><a asp-action="SignIn" asp-controller="Session">Вхід</a></li>
+              <li><p>|</p></li>
+              <li><a asp-action="SignUp" asp-controller="Session">Реєстрація</a></li>
+          }
         </ul>
         <a href="">
           <div class="menu__login-img" href=""></div>

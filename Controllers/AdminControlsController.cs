@@ -66,8 +66,7 @@ namespace CinemaProject.Controllers
                     MovieId = movieId,
                     SubcategoryId = movie.SubcategoryId
                 });
-                await data.SaveChangesAsync();
-                return RedirectToAction("AddMovie", "AdminControls");
+                return Index();
             }
             return View(movie);
         }
@@ -76,5 +75,22 @@ namespace CinemaProject.Controllers
         {
             subcategories = data.Subcategories.ToList();
         }
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(Product model)
+        {
+            if (ModelState.IsValid)
+            {
+               await data.Products.AddAsync(model);
+               await data.SaveChangesAsync();
+            }
+            
+            return View(model);
+        }
+
     }
 }

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin-page.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" 
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+<body>
+      <div class="admin-page-controll">
+        
+        <div class="left-admin-panel">
+            <ul class="admin-dashboard">    
+                <div class="dashboard-admin-kit">
+                    <img src="/images/admin-tols-logo.png" alt="">
+                <h3 >Dashboard Kit</3>
+                </div>
+                <li> 
+                    <a href=""><i class="fas fa-film icons-admin-panel" ></i> Movie</a></li>
+                <li>                
+                    <a href=""><i class="fab fa-product-hunt icons-admin-panel"></i>Product</a></li>
+                <li>
+                    <a href=""><i class="fas fa-percent icons-admin-panel"></i> Promocode</a></li>
+            </ul>
+        </div>
+    <div class="navbar-admin-page">
+        <div class="account-admin-panel">
+            <div class="page-admin-panel"><h3>Movie</h3></div>
+            <div class="user-admin-panel"><span>User user</span>
+                <img src="photo.png" alt="">
+            </div>
+        </div>
+    </div>
+    <main class="right-admin-page">
+       @RenderBody()
+    </main>
+</div>
+
+
+</body>
+</html>
