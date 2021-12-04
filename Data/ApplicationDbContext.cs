@@ -263,7 +263,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.Property(e => e.RoleId).ValueGeneratedOnAdd();
+                entity.Property(e => e.RoleId).ValueGeneratedNever();
 
                 entity.Property(e => e.RoleDescription).IsFixedLength(true);
 
@@ -368,7 +368,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
+                entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.Property(e => e.UserEmail).IsFixedLength(true);
 

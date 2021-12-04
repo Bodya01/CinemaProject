@@ -73,7 +73,6 @@ namespace CinemaProject.Controllers
 
         private void GetSubcategoryList()
         {
-            subcategories = data.Subcategories.ToList();
         }
         public IActionResult AddProduct()
         {
