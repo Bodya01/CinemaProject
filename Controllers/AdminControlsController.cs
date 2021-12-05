@@ -2,6 +2,7 @@
 using CinemaProject.Models.AdminModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,6 @@ namespace CinemaProject.Controllers
     {
         private ApplicationDbContext data = new ApplicationDbContext();
         private List<Subcategory> subcategories = new List<Subcategory>();
-
-        // GET: AdminControls
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         // GET: AdminControls/Details/5
         public ActionResult Details(int id)
@@ -38,7 +33,25 @@ namespace CinemaProject.Controllers
         {
             return View();
         }
+        // GET: AdminCrontrols/DeleteMovie
+        [HttpGet]
+        public ActionResult DeleteMovie()
+        {
+            var movies = data.Movies.ToList();
+            return View(movies);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteMovie(Movie movie)
+        {
+            
+            if (movie != null)
+            {
+                data.Movies.Remove(movie);
+                data.SaveChangesAsync();
+            }
+            return RedirectToAction("DeleteMovie");
+        }
 
         // GET: AdminControls/Delete/5
         public ActionResult Delete(int id)
@@ -66,13 +79,14 @@ namespace CinemaProject.Controllers
                     MovieId = movieId,
                     SubcategoryId = movie.SubcategoryId
                 });
-                return Index();
+                return AddMovie();
             }
             return View(movie);
         }
 
         private void GetSubcategoryList()
         {
+            subcategories = data.Subcategories.ToList();
         }
         public IActionResult AddProduct()
         {
