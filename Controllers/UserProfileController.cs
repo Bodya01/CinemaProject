@@ -17,6 +17,7 @@ namespace CinemaProject.Controllers
         public UserProfileController(UserManager<User> userManager)
         {
             _userManager = userManager;
+            
         }
 
         public IActionResult Index() => View(_userManager.Users);
@@ -47,6 +48,7 @@ namespace CinemaProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -55,15 +57,16 @@ namespace CinemaProject.Controllers
                 if (user != null)
                 {
                   
-                    user.UserName = model.UserName;
+                    user.UserName = model.UserName.Trim();
                     user.UserEmail = model.UserEmail;
                     user.UserSurname = model.UserSurname;
                     user.UserPhone = model.UserPhone;
 
                     var result = await _userManager.UpdateAsync(user);
+                  
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("ControlUsers","AdminControls");
                     }
                     else
                     {
@@ -74,7 +77,7 @@ namespace CinemaProject.Controllers
                     }
                 }
             }
-            return View();
+            return RedirectToAction("ControlUsers", "AdminControls");
         }
 
         [HttpPost]
