@@ -1,7 +1,9 @@
 ﻿using CinemaProject.Data;
 using CinemaProject.Models.AdminModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,31 +22,7 @@ namespace CinemaProject.Controllers
             return View();
         }
 
-        // GET: AdminControls/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AdminControls/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-
-        // GET: AdminControls/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-
-        // GET: AdminControls/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        
 
         public ActionResult AddMovie()
         {
@@ -93,8 +71,9 @@ namespace CinemaProject.Controllers
         }
         [HttpGet]
         public ActionResult GetListUsers()
-        {
-           var list = data.Users.ToList();
+        {  
+            
+            var list = data.Users.Where(x=> x.Id != Convert.ToInt64(User.Identity.GetUserId())).ToList();
             return Json(new { data = list });
         } 
         public IActionResult ControlUsers()

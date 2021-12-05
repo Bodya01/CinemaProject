@@ -24,12 +24,6 @@ namespace CinemaProject.Data
             MovieRatings = new HashSet<MovieRating>();
            
         }
-
-        [Key]
-        [Column("userId")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long UserId { get; set; }
-
         [Required]
         [Column("userSurname")]
         [StringLength(30)]

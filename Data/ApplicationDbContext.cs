@@ -70,7 +70,7 @@ namespace CinemaProject.Data
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.UserId)
-                    .HasPrincipalKey(x => x.UserId)
+                    .HasPrincipalKey(x => x.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cart_User");
 
@@ -198,7 +198,7 @@ namespace CinemaProject.Data
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.MovieRatings)
                     .HasForeignKey(d => d.UserId)
-                     .HasPrincipalKey(x => x.UserId)
+                     .HasPrincipalKey(x => x.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MovieRating_User");
             });
@@ -352,8 +352,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId).ValueGeneratedNever();
-
+          
                 entity.Property(e => e.UserEmail).IsFixedLength(true);
 
                 entity.Property(e => e.UserName).IsFixedLength(true);
