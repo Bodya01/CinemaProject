@@ -49,13 +49,13 @@
         </tr>
         </thead>
     </table>
-
 @section scripts{
  
   <script>
-       $(document).ready(function(){
-           {
-               $("#userTable").DataTable({
+        $(document).ready(function(){
+           { 
+             
+             let table = $("#userTable").DataTable({
                 processing: true,
                 serverSide: true,
                 searching: true,
@@ -67,6 +67,7 @@
                  
                    "datatype": "json"
                },
+                  
                "columns":[
                    {"data": "id"},
                    {"data": "userEmail"},
@@ -74,21 +75,38 @@
                    {
                     "data": null,
                     "className": "dt-center editor-edit",
-                    "defaultContent": '<button id ="edit-user-table">Оновити</button>',
+                    "defaultContent": '<button>Оновити</button>',
                     "orderable": false
-                   },
-                  
+                   },              
                ]
                });
               
-           }
-       });
-       $(document).on('click','#edit-user-table',function(e) {
-         console.log($(this).closest('tr')) 
+
+
+               $(document).on('click','.editor-edit',function(e) {
+                  var row = $(this).closest('tr');         
+                  var id = table.row( row ).data().id;
+                 
+
+                  var IdInput = document.getElementById('Id');  
+                  var nameInput = document.getElementById('UserName');
+                  var surnameInput = document.getElementById('UserSurname');
+                  var phoneInput = document.getElementById('UserPhone');  
+                  var emailInput = document.getElementById('exampleInputEmail1');  
+              
+
+                 IdInput.value = table.row( row ).data().id
+                 nameInput.value = table.row( row ).data().userName
+                 surnameInput.value = table.row( row ).data().userSurname
+                 phoneInput.value = table.row( row ).data().userPhone
+                 emailInput.value =  table.row( row ).data().userEmail
         });
+           }
+
+           
+       });
+       //.currentTarget._DT_CellIndex
        
-
-
            function showPreview(event) {
            if(event.target.files.length>0){
                let src = URL.createObjectURL(event.target.files[0]);
@@ -106,7 +124,6 @@
        const input = document.getElementById("file-upload");
      
        input.addEventListener("change", showPreview);
-
 
 
 

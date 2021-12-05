@@ -46,18 +46,6 @@ namespace CinemaProject.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Edit(string id)
-        {
-            User user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            EditUserViewModel model = new EditUserViewModel { UserEmail = user.UserEmail, UserName = user.UserName, UserSurname = user.UserSurname, UserPhone = user.UserPhone };
-        
-            return View(model);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewModel model)
         {
@@ -66,8 +54,9 @@ namespace CinemaProject.Controllers
                 User user = await _userManager.FindByIdAsync(model.Id);
                 if (user != null)
                 {
-                    user.Email = model.UserEmail;
+                  
                     user.UserName = model.UserName;
+                    user.UserEmail = model.UserEmail;
                     user.UserSurname = model.UserSurname;
                     user.UserPhone = model.UserPhone;
 
@@ -85,7 +74,7 @@ namespace CinemaProject.Controllers
                     }
                 }
             }
-            return View(model);
+            return View();
         }
 
         [HttpPost]
