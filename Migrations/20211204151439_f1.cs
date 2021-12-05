@@ -292,31 +292,6 @@ namespace CinemaProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoles",
-                columns: table => new
-                {
-                    userId = table.Column<long>(type: "bigint", nullable: false),
-                    roleId = table.Column<long>(type: "bigint", nullable: false),
-                    userRolesID = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.userId, x.roleId, x.userRolesID });
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Role",
-                        column: x => x.roleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserRoles_User",
-                        column: x => x.userId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Subcategory",
                 columns: table => new
                 {
@@ -403,31 +378,6 @@ namespace CinemaProject.Migrations
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RolePermissions",
-                columns: table => new
-                {
-                    rolePermissionsId = table.Column<long>(type: "bigint", nullable: false),
-                    roleId = table.Column<long>(type: "bigint", nullable: false),
-                    permissionId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_rolePermissions", x => new { x.rolePermissionsId, x.roleId, x.permissionId });
-                    table.ForeignKey(
-                        name: "FK_rolePermissions_Permission",
-                        column: x => x.permissionId,
-                        principalTable: "Permission",
-                        principalColumn: "permissionId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_rolePermissions_Role",
-                        column: x => x.roleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -730,16 +680,6 @@ namespace CinemaProject.Migrations
                 column: "subcategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RolePermissions_permissionId",
-                table: "RolePermissions",
-                column: "permissionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RolePermissions_roleId",
-                table: "RolePermissions",
-                column: "roleId");
-
-            migrationBuilder.CreateIndex(
                 name: "FK_Seat",
                 table: "Seat",
                 columns: new[] { "seatId", "hallId" },
@@ -784,11 +724,6 @@ namespace CinemaProject.Migrations
                 name: "IX_Ticket_sessionId_movieId_hallId_demonstrationId",
                 table: "Ticket",
                 columns: new[] { "sessionId", "movieId", "hallId", "demonstrationId" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_roleId",
-                table: "UserRoles",
-                column: "roleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -821,28 +756,25 @@ namespace CinemaProject.Migrations
                 name: "MovieSubcategories");
 
             migrationBuilder.DropTable(
+                name: "Permission");
+
+            migrationBuilder.DropTable(
                 name: "Reciept");
 
             migrationBuilder.DropTable(
                 name: "reservedTicket");
 
             migrationBuilder.DropTable(
-                name: "RolePermissions");
-
-            migrationBuilder.DropTable(
                 name: "Ticket");
 
             migrationBuilder.DropTable(
-                name: "UserRoles");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Subcategory");
-
-            migrationBuilder.DropTable(
-                name: "Permission");
 
             migrationBuilder.DropTable(
                 name: "Cart");
@@ -852,9 +784,6 @@ namespace CinemaProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Session");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Category");

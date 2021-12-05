@@ -4,14 +4,16 @@ using CinemaProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211204151439_f1")]
+    partial class f1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -763,6 +765,10 @@ namespace CinemaProject.Migrations
                         .HasColumnName("userEmail")
                         .IsFixedLength(true);
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("userId");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nchar(256)")
@@ -909,6 +915,7 @@ namespace CinemaProject.Migrations
                         .WithMany("Carts")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Cart_User")
+                        .HasPrincipalKey("UserId")
                         .IsRequired();
 
                     b.Navigation("Promocode");
@@ -980,6 +987,7 @@ namespace CinemaProject.Migrations
                         .WithMany("MovieRatings")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_MovieRating_User")
+                        .HasPrincipalKey("UserId")
                         .IsRequired();
 
                     b.Navigation("Movie");

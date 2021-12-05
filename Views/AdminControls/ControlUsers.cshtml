@@ -1,0 +1,131 @@
+﻿@model EditUserViewModel
+
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="Edit" asp-controller="UserProfile" class="user-edit-form ">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserName" class="control-label">Ім'я</label>
+        <input type="text" asp-for="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserSurname" class="control-label">Прізвище</label>
+        <input type="text" asp-for="UserSurname" class="form-control" />
+    </div>
+     <div class="form-group">
+        <label asp-for="UserPhone" class="control-label">Телефон</label>
+        <input  type="text" asp-for="UserPhone" class="form-control" />
+    </div>
+     <div class="form-group">
+        <label asp-for="UserEmail" class="control-label">Пошта</label>
+        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp"  asp-for="UserEmail" class="form-control" />
+    </div>
+
+    <div class="form-group change-photo">
+         <input type="file" id = "file-upload"/>
+         <label for="file-upload" class="custom-file-upload">
+         <img  id="img_preview" src = "/images/adminPageImages/addPhoto.png">        
+        </label> 
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Зберегти"  class="btn btn-primary"/>
+    </div>
+</form>
+
+    <table id="userTable" class="table table-dark">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+
+@section scripts{
+ 
+  <script>
+       $(document).ready(function(){
+           {
+               $("#userTable").DataTable({
+                processing: true,
+                serverSide: true,
+                searching: true,
+                paging: false,
+                info: false,
+                   "ajax": {
+                   "url": "/AdminControls/GetListUsers",
+                   "type": "GET",
+                 
+                   "datatype": "json"
+               },
+               "columns":[
+                   {"data": "id"},
+                   {"data": "userEmail"},
+                   {"data": "userName"},
+                   {
+                    "data": null,
+                    "className": "dt-center editor-edit",
+                    "defaultContent": '<button id ="edit-user-table">Оновити</button>',
+                    "orderable": false
+                   },
+                  
+               ]
+               });
+              
+           }
+       });
+       $(document).on('click','#edit-user-table',function(e) {
+         console.log($(this).closest('tr')) 
+        });
+       
+
+
+           function showPreview(event) {
+           if(event.target.files.length>0){
+               let src = URL.createObjectURL(event.target.files[0]);
+               let preview = document.getElementById('img_preview');
+              
+               preview.src = src;
+               $("#img_preview").css('margin-bottom','0px'); 
+               document.getElementById('img_preview').classList.add("preview");
+                let txtInInput=document.getElementById('text-upload-file');
+                txtInInput.style.display = "none"
+                $("#img_preview").css('width',"auto");
+           
+           }
+       }
+       const input = document.getElementById("file-upload");
+     
+       input.addEventListener("change", showPreview);
+
+
+
+
+
+</script>
+
+  
+}
+        
+
+
+
+
+
+
+
+
+
+
+
+    
+    

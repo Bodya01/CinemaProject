@@ -11,10 +11,10 @@ namespace CinemaProject.Data
     [Table("Role")]
     public partial class Role : IdentityRole<long>
     {
-        public Role() : base()
+        public Role() 
         {
-            RolePermissions = new HashSet<RolePermission>();
-            UserRoles = new HashSet<UserRole>();
+           
+           
         }
 
         [Key]
@@ -29,9 +29,7 @@ namespace CinemaProject.Data
         [StringLength(100)]
         public string RoleDescription { get; set; }
 
-        [InverseProperty(nameof(RolePermission.Role))]
-        public virtual ICollection<RolePermission> RolePermissions { get; set; }
-        [InverseProperty(nameof(UserRole.Role))]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+    
+        
     }
 }

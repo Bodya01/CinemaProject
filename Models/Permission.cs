@@ -11,7 +11,7 @@ namespace CinemaProject.Data
     {
         public Permission()
         {
-            RolePermissions = new HashSet<RolePermission>();
+            
         }
 
         [Key]
@@ -26,7 +26,6 @@ namespace CinemaProject.Data
         [StringLength(40)]
         public string PermissionDescription { get; set; }
 
-        [InverseProperty(nameof(RolePermission.Permission))]
-        public virtual ICollection<RolePermission> RolePermissions { get; set; }
+       
     }
 }

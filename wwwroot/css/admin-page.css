@@ -123,3 +123,55 @@
     padding-top: 54px;
     flex-direction: column;
 }
+
+
+.user-edit-form input {
+    width: 400px;
+   
+}
+
+.user-edit-form {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    
+    width:500px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    margin-bottom:100px;
+}
+
+#userTable_filter label {
+    display: none;
+}
+
+#img_preview {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+.change-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 30px;
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background: #74ebd5; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    align-self: start;
+    margin-left: 45px;
+}
+
+#file-upload{
+    display:none;
+}
+
+#text-upload-file {
+}

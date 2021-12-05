@@ -1,5 +1,6 @@
 ﻿using CinemaProject.Data;
 using CinemaProject.Models.AdminModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -33,25 +34,7 @@ namespace CinemaProject.Controllers
         {
             return View();
         }
-        // GET: AdminCrontrols/DeleteMovie
-        [HttpGet]
-        public ActionResult DeleteMovie()
-        {
-            var movies = data.Movies.ToList();
-            return View(movies);
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteMovie(Movie movie)
-        {
-            
-            if (movie != null)
-            {
-                data.Movies.Remove(movie);
-                data.SaveChangesAsync();
-            }
-            return RedirectToAction("DeleteMovie");
-        }
 
         // GET: AdminControls/Delete/5
         public ActionResult Delete(int id)
@@ -104,6 +87,25 @@ namespace CinemaProject.Controllers
             
             return View(model);
         }
+        [HttpGet]
+        public ActionResult GetListUsers()
+        {  
+            
+            var list = data.Users.Where(x=> x.Id != Convert.ToInt64(User.Identity.GetUserId())).ToList();
+            return Json(new { data = list });
+        } 
+        public IActionResult ControlUsers()
+        {
+            EditUserViewModel model = new EditUserViewModel();
+            model.Users = data.Users.ToList();
+            return View(model);
+        }
+       
+
+
+
+
+
 
     }
 }
