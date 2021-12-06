@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaProject.Controllers
 {
@@ -8,7 +7,7 @@ namespace CinemaProject.Controllers
     public class HomeController : Controller
     {
         // GET: HomeController
-     
+
         public ActionResult Index()
         {
             return View();

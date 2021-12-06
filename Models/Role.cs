@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,10 +9,10 @@ namespace CinemaProject.Data
     [Table("Role")]
     public partial class Role : IdentityRole<long>
     {
-        public Role() 
+        public Role()
         {
-           
-           
+
+
         }
 
         [Key]
@@ -29,7 +27,7 @@ namespace CinemaProject.Data
         [StringLength(100)]
         public string RoleDescription { get; set; }
 
-    
-        
+
+
     }
 }

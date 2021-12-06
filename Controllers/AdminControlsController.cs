@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,30 +15,41 @@ namespace CinemaProject.Controllers
         private ApplicationDbContext data = new ApplicationDbContext();
         private List<Subcategory> subcategories = new List<Subcategory>();
 
-        // GET: AdminControls/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult GetMovieList()
         {
-            return View();
+            var movieList = data.Movies.ToList();
+            return Json(new { data = movieList });
+        }
+        public IActionResult ControlMovies()
+        {
+            ControlMovies model = new ControlMovies();
+            model.Movies = data.Movies.ToList();
+            return View(model);
         }
 
-        // GET: AdminControls/Create
-        public ActionResult Create()
+        public IActionResult DeleteMovie()
         {
-            return View();
+            return View(data.Movies.ToList());
         }
 
 
-        // GET: AdminControls/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPost]
+        [Route("AdminControls/DeleteMovie/{id:int}")]
+        public async Task<IActionResult> DeleteMovie(int? id)
         {
-            return View();
-        }
-
-
-        // GET: AdminControls/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            var movie = data.Movies.FirstOrDefault(x => x.MovieId == id);
+            if (movie != null)
+            {
+                data.Movies.Remove(movie);
+                var subcategories = data.MovieSubcategories.Where(x => x.MovieId == id);
+                foreach (var subcategory in subcategories)
+                {
+                    data.MovieSubcategories.Remove(subcategory);
+                }
+                await data.SaveChangesAsync();
+            }
+            return DeleteMovie();
         }
 
         public ActionResult AddMovie()
@@ -62,6 +72,7 @@ namespace CinemaProject.Controllers
                     MovieId = movieId,
                     SubcategoryId = movie.SubcategoryId
                 });
+                await data.SaveChangesAsync();
                 return AddMovie();
             }
             return View(movie);
@@ -81,31 +92,23 @@ namespace CinemaProject.Controllers
         {
             if (ModelState.IsValid)
             {
-               await data.Products.AddAsync(model);
-               await data.SaveChangesAsync();
+                await data.Products.AddAsync(model);
+                await data.SaveChangesAsync();
             }
-            
+
             return View(model);
         }
         [HttpGet]
         public ActionResult GetListUsers()
-        {  
-            
-            var list = data.Users.Where(x=> x.Id != Convert.ToInt64(User.Identity.GetUserId())).ToList();
+        {
+            var list = data.Users.Where(x => x.Id != Convert.ToInt64(User.Identity.GetUserId())).ToList();
             return Json(new { data = list });
-        } 
+        }
         public IActionResult ControlUsers()
         {
             EditUserViewModel model = new EditUserViewModel();
             model.Users = data.Users.ToList();
             return View(model);
         }
-       
-
-
-
-
-
-
     }
 }
