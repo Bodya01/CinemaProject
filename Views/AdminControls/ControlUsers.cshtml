@@ -4,52 +4,59 @@
 @{
     Layout = "_AdminLayout";
 }
+<div class = "control-users-page">
+    <form asp-action="Edit" asp-controller="UserProfile" class="user-edit-form ">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <input type="hidden" asp-for="Id" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label">Ім'я</label>
+            <input type="text" asp-for="UserName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UserSurname" class="control-label">Прізвище</label>
+            <input type="text" asp-for="UserSurname" class="form-control" />
+        </div>
+         <div class="form-group">
+            <label asp-for="UserPhone" class="control-label">Телефон</label>
+            <input  type="text" asp-for="UserPhone" class="form-control" />
+        </div>
+         <div class="form-group">
+            <label asp-for="UserEmail" class="control-label">Пошта</label>
+            <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp"  asp-for="UserEmail" class="form-control" />
+        </div>
 
-<form asp-action="Edit" asp-controller="UserProfile" class="user-edit-form ">
-    <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <input type="hidden" asp-for="Id" />
-    </div>
-    <div class="form-group">
-        <label asp-for="UserName" class="control-label">Ім'я</label>
-        <input type="text" asp-for="UserName" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="UserSurname" class="control-label">Прізвище</label>
-        <input type="text" asp-for="UserSurname" class="form-control" />
-    </div>
-     <div class="form-group">
-        <label asp-for="UserPhone" class="control-label">Телефон</label>
-        <input  type="text" asp-for="UserPhone" class="form-control" />
-    </div>
-     <div class="form-group">
-        <label asp-for="UserEmail" class="control-label">Пошта</label>
-        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp"  asp-for="UserEmail" class="form-control" />
-    </div>
+        <div class="form-group change-photo">
+             <input type="file" id = "file-upload"/>
+             <label for="file-upload" class="custom-file-upload">
+             <img  id="img_preview" src = "/images/adminPageImages/addPhoto.png">        
+            </label> 
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Зберегти"  class="btn btn-primary"/>
+        </div>
+    </form>
+    <div id="usersTable">
+     <table id="userTable" class="table table-dark">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+    </div>   
 
-    <div class="form-group change-photo">
-         <input type="file" id = "file-upload"/>
-         <label for="file-upload" class="custom-file-upload">
-         <img  id="img_preview" src = "/images/adminPageImages/addPhoto.png">        
-        </label> 
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Зберегти"  class="btn btn-primary"/>
-    </div>
-</form>
+</div>
 
-    <table id="userTable" class="table table-dark">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Phone</>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-    </table>
+
 @section scripts{
  
   <script>
@@ -64,22 +71,35 @@
                 info: false,
                    "ajax": {
                    "url": "/AdminControls/GetListUsers",
-                   "type": "GET",
-                 
+                   "type": "GET",              
                    "datatype": "json"
+                
                },
                   
                "columns":[
                    {"data": "id"},
                    {"data": "userEmail"},
                    {"data": "userName"},
-                 
+                   {"data": "userSurname"},
+                   {"data": "userPhone"},
                    {
                     "data": null,
                     "className": "dt-center editor-edit",
-                    "defaultContent": '<button>Оновити</button>',
+                    "defaultContent": '<a>Edit</a>',
                     "orderable": false
-                   },              
+                   },
+                    {
+                    "data": null,
+                    "className": "dt-center editor-role",
+                    "defaultContent": '<a><img src="/images/user.png"></a>',
+                    "orderable": false
+                   },
+                    {
+                    "data": null,
+                    "className": "dt-center editor-delete",
+                    "defaultContent": '<a><img src="/images/delete.svg"></a>',
+                    "orderable": false
+                   },  
                ]
                });
               
@@ -102,13 +122,55 @@
                  surnameInput.value = table.row( row ).data().userSurname
                  phoneInput.value = table.row( row ).data().userPhone
                  emailInput.value =  table.row( row ).data().userEmail
-        });
-           }
+                });
 
+                    $(document).on('click','.editor-role',function(e) {
+                       var row = $(this).closest('tr');         
+                       var id = table.row( row ).data().id.toString();
+
+                       EditRole.open({
+                         classblock:"right-admin-page",
+                         message: "Are you sure?",
+                         title: "You are about to delete this user!",
+                         yes:"Delete",
+                         no: "Cansel",
+                          onok: () => {
+                                      
+                          }
+                         })
+                    
+                    });
+
+
+
+                  $(document).on('click','.editor-delete',function(e) {
+                       var row = $(this).closest('tr');         
+                       var id = table.row( row ).data().id.toString();
+                       console.log(id)
+                       Confirm.open({
+                         classblock:"right-admin-page",
+                         message: "Are you sure?",
+                         title: "You are about to delete this user!",
+                         yes:"Delete",
+                         no: "Cansel",
+                          onok: () => {
+                                let form = document.createElement("form");
+                                form.method = "POST";
+                                form.action = `/UserProfile/Delete/${id}`;
+                                form.style = "display: none;";
+                                let methodInput = document.createElement("input");
+                                methodInput.value = "DELETE";
+                                methodInput.name = "Delete";
+                                form.appendChild(methodInput);
+                                document.body.appendChild(form);
+                                form.submit();         
+                          }
+                         })
+                  });
+        }
+          
            
        });
-       //.currentTarget._DT_CellIndex
-       
            function showPreview(event) {
            if(event.target.files.length>0){
                let src = URL.createObjectURL(event.target.files[0]);
@@ -130,7 +192,216 @@
 
 
 
+function useReturnData(data){
+    myvar = data;
+    console.log(myvar);
+};
+
+
+
+var EditRole = {
+ 
+    open (options) {
+        options = Object.assign({}, {
+            title: '',
+            message: '',
+            classblock: '',
+            okText: 'OK',
+            cancelText: 'Cancel',
+            yes: '',
+            no: '',
+            
+            onok: function () {console.log("delete")},
+            oncancel: function () {console.log("cansel")},
+            
+        }, options);
+
+    const html = `
+         <div class="user-alert-warning">
+                    <form asp-action="Edit" asp-controller="ControlRoles" class="user-edit-form ">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <input type="hidden" asp-for="Id" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label">Ім'я</label>
+            <input type="text" asp-for="UserName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Зберегти"  class="btn btn-primary"/>
+        </div>
+        </form>
+                    <select id = user-roles-select></select>
+
+                    <a style ='cursor: pointer;' id = warning-cansel>${options.no}</a>
+                    <a style ='cursor: pointer;' id = warning-delete>${options.yes}</a>
+         </div>
+    `;
+
+
+
+    const url = '/AdminControls/GetListRoles';
+    let dropdown = $('#user-roles-select');
+    dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
+    dropdown.prop('selectedIndex', 0);
+
+    $.getJSON(url, function (data) {
+      $.each(data, function (key, entry) {
+        dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.name));
+      })
+    });
+
+
+    const template = document.createElement('template')
+    
+    template.innerHTML = html;
+
+   
+    const confirmEl  = template.content.querySelector('.user-alert-warning');
+    const bntNo      = template.content.querySelector('#warning-cansel');
+    const bntYes     = template.content.querySelector('#warning-delete');
+    const userRoles  = template.content.querySelector('#user-roles-select');
+
+
+
+    userRoles.addEventListener('click', () => {
+            options.onok();
+            this._close(confirmEl,options.classblock);
+        });
+
+    confirmEl.addEventListener('click', e => {
+            if (e.target === confirmEl) {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            }
+        });
+
+        
+    bntYes.addEventListener('click', () => {
+            options.onok();
+            this._close(confirmEl,options.classblock);
+        });
+
+    bntNo.addEventListener('click', () => {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            });
+    let main_page = document.body.getElementsByClassName(options.classblock)[0];
+    
+    main_page.appendChild(template.content);
+  },
+
+  _close(confirmEl,classname){
+    confirmEl.classList.add('confirm--close');
+
+        confirmEl.addEventListener('animationend', () => {
+
+           
+            let main_page = document.body.getElementsByClassName(classname)[0];
+            
+            main_page.removeChild(confirmEl);
+        });
+  }
+}   
+
+
+
+
+
+
+
+
+
+
+var Confirm = {
+    open (options) {
+        options = Object.assign({}, {
+            title: '',
+            message: '',
+            classblock: '',
+            okText: 'OK',
+            cancelText: 'Cancel',
+            yes: '',
+            no: '',
+            onok: function () {console.log("delete")},
+            oncancel: function () {console.log("cansel")}
+        }, options);
+
+    const html = `
+         <div class="user-alert-warning">
+                <img src = "/images/youWontDelete.svg"></img>
+                <p class="warning-text"><span>${options.title}</span>${options.message}</p>
+                <div class="warning-buttons">
+                    <a style ='cursor: pointer;' id = warning-cansel>${options.no}</a>
+                    <a style ='cursor: pointer;' id = warning-delete>${options.yes}</a>
+                </div>
+    `;
+
+    const template = document.createElement('template')
+    
+    template.innerHTML = html;
+
+   
+    const confirmEl  = template.content.querySelector('.user-alert-warning');
+    const bntNo      = template.content.querySelector('#warning-cansel');
+    const bntYes     = template.content.querySelector('#warning-delete');
+
+
+    confirmEl.addEventListener('click', e => {
+            if (e.target === confirmEl) {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            }
+        });
+
+        
+    bntYes.addEventListener('click', () => {
+            options.onok();
+            this._close(confirmEl,options.classblock);
+        });
+
+    bntNo.addEventListener('click', () => {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            });
+    let main_page = document.body.getElementsByClassName(options.classblock)[0];
+    
+    main_page.appendChild(template.content);
+  },
+
+  _close(confirmEl,classname){
+    confirmEl.classList.add('confirm--close');
+
+        confirmEl.addEventListener('animationend', () => {
+
+           
+            let main_page = document.body.getElementsByClassName(classname)[0];
+            
+            main_page.removeChild(confirmEl);
+        });
+  }
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
+
+
+
 
   
 }

@@ -29,12 +29,16 @@
                     <a href=""><i class="fab fa-product-hunt icons-admin-panel"></i>Product</a></li>
                 <li>
                     <a href=""><i class="fas fa-percent icons-admin-panel"></i> Promocode</a></li>
+                 <li>
+                    <a asp-action = "ControlUsers" asp-controller="AdminControls"><i class="fas fa-users icons-admin-panel"></i> Control Users</a></li>
+                    <li>
+                    <a asp-action = "CreateRole" asp-controller="ControlRoles"><i class="fas fa-user-shield icons-admin-panel"></i>Control Roles</a></li>
             </ul>
         </div>
     <div class="navbar-admin-page">
         <div class="account-admin-panel">
-            <div class="page-admin-panel"><h3>Movie</h3></div>
-            <div class="user-admin-panel"><span>User user</span>
+            <div class="page-admin-panel"><h3>@ViewContext.RouteData.Values["action"].ToString()</h3></div>
+            <div class="user-admin-panel"><span>@User.Identity.Name</span>
                 <img src="photo.png" alt="">
             </div>
         </div>
@@ -43,7 +47,6 @@
        @RenderBody()
     </main>
 </div>
-
 
 <script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../node_modules/datatables.net/js/jquery.dataTables.js"></script>

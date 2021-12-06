@@ -1,22 +1,18 @@
 ﻿using CinemaProject.Data;
 using System.Collections.Generic;
 
-namespace CinemaProject.Models.ModelViews
+namespace CinemaProject.Models.AdminModels
 {
     public class ChangeRoleViewModel
     {
-        public long UserId { get; set; }
-        public long RoleId { get; set; }
+        public string UserId { get; set; }
+        public string UserEmail { get; set; }
         public List<Role> AllRoles { get; set; }
-
         public IList<string> UserRoles { get; set; }
-
-
-
         public ChangeRoleViewModel()
         {
             AllRoles = new List<Role>();
             UserRoles = new List<string>();
         }
     }
-}
+}   

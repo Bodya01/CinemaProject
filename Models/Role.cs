@@ -11,7 +11,7 @@ namespace CinemaProject.Data
     [Table("Role")]
     public partial class Role : IdentityRole<long>
     {
-        public Role() 
+        public Role(string name) 
         {
            
            

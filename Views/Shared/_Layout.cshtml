@@ -11,8 +11,8 @@
   </head>
   <body>
     <header class="header">
-      <a name="start" href="" class="logo"
-        ><div class="logo-gray">My&nbsp;</div>
+       <a name="start" href="Index.html" class="logo">
+        <div class="logo-gray">My&nbsp;</div>
         <div class="logo-c">c</div>
         <div class="logo-i">i</div>
         <div class="logo-n">n</div>
@@ -21,22 +21,22 @@
       <form>
         <input class="menu__search" type="search" placeholder="Пошук" />
       </form>
-      <nav class="nav__links">
+      <nav class="nav-links">
         <ul>
-          <li><a href="#">Фільми</a></li>
-          <li><a href="#">ніга</a></li>
-          <li><a href="#">фегот</a></li>
-          <li><a href="#">пайдорас</a></li>
+          <li><a href="FilmMenu.html">Фільми</a></li>
+          <li><a href="#">Сеанси</a></li>
+          <li><a href="#">Магазин</a></li>
+          <li><a href="#">Акції та знижки</a></li>
         </ul>
       </nav>
       <div class="menu__login">
         <ul>
           @if(User.Identity.IsAuthenticated)
           { 
-              <p>@User.Identity.Name</p>
+              <li>@User.Identity.Name</li>
  
              <form method="post" asp-controller="Session" asp-action="Logout">
-                 <input type="submit" value="Выход" />
+                 <input type="submit" value="Вихід" />
              </form>                
           }
           else
@@ -82,11 +82,26 @@
           <a href="#">Новини</a>
         </div>
         <div class="footer-social-media">
-          <a href="#"> <div class="facebook"></div></a>
-          <a href="#"><div class="youtube"></div></a>
-          <a href="#"><div class="instagram"></div></a>
-          <a href="#"><div class="linkedin"></div></a>
-          <a href="#"><div class="telegram"></div></a>
+          <a href=""
+            ><svg class="facebook">
+              <use href="/images/symbol.svg#icon-facebook"></use></svg
+          ></a>
+          <a href=""
+            ><svg class="instagram">
+              <use href="/images/symbol.svg#icon-instagram"></use></svg
+          ></a>
+          <a href=""
+            ><svg class="linkedin">
+              <use href="/images/symbol.svg#icon-linkedin"></use></svg
+          ></a>
+          <a href=""
+            ><svg class="twitter">
+              <use href="/images/symbol.svg#icon-twitter"></use></svg
+          ></a>
+          <a href=""
+            ><svg class="youtube">
+              <use href="/images/symbol.svg#icon-youtube"></use></svg
+          ></a>
         </div>
         <div class="footer-lower-block">
           <div class="footer-lower-block-text">

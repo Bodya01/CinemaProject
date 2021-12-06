@@ -1,0 +1,231 @@
+.profile-main {
+  width: 100%;
+  height: 858px;
+  margin: 105px 0 0 0;
+  display: flex;
+  .profile-nav {
+    width: 320px;
+    height: 858px;
+    background: #363740;
+    float: left;
+    h1 {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: $ExtraBold;
+      font-size: 30px;
+    }
+  }
+  a {
+    width: 310px;
+    height: 75px;
+    background: #363740;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      background: $color-gull-grey;
+    }
+    .percent {
+      width: 30px;
+      height: 30px;
+      fill: white;
+      margin: 0 10px 0 10px;
+    }
+    .profile-nav-percent-text-percent {
+      font-size: 20px;
+      text-align: center;
+      font-family: $Medium;
+      color: white;
+    }
+    .save {
+      width: 29px;
+      height: 29px;
+      fill: white;
+      margin: 0 10px 0 10px;
+    }
+    .profile-nav-percent-text-save {
+      font-size: 20px;
+      text-align: center;
+      font-family: $Medium;
+      color: white;
+    }
+    .ticket {
+      width: 29px;
+      height: 29px;
+      fill: white;
+      margin: 0 10px 0 10px;
+    }
+    .profile-nav-percent-text-ticket {
+      font-size: 20px;
+      text-align: center;
+      font-family: $Medium;
+      color: white;
+    }
+    .wallet {
+      width: 29px;
+      height: 29px;
+      fill: white;
+      margin: 0 10px 0 10px;
+    }
+    .profile-nav-percent-text-wallet {
+      font-size: 20px;
+      text-align: center;
+      font-family: $Medium;
+      color: white;
+    }
+    .mail {
+      width: 29px;
+      height: 29px;
+      fill: white;
+      margin: 0 10px 0 10px;
+    }
+    .profile-nav-percent-text-mail {
+      font-size: 20px;
+      text-align: center;
+      font-family: $Medium;
+      color: white;
+    }
+  }
+
+  .main-section {
+    width: 100%;
+    .profile-article-first {
+      width: 900px;
+      height: 200px;
+      background-color: white;
+      display: flex;
+      margin: 15px auto 0;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+      h1 {
+        display: flex;
+        color: black;
+        font-size: 70px;
+        font-family: $ExtraBold;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .profile-article-second-third {
+      width: 100%;
+      height: 658px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      float: left;
+    }
+    .profile-article-second {
+      width: 500px;
+      height: 400px;
+      background-color: white;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+
+      h1 {
+        font-size: 40px;
+        font-family: $ExtraBold;
+        text-align: center;
+        color: $color-pink-red;
+        margin: 0 auto 10px;
+      }
+      h2 {
+        width: 80%;
+        font-size: 30px;
+        font-family: $ExtraBold;
+        text-align: center;
+        color: $color-pink-red;
+        margin: 0 auto 10px;
+        a {
+          width: 100%;
+          color: $color-pink-red;
+          text-decoration: none;
+          background-color: $color-white-smoke;
+        }
+      }
+      hr {
+        width: 100%;
+        height: 2px;
+        background-color: $color-bondi-blue;
+        border: none;
+        border-radius: 15px;
+        margin: 10px auto;
+      }
+      p {
+        font-size: 20px;
+        font-family: $Regular;
+        display: flex;
+        justify-content: center;
+        color: black;
+        text-align: center;
+      }
+    }
+    .profile-article-third {
+      width: 500px;
+      height: 400px;
+      background: white;
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 15px;
+      padding: 15px;
+    }
+    div {
+      display: flex;
+      hr {
+        width: 80%;
+        height: 2px;
+        background-color: $color-bondi-blue;
+        border: none;
+        border-radius: 15px;
+        margin: 10px auto;
+      }
+    }
+    h1 {
+      font-size: 40px;
+      font-family: $ExtraBold;
+      text-align: center;
+      color: black;
+      margin: 0 auto 10px;
+    }
+    hr {
+      width: 100%;
+      height: 2px;
+      background-color: $color-pink-red;
+      border: none;
+      border-radius: 15px;
+      margin: 10px auto;
+    }
+    p {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-family: $Regular;
+      font-size: 30px;
+    }
+    .lock {
+      width: 40px;
+      height: 40px;
+    }
+    .mail {
+      width: 40px;
+      height: 40px;
+    }
+    .phone {
+      width: 40px;
+      height: 40px;
+    }
+    .id {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

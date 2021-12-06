@@ -119,29 +119,37 @@
 
 .right-admin-page {
     display: flex;
-    padding-left: 30px;
-    padding-top: 54px;
+    padding-left: 10px;
+    padding-top: 24px;
     flex-direction: column;
 }
 
 
 .user-edit-form input {
-    width: 400px;
+    width: 250px;
    
 }
 
 .user-edit-form {
     display:flex;
     flex-direction:column;
-    align-items:center;
-    
-    width:500px;
+    align-items:center; 
+    width:300px;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    margin-bottom:100px;
+    
 }
 
 #userTable_filter label {
     display: none;
+}
+
+#usersTable{
+    width:50%;
+    margin-left:30px;
+}
+.control-users-page{
+    display:flex;
+    flex-direction:row;
 }
 
 #img_preview {
@@ -150,13 +158,13 @@
     cursor: pointer;
     display: block;
     position: absolute;
-    top: 50%; 
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 .change-photo {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 30px;
     position:relative;
     display: flex;
@@ -166,7 +174,7 @@
     background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     align-self: start;
-    margin-left: 45px;
+    margin-left: 25px;
 }
 
 #file-upload{
@@ -175,3 +183,113 @@
 
 #text-upload-file {
 }
+
+
+
+
+
+/*Delete message*/
+
+.user-alert-warning {
+    box-shadow: 0px 4px 28px #818181;
+    display: flex;
+    width: 458px;
+    height: 257px;
+    flex-direction: column;
+    padding: 18px 35px;
+    background: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+
+.warning-text span {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+.warning-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 71px;
+    color: black;
+}
+
+.user-alert-warning img {
+    position: relative;
+    top: -55px;
+    align-self: center;
+}
+
+.warning-buttons {
+    align-self: flex-end;
+}
+
+    .warning-buttons a {
+        text-decoration: none;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+#warning-delete {
+    color: white;
+    background: #D72130;
+    border: 1px solid #C63638;
+    box-sizing: border-box;
+    padding: 8px 35px;
+}
+
+#warning-cansel {
+    font-weight: 600;
+    color: #D72130;
+    margin-right: 32px;
+    align-self: center;
+}
+
+
+.confirm--close {
+    animation-name: confirm---close;
+}
+
+@keyframes confirm---close {
+    from {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+/*--------------------------------*/
+
+
+
+
+/*Buttons in table control users url = "/AdminControls/ControlUsers"*/
+
+.editor-delete{
+    cursor:pointer;
+}
+
+.editor-edit{
+    cursor:pointer;
+}
+
+.editor-role img{
+    width:26px;
+    height:23px;
+}
+
+.editor-edit:hover {
+    color: cyan;
+}
+
+    /***/

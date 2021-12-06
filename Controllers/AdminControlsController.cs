@@ -1,6 +1,7 @@
 ﻿using CinemaProject.Data;
 using CinemaProject.Models.AdminModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -11,6 +12,8 @@ using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
+
+   
     public class AdminControlsController : Controller
     {
         private ApplicationDbContext data = new ApplicationDbContext();
@@ -75,7 +78,15 @@ namespace CinemaProject.Controllers
             
             var list = data.Users.Where(x=> x.Id != Convert.ToInt64(User.Identity.GetUserId())).ToList();
             return Json(new { data = list });
-        } 
+        }
+
+
+        [HttpGet]
+        public ActionResult GetListRoles()
+        {
+            var list = data.Roles.ToList();
+            return Json(new { data = list });
+        }
         public IActionResult ControlUsers()
         {
             EditUserViewModel model = new EditUserViewModel();

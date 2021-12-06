@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -72,6 +74,10 @@ namespace CinemaProject.Controllers
                     {
                         foreach (var error in result.Errors)
                         {
+                           
+                                
+
+                           
                             ModelState.AddModelError(string.Empty, error.Description);
                         }
                     }
@@ -81,14 +87,29 @@ namespace CinemaProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(string id)
+        [Route("/UserProfile/Delete/{id:int}")]
+        public async Task<IActionResult> Delete(int? id)
         {
-            User user = await _userManager.FindByIdAsync(id);
-            if (user != null)
+            if (id == null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
+                return Content(null);
             }
-            return RedirectToAction("Index");
+            else
+            {
+                User user = await _userManager.FindByIdAsync(id.ToString());
+                if (user != null)
+                {
+                    IdentityResult result = await _userManager.DeleteAsync(user);
+                }
+                return RedirectToAction("ControlUsers", "AdminControls");
+            }
+
+        }
+
+        public static string GetInfoUser()
+        {
+            MethodBase m = MethodBase.GetCurrentMethod(); ;
+            return m.Name.ToString();
         }
 
 
