@@ -1,5 +1,4 @@
 ﻿using CinemaProject.Data;
-using System;
 using System.Collections.Generic;
 
 namespace CinemaProject.Models.AdminModels
