@@ -288,6 +288,36 @@
     height:23px;
 }
 
+.span-role-name {
+    font-size: 18px;
+    line-height: 16px;
+    margin-right:15px;
+}
+
+.user-alert-change-role {
+    box-shadow: 0px 4px 28px #818181;
+    display: flex;
+    align-items:center;
+    flex-direction:column;
+    width: 458px;
+    height: 257px;
+    flex-direction: column;
+    padding: 18px 35px;
+    background: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+
+
+.buttons-change-role{
+    align-self:flex-end;    
+}
+
 .editor-edit:hover {
     color: cyan;
 }

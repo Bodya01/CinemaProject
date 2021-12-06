@@ -13,13 +13,11 @@ namespace CinemaProject.Data
     {
         public Role(string name) 
         {
-           
-           
+            Name = name.Trim();
+            RoleName = name.Trim();
+            RoleDescription = name.Trim();
         }
 
-        [Key]
-        [Column("roleId")]
-        public long RoleId { get; set; }
         [Required]
         [Column("roleName")]
         [StringLength(30)]

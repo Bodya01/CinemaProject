@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CinemaProject.Controllers
 {
@@ -88,16 +89,25 @@ namespace CinemaProject.Controllers
             {
                 var user = new User
                 {
-                    UserName = model.UserName,
-                    UserEmail = model.Email,               
-                    UserSurname = model.Surname,
-                    UserPhone = model.Phone,
-
-                  
-                    
+                    UserName = model.UserName.Trim(),
+                    UserEmail = model.Email.Trim(),               
+                    UserSurname = model.Surname.Trim(),
+                    UserPhone = model.Phone.Trim()                
                 };
-                var result = await userManager.CreateAsync(user, model.Password);
                 
+                var result = await userManager.CreateAsync(user, model.Password);
+                var id = data.Users.OrderBy(x => x.Id).Last().Id;
+               
+               
+                foreach (var item in data.Users.Where(x => x.Id == id))
+                {
+                    item.UserEmail = user.UserEmail;
+                    item.UserName = user.UserName;
+                    item.UserPhone = user.UserPhone;
+                    item.UserSurname = user.UserSurname;
+
+                }
+                await data.SaveChangesAsync();
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user,  false);

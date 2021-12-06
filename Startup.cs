@@ -56,7 +56,7 @@ namespace CinemaProject
             services.AddIdentity<User, Role>(options =>
             {
                 options.User.RequireUniqueEmail = false;
-               
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
 
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()

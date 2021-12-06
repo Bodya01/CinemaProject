@@ -129,14 +129,15 @@
                        var id = table.row( row ).data().id.toString();
 
                        EditRole.open({
+                         iduser: id,
                          classblock:"right-admin-page",
                          message: "Are you sure?",
                          title: "You are about to delete this user!",
                          yes:"Delete",
                          no: "Cansel",
                           onok: () => {
-                                      
-                          }
+                                 
+                          } 
                          })
                     
                     });
@@ -154,6 +155,8 @@
                          yes:"Delete",
                          no: "Cansel",
                           onok: () => {
+                               var row = $(this).closest('tr');         
+                                 var id = table.row( row ).data().id.toString();
                                 let form = document.createElement("form");
                                 form.method = "POST";
                                 form.action = `/UserProfile/Delete/${id}`;
@@ -203,6 +206,7 @@ var EditRole = {
  
     open (options) {
         options = Object.assign({}, {
+            
             title: '',
             message: '',
             classblock: '',
@@ -210,47 +214,27 @@ var EditRole = {
             cancelText: 'Cancel',
             yes: '',
             no: '',
-            
+            iduser: '',
             onok: function () {console.log("delete")},
             oncancel: function () {console.log("cansel")},
             
         }, options);
 
+      
     const html = `
-         <div class="user-alert-warning">
-                    <form asp-action="Edit" asp-controller="ControlRoles" class="user-edit-form ">
-        <div asp-validation-summary="All"></div>
-        <div class="form-group">
-            <input type="hidden" asp-for="Id" />
-        </div>
-        <div class="form-group">
-            <label asp-for="UserName" class="control-label">Ім'я</label>
-            <input type="text" asp-for="UserName" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Зберегти"  class="btn btn-primary"/>
-        </div>
-        </form>
-                    <select id = user-roles-select></select>
-
+         <form action="/ControlRoles/Edit/${options.iduser}"method = 'post' class="user-alert-change-role">
+       
+                                
+                   <div id ="user-roles-select"> </div>   
+                    
+                   
+                    <div class = "buttons-change-role">
                     <a style ='cursor: pointer;' id = warning-cansel>${options.no}</a>
-                    <a style ='cursor: pointer;' id = warning-delete>${options.yes}</a>
-         </div>
+                    <button  type="submit" class="btn btn-primary"  id = warning-delete>${options.yes}</button >
+                    </div>
+         </form>
     `;
 
-
-
-    const url = '/AdminControls/GetListRoles';
-    let dropdown = $('#user-roles-select');
-    dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
-    dropdown.prop('selectedIndex', 0);
-
-    $.getJSON(url, function (data) {
-      $.each(data, function (key, entry) {
-        dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.name));
-      })
-    });
 
 
     const template = document.createElement('template')
@@ -258,17 +242,49 @@ var EditRole = {
     template.innerHTML = html;
 
    
-    const confirmEl  = template.content.querySelector('.user-alert-warning');
+    const confirmEl  = template.content.querySelector('.user-alert-change-role');
     const bntNo      = template.content.querySelector('#warning-cansel');
     const bntYes     = template.content.querySelector('#warning-delete');
     const userRoles  = template.content.querySelector('#user-roles-select');
 
+    const url = '/ControlRoles/GetListRoles';
+    console.log(userRoles)
+  
+    $.getJSON(url, function (data) {
+      $.each(data, function (key, entry) {        
+                console.log(entry)  
+                console.log()
+                var input = document.createElement("input");
+                var inputhiden = document.createElement("input");
 
+                inputhiden.type = "hidden";
+                inputhiden.value = entry[0].userId;
+                inputhiden.name = "userId";
+                input.type = "checkbox"             
+                input.value = entry[0].allRoles[0].name;
+                input.name = 'roles'
+                var span = document.createElement("span");
+                span.textContent = `Role: ${entry[0].allRoles[0].name}`
+                if(entry[0].userRoles.length == 0)
+                {              
+                    input.checked = ""
+                }
+                else if(entry[0].userRoles.length > 0)
+                {
+                  
+                    if(entry[0].allRoles[0].name ==  entry[0].userRoles[0]){
+                         input.checked = "true"
+                    }                  
+                }
+                span.classList.add('span-role-name')
+                userRoles.appendChild(inputhiden);     
+                userRoles.appendChild(span);     
+                userRoles.appendChild(input);      
+     
+   
+      })
+    });
 
-    userRoles.addEventListener('click', () => {
-            options.onok();
-            this._close(confirmEl,options.classblock);
-        });
 
     confirmEl.addEventListener('click', e => {
             if (e.target === confirmEl) {

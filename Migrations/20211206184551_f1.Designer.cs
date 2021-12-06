@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211205133234_f2")]
-    partial class f2
+    [Migration("20211206184551_f1")]
+    partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -513,10 +513,6 @@ namespace CinemaProject.Migrations
                         .HasColumnName("roleDescription")
                         .IsFixedLength(true);
 
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("roleId");
-
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -760,8 +756,7 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("UserEmail")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nchar(50)")
+                        .HasColumnType("nchar(450)")
                         .HasColumnName("userEmail")
                         .IsFixedLength(true);
 
@@ -771,15 +766,13 @@ namespace CinemaProject.Migrations
                         .IsFixedLength(true);
 
                     b.Property<string>("UserPhone")
-                        .HasMaxLength(100)
-                        .HasColumnType("nchar(100)")
+                        .HasColumnType("nchar")
                         .HasColumnName("userPassword")
                         .IsFixedLength(true);
 
                     b.Property<string>("UserSurname")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nchar(30)")
+                        .HasColumnType("nchar")
                         .HasColumnName("userSurname")
                         .IsFixedLength(true);
 

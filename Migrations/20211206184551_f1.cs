@@ -13,7 +13,6 @@ namespace CinemaProject.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    roleId = table.Column<long>(type: "bigint", nullable: false),
                     roleName = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
                     roleDescription = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -31,10 +30,9 @@ namespace CinemaProject.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<long>(type: "bigint", nullable: false),
-                    userSurname = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
-                    userEmail = table.Column<string>(type: "nchar(50)", fixedLength: true, maxLength: 50, nullable: false),
-                    userPassword = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: true),
+                    userSurname = table.Column<string>(type: "nchar", fixedLength: true, nullable: false),
+                    userEmail = table.Column<string>(type: "nchar(450)", fixedLength: true, nullable: false),
+                    userPassword = table.Column<string>(type: "nchar", fixedLength: true, nullable: true),
                     UserName = table.Column<string>(type: "nchar(256)", fixedLength: true, maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -53,7 +51,6 @@ namespace CinemaProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.UniqueConstraint("AK_AspNetUsers_userId", x => x.userId);
                 });
 
             migrationBuilder.CreateTable(
@@ -377,7 +374,7 @@ namespace CinemaProject.Migrations
                         name: "FK_MovieRating_User",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "userId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -406,7 +403,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Cart_User",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "userId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 

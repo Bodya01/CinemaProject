@@ -511,10 +511,6 @@ namespace CinemaProject.Migrations
                         .HasColumnName("roleDescription")
                         .IsFixedLength(true);
 
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("roleId");
-
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(30)

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211204151439_f1")]
-    partial class f1
+    [Migration("20211206184952_f2")]
+    partial class f2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -513,10 +513,6 @@ namespace CinemaProject.Migrations
                         .HasColumnName("roleDescription")
                         .IsFixedLength(true);
 
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("roleId");
-
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -765,10 +761,6 @@ namespace CinemaProject.Migrations
                         .HasColumnName("userEmail")
                         .IsFixedLength(true);
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("userId");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nchar(256)")
@@ -915,7 +907,6 @@ namespace CinemaProject.Migrations
                         .WithMany("Carts")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Cart_User")
-                        .HasPrincipalKey("UserId")
                         .IsRequired();
 
                     b.Navigation("Promocode");
@@ -987,7 +978,6 @@ namespace CinemaProject.Migrations
                         .WithMany("MovieRatings")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_MovieRating_User")
-                        .HasPrincipalKey("UserId")
                         .IsRequired();
 
                     b.Navigation("Movie");

@@ -81,12 +81,7 @@ namespace CinemaProject.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult GetListRoles()
-        {
-            var list = data.Roles.ToList();
-            return Json(new { data = list });
-        }
+        
         public IActionResult ControlUsers()
         {
             EditUserViewModel model = new EditUserViewModel();
