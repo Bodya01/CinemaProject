@@ -297,7 +297,7 @@
 .user-alert-change-role {
     box-shadow: 0px 4px 28px #818181;
     display: flex;
-    align-items:center;
+    
     flex-direction:column;
     width: 458px;
     height: 257px;
@@ -318,8 +318,12 @@
     align-self:flex-end;    
 }
 
+.block-role-name-input{
+    display:flex;
+    margin-top:10px;
+}
+
 .editor-edit:hover {
     color: cyan;
 }
-
-    /***/
+/***/

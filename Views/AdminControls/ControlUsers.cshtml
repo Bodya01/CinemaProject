@@ -135,7 +135,7 @@
                          title: "You are about to delete this user!",
                          yes:"Delete",
                          no: "Cansel",
-                          onok: () => {
+                         onok: () => {
                                  
                           } 
                          })
@@ -154,19 +154,19 @@
                          title: "You are about to delete this user!",
                          yes:"Delete",
                          no: "Cansel",
-                          onok: () => {
+                         onok: () => {
                                var row = $(this).closest('tr');         
-                                 var id = table.row( row ).data().id.toString();
-                                let form = document.createElement("form");
-                                form.method = "POST";
-                                form.action = `/UserProfile/Delete/${id}`;
-                                form.style = "display: none;";
-                                let methodInput = document.createElement("input");
-                                methodInput.value = "DELETE";
-                                methodInput.name = "Delete";
-                                form.appendChild(methodInput);
-                                document.body.appendChild(form);
-                                form.submit();         
+                               var id = table.row( row ).data().id.toString();
+                               let form = document.createElement("form");
+                               form.method = "POST";
+                               form.action = `/UserProfile/Delete/${id}`;
+                               form.style = "display: none;";
+                               let methodInput = document.createElement("input");
+                               methodInput.value = "DELETE";
+                               methodInput.name = "Delete";
+                               form.appendChild(methodInput);
+                               document.body.appendChild(form);
+                               form.submit();         
                           }
                          })
                   });
@@ -252,34 +252,47 @@ var EditRole = {
   
     $.getJSON(url, function (data) {
       $.each(data, function (key, entry) {        
-                console.log(entry)  
+                console.log(key)  
                 console.log()
-                var input = document.createElement("input");
-                var inputhiden = document.createElement("input");
 
-                inputhiden.type = "hidden";
-                inputhiden.value = entry[0].userId;
-                inputhiden.name = "userId";
-                input.type = "checkbox"             
-                input.value = entry[0].allRoles[0].name;
-                input.name = 'roles'
-                var span = document.createElement("span");
-                span.textContent = `Role: ${entry[0].allRoles[0].name}`
-                if(entry[0].userRoles.length == 0)
-                {              
-                    input.checked = ""
-                }
-                else if(entry[0].userRoles.length > 0)
-                {
+                for(let i = 0; i < entry[0].allRoles.length; i++){
+                    console.log(i)
+                    var div = document.createElement("div");
+
+                    var input = document.createElement("input");
+                    var inputhiden = document.createElement("input");
+                    inputhiden.type = "hidden";
+                    inputhiden.value = entry[0].userId;
+                    inputhiden.name = "userId";
+                    input.type = "checkbox"             
+                    input.value = entry[0].allRoles[i].name;
+                    input.name = 'roles'
+                    var span = document.createElement("span");
+                    span.textContent = `Role: ${entry[0].allRoles[i].name}`
+                    if(entry[0].userRoles.length == 0)
+                    {              
+                        input.checked = ""
+                    }
+                    else if(entry[0].userRoles.length > 0)
+                    {
                   
-                    if(entry[0].allRoles[0].name ==  entry[0].userRoles[0]){
-                         input.checked = "true"
-                    }                  
+                        if(entry[0].allRoles[i].name ==  entry[0].userRoles[i]){
+                             input.checked = "true"
+                        }                  
+                    }
+                    span.classList.add('span-role-name')
+                    input.clasList.add('toggle__input')
+                    div.classList.add('block-role-name-input')
+                    div.appendChild(inputhiden);
+                    div.appendChild(span);
+                    div.appendChild(input);    
+                    userRoles.appendChild(div);     
+
                 }
-                span.classList.add('span-role-name')
-                userRoles.appendChild(inputhiden);     
-                userRoles.appendChild(span);     
-                userRoles.appendChild(input);      
+
+
+
+                
      
    
       })
