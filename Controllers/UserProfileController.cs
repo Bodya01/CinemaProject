@@ -2,7 +2,6 @@
 using CinemaProject.Models.AdminModels;
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net;
@@ -15,7 +14,7 @@ namespace CinemaProject.Controllers
     public class UserProfileController : Controller
     {
         private readonly UserManager<User> _userManager;
-        
+
         public UserProfileController(UserManager<User> userManager)
         {
             _userManager = userManager;
@@ -31,8 +30,8 @@ namespace CinemaProject.Controllers
 
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.UserEmail, UserName = model.UserName, UserSurname = model.UserSurname,UserPhone = model.UserPhone };
-                
+                User user = new User { Email = model.UserEmail, UserName = model.UserName, UserSurname = model.UserSurname, UserPhone = model.UserPhone };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -59,7 +58,7 @@ namespace CinemaProject.Controllers
                 if (user != null)
                 {
                   
-                    user.UserName = model.UserName.Trim();
+                    user.UserName = model.UserName;
                     user.UserEmail = model.UserEmail;
                     user.UserSurname = model.UserSurname;
                     user.UserPhone = model.UserPhone;

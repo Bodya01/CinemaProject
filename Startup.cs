@@ -1,6 +1,4 @@
-using CinemaProject;
 using CinemaProject.Data;
-using CinemaProject.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +13,7 @@ using System.IO;
 
 namespace CinemaProject
 {
-    
+
 
     public class Startup
     {
@@ -29,10 +27,8 @@ namespace CinemaProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-         
-           services.AddDbContext<ApplicationDbContext>();
+            services.AddDbContext<ApplicationDbContext>();
             services.AddSession();
-
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -46,38 +42,21 @@ namespace CinemaProject
                 options.SlidingExpiration = true;
             });
 
-
-         
-
-
-
-
-
             services.AddIdentity<User, Role>(options =>
             {
                 options.User.RequireUniqueEmail = false;
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
 
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-          
-
-            
-
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
             services.AddMvc();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -102,11 +81,10 @@ namespace CinemaProject
             app.UseAuthorization();
             app.UseAuthentication();
 
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                   
+
                     pattern: "{controller}/{action}/{id?}",
                     constraints: new { id = "int" },
                     defaults: new { Controller = "Home", Action = "Index" },

@@ -34,7 +34,14 @@ namespace CinemaProject.Data
         public DateTime CreateAt { get; set; }
 
         [Required]
+        [Column("moviePhotoPath")]
         public string MoviePhotoPath { get; set; }
+        [Required]
+        [Column("moviePreviewPath")]
+        public string MoviePreviewPath { get; set; }
+        [Required]
+        [Column("movieTrailerPath")]
+        public string MovieTrailerPath { get; set; }
 
         [InverseProperty(nameof(MovieRating.Movie))]
         public virtual ICollection<MovieRating> MovieRatings { get; set; }

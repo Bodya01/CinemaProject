@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 #nullable disable
 
@@ -18,11 +15,11 @@ namespace CinemaProject.Data
     {
 
 
-        public User() 
+        public User()
         {
             Carts = new HashSet<Cart>();
             MovieRatings = new HashSet<MovieRating>();
-           
+
         }
         [Required]
         [Column("userSurname")]
@@ -32,7 +29,7 @@ namespace CinemaProject.Data
         [Column("userEmail")]
         [StringLength(50)]
         public string UserEmail { get; set; }
-      
+
         [Column("userPassword")]
         [StringLength(100)]
         public string UserPhone { get; set; }
@@ -41,9 +38,9 @@ namespace CinemaProject.Data
         public virtual ICollection<Cart> Carts { get; set; }
         [InverseProperty(nameof(MovieRating.User))]
         public virtual ICollection<MovieRating> MovieRatings { get; set; }
-        
 
-        
-       
+
+
+
     }
 }

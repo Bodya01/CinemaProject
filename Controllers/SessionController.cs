@@ -1,14 +1,9 @@
 ﻿using CinemaProject.Data;
 using CinemaProject.Models.ModelViews;
 using CinemaProject.Models.SessionModels;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -26,10 +21,10 @@ namespace CinemaProject.Controllers
         public SessionController(UserManager<User> userManager,
             SignInManager<User> signInManager)
         {
-            
+
             this.userManager = userManager;
             this.signInManager = signInManager;
-           
+
         }
 
 
@@ -57,7 +52,7 @@ namespace CinemaProject.Controllers
                     await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    
+
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
@@ -110,7 +105,7 @@ namespace CinemaProject.Controllers
                 await data.SaveChangesAsync();
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user,  false);
+                    await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -131,7 +126,7 @@ namespace CinemaProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-           
+
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
@@ -142,7 +137,7 @@ namespace CinemaProject.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 ModelState.Clear();
                 model.EmailSent = true;
             }

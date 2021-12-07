@@ -9,14 +9,14 @@
         <input type="text" placeholder="Movie name" asp-for="Movies.NameMovie"/>
         <input type="text" placeholder="Age restrcition" asp-for="Movies.AgeRestriction" />
         <input type="text" placeholder="Creation date" asp-for="Movies.CreateAt" />
+        <input type="text" placeholder="Movie photo url" asp-for="Movies.MoviePhotoPath" />
+        <input type="text" placeholder="Movie preview url" asp-for="Movies.MoviePreviewPath" />
+        <input type="text" placeholder="Movie trailer url" asp-for="Movies.MovieTrailerPath" />
         <div id="SubcategorySelects">
             <select  asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" ></select>
         </div>
-            <textarea placeholder="Movie description" asp-for="Movies.MovieDescription"></textarea>
-       
+        <textarea placeholder="Movie description" asp-for="Movies.MovieDescription"></textarea>  
         <input type="submit" value="Add"/>
     </form>
-
-   
 </main>
 <script src="~/js/AddMovie.js"></script>

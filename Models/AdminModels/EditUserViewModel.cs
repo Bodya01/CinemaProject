@@ -10,7 +10,6 @@ namespace CinemaProject.Models.AdminModels
         public string UserName { get; set; }
         public string UserSurname { get; set; }
         public string UserPhone { get; set; }
-
-        public List<User> Users { get; set; } 
+        public List<User> Users { get; set; }
     }
 }

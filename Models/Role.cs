@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,9 +11,8 @@ namespace CinemaProject.Data
     {
         public Role(string name) 
         {
-            Name = name.Trim();
-            RoleName = name.Trim();
-            RoleDescription = name.Trim();
+           
+           
         }
 
         [Required]
@@ -27,7 +24,7 @@ namespace CinemaProject.Data
         [StringLength(100)]
         public string RoleDescription { get; set; }
 
-    
-        
+
+
     }
 }

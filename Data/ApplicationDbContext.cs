@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 #nullable disable
 
 namespace CinemaProject.Data
 {
-    public partial class ApplicationDbContext : IdentityDbContext<User,Role,long>
+    public partial class ApplicationDbContext : IdentityDbContext<User, Role, long>
     {
         public ApplicationDbContext()
         {
@@ -34,20 +33,20 @@ namespace CinemaProject.Data
         public virtual DbSet<Reciept> Reciepts { get; set; }
         public virtual DbSet<ReservedTicket> ReservedTickets { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-      
+
         public virtual DbSet<Seat> Seats { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Subcategory> Subcategories { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<User> Users { get; set; }
-      
-     
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server= DESKTOP-GL1TEJO;Database=CinemaProject;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server= DESKTOP-MBGGAE3;Database=CinemaProject;Trusted_Connection=True;");
             }
         }
 
@@ -270,7 +269,7 @@ namespace CinemaProject.Data
                 entity.Property(e => e.RoleName).IsFixedLength(true);
             });
 
-          
+
 
             modelBuilder.Entity<Seat>(entity =>
             {
@@ -352,7 +351,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-          
+
                 entity.Property(e => e.UserEmail).IsFixedLength(true);
 
                 entity.Property(e => e.UserName).IsFixedLength(true);
@@ -366,7 +365,7 @@ namespace CinemaProject.Data
 
             });
 
-   
+
             OnModelCreatingPartial(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
