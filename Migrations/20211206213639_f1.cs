@@ -30,9 +30,9 @@ namespace CinemaProject.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userSurname = table.Column<string>(type: "nchar", fixedLength: true, nullable: false),
-                    userEmail = table.Column<string>(type: "nchar(450)", fixedLength: true, nullable: false),
-                    userPassword = table.Column<string>(type: "nchar", fixedLength: true, nullable: true),
+                    userSurname = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
+                    userEmail = table.Column<string>(type: "nchar(50)", fixedLength: true, maxLength: 50, nullable: false),
+                    userPassword = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: true),
                     UserName = table.Column<string>(type: "nchar(256)", fixedLength: true, maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -105,7 +105,9 @@ namespace CinemaProject.Migrations
                     ageRestriction = table.Column<int>(type: "int", nullable: false),
                     movieDescription = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
                     createAt = table.Column<DateTime>(type: "date", nullable: false),
-                    MoviePhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    moviePhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    moviePreviewPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    movieTrailerPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

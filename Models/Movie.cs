@@ -22,13 +22,11 @@ namespace CinemaProject.Data
         public long MovieId { get; set; }
         [Required]
         [Column("nameMovie")]
-        [StringLength(20)]
         public string NameMovie { get; set; }
         [Column("ageRestriction")]
         public int AgeRestriction { get; set; }
         [Required]
         [Column("movieDescription")]
-        [StringLength(10)]
         public string MovieDescription { get; set; }
         [Column("createAt", TypeName = "date")]
         public DateTime CreateAt { get; set; }

@@ -1,7 +1,6 @@
 ﻿using CinemaProject.Data;
 using CinemaProject.Models.AdminModels;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 namespace CinemaProject.Controllers
 {
 
-   
+
     public class AdminControlsController : Controller
     {
         private ApplicationDbContext data = new ApplicationDbContext();
@@ -26,16 +25,45 @@ namespace CinemaProject.Controllers
         }
         public IActionResult ControlMovies()
         {
+            GetSubcategoryList();
+            ViewBag.Subcategories = new SelectList(subcategories, "SubcategoryId", "SubcategoryName");
             ControlMovies model = new ControlMovies();
             model.Movies = data.Movies.ToList();
             return View(model);
         }
 
-        public IActionResult DeleteMovie()
+        [HttpPost]
+        public async Task<IActionResult> EditMovie(ControlMovies movies)
         {
-            return View(data.Movies.ToList());
-        }
+            Movie movie = data.Movies.FirstOrDefault(x => x.MovieId == movies.Id);
+            
+            if (movie != null)
+            {
+                movie.NameMovie = movies.NameMovie;
+                movie.AgeRestriction = movies.AgeRestriction;
+                movie.CreateAt = DateTime.Parse(movies.CreateAt);
+                movie.MovieDescription = movies.MovieDescription;
+                movie.MoviePhotoPath = movies.MoviePhotoPath;
+                movie.MoviePreviewPath = movies.MoviePreviewPath;
+                movie.MovieTrailerPath = movies.MovieTrailerPath;
+                data.Movies.Update(movie);
 
+                MovieSubcategory subcategory = data.MovieSubcategories.FirstOrDefault(x => x.MovieId == movies.Id);
+                MovieSubcategory newSubcategory = new MovieSubcategory
+                {
+                    MovieSubcategoriesId = subcategory.MovieSubcategoriesId,
+                    MovieId = subcategory.MovieId,
+                    SubcategoryId = movies.SubcategoryId
+                };
+                data.MovieSubcategories.Remove(subcategory);
+                data.MovieSubcategories.Add(newSubcategory);
+
+                await data.SaveChangesAsync();
+
+
+            }
+            return RedirectToAction("ControlMovies", "AdminControls");
+        }
 
         [HttpPost]
         [Route("AdminControls/DeleteMovie/{id:int}")]
@@ -45,14 +73,13 @@ namespace CinemaProject.Controllers
             if (movie != null)
             {
                 data.Movies.Remove(movie);
-                var subcategories = data.MovieSubcategories.Where(x => x.MovieId == id);
-                foreach (var subcategory in subcategories)
+                foreach (var subcategory in data.MovieSubcategories.Where(x => x.MovieId == id))
                 {
                     data.MovieSubcategories.Remove(subcategory);
                 }
                 await data.SaveChangesAsync();
             }
-            return DeleteMovie();
+            return RedirectToAction("ControlMovies", "AdminControls");
         }
 
         public ActionResult AddMovie()

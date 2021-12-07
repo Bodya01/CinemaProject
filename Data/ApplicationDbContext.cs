@@ -262,7 +262,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Role>(entity =>
             {
-                
+
 
                 entity.Property(e => e.RoleDescription).IsFixedLength(true);
 

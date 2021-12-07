@@ -13,6 +13,7 @@ namespace CinemaProject.Models.AdminModels
         public string MoviePhotoPath { get; set; }
         public string MoviePreviewPath { get; set; }
         public string MovieTrailerPath { get; set; }
+        public int SubcategoryId { get; set; }
         public List<Movie> Movies { get; set; }
     }
 }

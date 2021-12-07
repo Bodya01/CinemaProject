@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211206184551_f1")]
+    [Migration("20211206213639_f1")]
     partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -290,7 +290,18 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("MoviePhotoPath")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("moviePhotoPath");
+
+                    b.Property<string>("MoviePreviewPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("moviePreviewPath");
+
+                    b.Property<string>("MovieTrailerPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("movieTrailerPath");
 
                     b.Property<string>("NameMovie")
                         .IsRequired()
@@ -756,7 +767,8 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("UserEmail")
                         .IsRequired()
-                        .HasColumnType("nchar(450)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nchar(50)")
                         .HasColumnName("userEmail")
                         .IsFixedLength(true);
 
@@ -766,13 +778,15 @@ namespace CinemaProject.Migrations
                         .IsFixedLength(true);
 
                     b.Property<string>("UserPhone")
-                        .HasColumnType("nchar")
+                        .HasMaxLength(100)
+                        .HasColumnType("nchar(100)")
                         .HasColumnName("userPassword")
                         .IsFixedLength(true);
 
                     b.Property<string>("UserSurname")
                         .IsRequired()
-                        .HasColumnType("nchar")
+                        .HasMaxLength(30)
+                        .HasColumnType("nchar(30)")
                         .HasColumnName("userSurname")
                         .IsFixedLength(true);
 

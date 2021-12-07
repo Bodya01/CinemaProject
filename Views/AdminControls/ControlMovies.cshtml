@@ -5,7 +5,7 @@
 }
 
 
-<form asp-action="Edit" asp-controller="MovieControls" class="user-edit-form ">
+<form asp-action="EditMovie" asp-controller="AdminControls" class="user-edit-form ">
     <div asp-validation-summary="All"></div>
     <div class="form-group">
         <input type="hidden" asp-for="Id" />
@@ -37,6 +37,9 @@
          <div class="form-group">
         <label asp-for="MovieTrailerPath" class="control-label">Трейлер фільму</label>
         <input type="text" asp-for="MovieTrailerPath" class="form-control" />
+    </div>
+    <div class="form-group">
+        <select  asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" ></select>
     </div>
 
     <div class="form-group">
@@ -93,11 +96,41 @@
                    }
                 ]
              });
+             $(document).on('click','.editor-delete',function(e) 
+               {
+                    var row = $(this).closest('tr');
+                    console.log(table.row( row ).data().movieId);
+                    var id = table.row( row ).data().movieId;
+                    console.log(id)
+                    Confirm.open(
+                    {
+                        classblock:"right-admin-page",
+                        message: "Are you sure?",
+                        title: "You are about to delete this user!",
+                        yes:"Delete",
+                        no: "Cansel",
+                        onok: () => 
+                        {
+                            var row = $(this).closest('tr');
+                            var id = table.row( row ).data().movieId.toString();
+                            let form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = `/AdminControls/DeleteMovie/${id}`;
+                            form.style = "display: none;";
+                            let methodInput = document.createElement("input");
+                            methodInput.value = "DELETE";
+                            methodInput.name = "Delete";
+                            form.appendChild(methodInput);
+                            document.body.appendChild(form);
+                            form.submit();
+                         }
+                    })
+                });
 
                $(document).on('click','.movie-edit',function(e)
                {
                   var row = $(this).closest('tr');         
-                  var id = table.row( row ).data().id;
+                  var id = table.row( row ).data().movieId;
                  
 
                   var IdInput = document.getElementById('Id');
@@ -119,35 +152,7 @@
                  moviePreviewPath.value = table.row( row ).data().moviePreviewPath
                  movieTrailerPath.value =  table.row( row ).data().movieTrailerPath
                });
-               $(document).on('click','.editor-delete',function(e) 
-               {
-                    var row = $(this).closest('tr');
-                    var id = table.row( row ).data().movieId.toString();
-                    console.log(id)
-                    Confirm.open(
-                    {
-                        classblock:"right-admin-page",
-                        message: "Are you sure?",
-                        title: "You are about to delete this user!",
-                        yes:"Delete",
-                        no: "Cansel",
-                        onok: () => 
-                        {
-                            var row = $(this).closest('tr');
-                            var id = table.row( row ).data().id.toString();
-                            let form = document.createElement("form");
-                            form.method = "POST";
-                            form.action = `/AdminControls/DeleteMovie/${id}`;
-                            form.style = "display: none;";
-                            let methodInput = document.createElement("input");
-                            methodInput.value = "DELETE";
-                            methodInput.name = "Delete";
-                            form.appendChild(methodInput);
-                            document.body.appendChild(form);
-                            form.submit();
-                         }
-                    })
-                });
+               
 
 
            }
