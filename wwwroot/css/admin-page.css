@@ -326,4 +326,24 @@
 .editor-edit:hover {
     color: cyan;
 }
+
+.checkbox-user-role {
+   
+    width: 20px;
+    height: 20px;
+  
+    margin-left: 14px;
+    
+}
+
+.change-role-img{
+    width:30px;
+}
+
+.text-change-role {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 16px;
+}
+
 /***/

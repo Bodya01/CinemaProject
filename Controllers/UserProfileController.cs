@@ -9,17 +9,24 @@ using System.Net;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using CinemaProject.Models.ModelViews;
 
 namespace CinemaProject.Controllers
 {
     public class UserProfileController : Controller
     {
         private readonly UserManager<User> _userManager;
-        
-        public UserProfileController(UserManager<User> userManager)
+        ApplicationDbContext _data = new();
+        IWebHostEnvironment _appEnvironment;
+      
+        public UserProfileController(UserManager<User> userManager, IWebHostEnvironment appEnvironment, ApplicationDbContext data)
         {
             _userManager = userManager;
-            
+            _appEnvironment = appEnvironment;
+            _data = data;
         }
 
         public IActionResult Index() => View(_userManager.Users);
@@ -51,7 +58,7 @@ namespace CinemaProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditUserViewModel model)
+        public async Task<IActionResult> Edit(EditUserViewModel model, IFormFile uploadedFile)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +71,31 @@ namespace CinemaProject.Controllers
                     user.UserSurname = model.UserSurname;
                     user.UserPhone = model.UserPhone;
 
+                    if (uploadedFile != null)
+                    {
+                        string newPath = @"\images\user-images\" + uploadedFile.FileName;
+                        if (user.PhotoPath != string.Empty)
+                        {
+                            string path = user.PhotoPath;
+                            var bytes = System.IO.File.ReadAllBytes(@$"\{user.PhotoPath}");
+                            if (bytes.Length != 0)
+                            {
+                                System.IO.File.Delete(@$"\{user.PhotoPath}");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError(string.Empty, "File not find");
+                            }
+                        }
+                        else
+                        {
+                            using (var fileStream = new FileStream(_appEnvironment.WebRootPath + newPath, FileMode.Create))
+                            {
+                                user.PhotoPath = @$"images\user-images\{uploadedFile.FileName}";
+                                await uploadedFile.CopyToAsync(fileStream);
+                            }
+                        }
+                    }
                     var result = await _userManager.UpdateAsync(user);
                   
                     if (result.Succeeded)
@@ -73,11 +105,7 @@ namespace CinemaProject.Controllers
                     else
                     {
                         foreach (var error in result.Errors)
-                        {
-                           
-                                
-
-                           
+                        {                                                   
                             ModelState.AddModelError(string.Empty, error.Description);
                         }
                     }
@@ -85,6 +113,13 @@ namespace CinemaProject.Controllers
             }
             return RedirectToAction("ControlUsers", "AdminControls");
         }
+
+       
+
+
+
+
+
 
         [HttpPost]
         [Route("/UserProfile/Delete/{id:int}")]
@@ -99,6 +134,19 @@ namespace CinemaProject.Controllers
                 User user = await _userManager.FindByIdAsync(id.ToString());
                 if (user != null)
                 {
+                    if (user.PhotoPath != null) {
+                        string path = "/images/user-images/" + user.PhotoPath;
+                        var bytes = System.IO.File.ReadAllBytes(path);
+
+                        if(bytes.Length != 0)
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "File not find");
+                        }               
+                    }
                     IdentityResult result = await _userManager.DeleteAsync(user);
                 }
                 return RedirectToAction("ControlUsers", "AdminControls");

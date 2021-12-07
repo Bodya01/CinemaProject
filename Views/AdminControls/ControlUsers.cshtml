@@ -5,7 +5,7 @@
     Layout = "_AdminLayout";
 }
 <div class = "control-users-page">
-    <form asp-action="Edit" asp-controller="UserProfile" class="user-edit-form ">
+    <form asp-action="Edit" asp-controller="UserProfile" class="user-edit-form " enctype="multipart/form-data">
         <div asp-validation-summary="All"></div>
         <div class="form-group">
             <input type="hidden" asp-for="Id" />
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group change-photo">
-             <input type="file" id = "file-upload"/>
+             <input type="file" asp-for="UserPhotoPath" name="uploadedFile" id = "file-upload"/>
              <label for="file-upload" class="custom-file-upload">
              <img  id="img_preview" src = "/images/adminPageImages/addPhoto.png">        
             </label> 
@@ -127,13 +127,14 @@
                     $(document).on('click','.editor-role',function(e) {
                        var row = $(this).closest('tr');         
                        var id = table.row( row ).data().id.toString();
-
+                       var userEmail = table.row( row ).data().userEmail
                        EditRole.open({
+
                          iduser: id,
                          classblock:"right-admin-page",
                          message: "Are you sure?",
-                         title: "You are about to delete this user!",
-                         yes:"Delete",
+                         title: userEmail,
+                         yes:"Change",
                          no: "Cansel",
                          onok: () => {
                                  
@@ -149,6 +150,7 @@
                        var id = table.row( row ).data().id.toString();
                        console.log(id)
                        Confirm.open({
+                        
                          classblock:"right-admin-page",
                          message: "Are you sure?",
                          title: "You are about to delete this user!",
@@ -223,8 +225,9 @@ var EditRole = {
       
     const html = `
          <form action="/ControlRoles/Edit/${options.iduser}"method = 'post' class="user-alert-change-role">
-       
-                                
+                    
+                   <p class = "text-change-role">Manager Roles for user: <span style="font-weight: bold;"> ${options.title}</span></p>
+                   <img src = "/images/user-role-change.jpg" class="change-role-img"></img>      
                    <div id ="user-roles-select"> </div>   
                     
                    
@@ -275,13 +278,13 @@ var EditRole = {
                     }
                     else if(entry[0].userRoles.length > 0)
                     {
-                  
-                        if(entry[0].allRoles[i].name ==  entry[0].userRoles[i]){
+                        for(let k = 0; k < entry[0].userRoles.length; k++)
+                        if(entry[0].allRoles[i].name ==  entry[0].userRoles[k]){
                              input.checked = "true"
                         }                  
                     }
                     span.classList.add('span-role-name')
-                    input.clasList.add('toggle__input')
+                    input.classList.add('checkbox-user-role')
                     div.classList.add('block-role-name-input')
                     div.appendChild(inputhiden);
                     div.appendChild(span);

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\datatables\" />
+    <Folder Include="wwwroot\images\user-images\" />
   </ItemGroup>
 
 </Project>

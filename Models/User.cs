@@ -37,6 +37,8 @@ namespace CinemaProject.Data
         [StringLength(100)]
         public string UserPhone { get; set; }
 
+        public string PhotoPath { get; set; }
+
         [InverseProperty(nameof(Cart.User))]
         public virtual ICollection<Cart> Carts { get; set; }
         [InverseProperty(nameof(MovieRating.User))]
