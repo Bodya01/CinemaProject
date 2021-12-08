@@ -4,14 +4,16 @@ using CinemaProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211207222844_f1")]
+    partial class f1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -281,8 +283,7 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("MovieDescription")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nchar(100)")
+                        .HasColumnType("nchar")
                         .HasColumnName("movieDescription")
                         .IsFixedLength(true);
 
@@ -303,8 +304,7 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("NameMovie")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nchar(50)")
+                        .HasColumnType("nchar")
                         .HasColumnName("nameMovie")
                         .IsFixedLength(true);
 

@@ -110,7 +110,7 @@ namespace CinemaProject.Data
             {
                 entity.Property(e => e.CinemaId).ValueGeneratedOnAdd();
 
-                entity.Property(e => e.Adrees).IsFixedLength(true);
+                entity.Property(e => e.Adress).IsFixedLength(true);
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Cinemas)
@@ -284,7 +284,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Session>(entity =>
             {
-                entity.HasKey(e => new { e.Sessiond, e.MovieId, e.HallId, e.DemonstrationId })
+                entity.HasKey(e => new { e.SessionId, e.MovieId, e.HallId, e.DemonstrationId })
                     .HasName("PK_Session_1");
 
                 entity.HasOne(d => d.Demonstration)
@@ -301,7 +301,7 @@ namespace CinemaProject.Data
 
                 entity.HasOne(d => d.Hall)
                     .WithMany(p => p.Sessions)
-                    .HasForeignKey(d => new { d.HallId, d.CinamaId })
+                    .HasForeignKey(d => new { d.HallId, d.CinemaId})
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Session_Hall");
             });

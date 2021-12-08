@@ -4,8 +4,10 @@
     Layout = "_AdminLayout";
 }
 
+<div><a asp-action="AddMovie" class="add-movie-link">Add new movie</a></div>
 
-<form asp-action="EditMovie" asp-controller="AdminControls" class="user-edit-form ">
+<div class = "control-users-page movie-controls">
+    <form asp-action="EditMovie" asp-controller="AdminControls" class="user-edit-form ">
     <div asp-validation-summary="All"></div>
     <div class="form-group">
         <input type="hidden" asp-for="Id" />
@@ -46,7 +48,6 @@
         <input type="submit" value="Зберегти"  class="btn btn-primary"/>
     </div>
 </form>
-
 <table class="table table-dark" id="movieTable">
     <thead>
         <tr>
@@ -58,6 +59,8 @@
         </tr>
     </thead>
 </table>
+</div>
+
 @section scripts{
  
   <script>

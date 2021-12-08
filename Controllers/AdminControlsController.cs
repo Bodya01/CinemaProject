@@ -16,6 +16,7 @@ namespace CinemaProject.Controllers
     {
         private ApplicationDbContext data = new ApplicationDbContext();
         private List<Subcategory> subcategories = new List<Subcategory>();
+        private List<string> sessionTimes = new List<string>();
 
         [HttpGet]
         public ActionResult GetMovieList()
@@ -59,8 +60,6 @@ namespace CinemaProject.Controllers
                 data.MovieSubcategories.Add(newSubcategory);
 
                 await data.SaveChangesAsync();
-
-
             }
             return RedirectToAction("ControlMovies", "AdminControls");
         }
@@ -103,7 +102,7 @@ namespace CinemaProject.Controllers
                     SubcategoryId = movie.SubcategoryId
                 });
                 await data.SaveChangesAsync();
-                return AddMovie();
+                return RedirectToAction("ControlMovies", "AdminControls");
             }
             return View(movie);
         }
@@ -139,6 +138,70 @@ namespace CinemaProject.Controllers
             EditUserViewModel model = new EditUserViewModel();
             model.Users = data.Users.ToList();
             return View(model);
+        }
+
+
+
+
+        public IActionResult AddSession()
+        {
+            FillSessionTime();
+            ViewBag.SessionTimes = new SelectList(sessionTimes);
+            ViewBag.Demonstrations = new SelectList(data.Demonstrations.ToList(), "DemonstrationId", "DemonstrationName");
+            ViewBag.Halls = new SelectList(data.Halls.ToList(), "HallId", "HallName");
+            ViewBag.Movies = new SelectList(data.Movies.ToList(), "MovieId", "NameMovie");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSession(AddSession newSession)
+        {
+            if (newSession != null)
+            {
+                Session session = new Session
+                {
+                    CinemaId = newSession.CinamaId,
+                    DemonstrationId = newSession.DemonstrationId,
+                    HallId = newSession.HallId,
+                    MovieId = newSession.MovieId,
+                    ScreenStart = DateTime.Parse($"{newSession.SessionDate} {newSession.SessionTime}"),
+                    ScreenEnd = GetSessionEndTime(newSession.SessionDate, newSession.SessionTime, newSession.SessionLasts),
+                    Hall = data.Halls.FirstOrDefault(x=> x.HallId == newSession.HallId),
+                    Demonstration = data.Demonstrations.FirstOrDefault(x => x.DemonstrationId == newSession.DemonstrationId),
+                    Movie = data.Movies.FirstOrDefault(x => x.MovieId == newSession.MovieId)
+                };
+                data.Sessions.Add(session);
+                await data.SaveChangesAsync();
+                return RedirectToAction("ControlMovies", "AdminControls");
+            }
+            return View();
+        }
+        public DateTime GetSessionEndTime(string dateStart, string timeStart, string lastTime)
+        {
+            string temp = string.Empty;
+            string newTimeStart = "0";
+            for (int i = 0; i < timeStart.Length - 1; i++)
+            {
+                newTimeStart += lastTime[i];
+            }
+            for (int i = 0; i < timeStart.Length; i++)
+            {
+                if (!char.IsDigit(timeStart[i]))
+                {
+                    temp += timeStart[i];
+                    continue;
+                }
+                temp += ((timeStart[i] - '0') + (newTimeStart[i] - '0')).ToString();
+            }
+            return DateTime.Parse($"{ dateStart} {temp}");
+        }
+        private void FillSessionTime()
+        {
+            sessionTimes.Add("10:00");
+            sessionTimes.Add("13:00");
+            sessionTimes.Add("16:00");
+            sessionTimes.Add("19:00");
+            sessionTimes.Add("22:00");
         }
     }
 }

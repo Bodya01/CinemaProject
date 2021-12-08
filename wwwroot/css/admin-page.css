@@ -322,4 +322,29 @@
     color: cyan;
 }
 
+
     /***/
+
+.movie-controls {
+    display: flex;
+    justify-content: space-evenly;
+    overflow-x: hidden;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+.table_width {
+    width: 100%;
+}
+
+#movieTable_wrapper {
+    width: 1200px;
+}
+
+.add-movie-link{
+    display:flex;
+    justify-content:center;
+    font-size:25px;
+}

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211206213639_f1")]
-    partial class f1
+    [Migration("20211207224243_f2")]
+    partial class f2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,10 +133,10 @@ namespace CinemaProject.Migrations
                         .HasColumnName("cinemaId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adrees")
+                    b.Property<string>("Adress")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nchar(100)")
                         .IsFixedLength(true);
 
                     b.Property<long>("CityId")
@@ -160,8 +160,8 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("CityName")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nchar(20)")
                         .HasColumnName("cityName")
                         .IsFixedLength(true);
 
@@ -283,8 +283,8 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("MovieDescription")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nchar(100)")
                         .HasColumnName("movieDescription")
                         .IsFixedLength(true);
 
@@ -305,8 +305,7 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("NameMovie")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nchar(20)")
+                        .HasColumnType("nchar")
                         .HasColumnName("nameMovie")
                         .IsFixedLength(true);
 
@@ -441,15 +440,15 @@ namespace CinemaProject.Migrations
 
                     b.Property<string>("PromocodeDescription")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nchar(50)")
                         .HasColumnName("promocodeDescription")
                         .IsFixedLength(true);
 
                     b.Property<string>("PromocodeName")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nchar(20)")
                         .HasColumnName("promocodeName")
                         .IsFixedLength(true);
 
@@ -579,9 +578,9 @@ namespace CinemaProject.Migrations
 
             modelBuilder.Entity("CinemaProject.Data.Session", b =>
                 {
-                    b.Property<long>("Sessiond")
+                    b.Property<long>("SessionId")
                         .HasColumnType("bigint")
-                        .HasColumnName("sessiond");
+                        .HasColumnName("sessionId");
 
                     b.Property<long>("MovieId")
                         .HasColumnType("bigint")
@@ -595,9 +594,9 @@ namespace CinemaProject.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("demonstrationId");
 
-                    b.Property<long>("CinamaId")
+                    b.Property<long>("CinemaId")
                         .HasColumnType("bigint")
-                        .HasColumnName("cinamaId");
+                        .HasColumnName("CinemaId");
 
                     b.Property<DateTime>("ScreenEnd")
                         .HasColumnType("date")
@@ -607,14 +606,14 @@ namespace CinemaProject.Migrations
                         .HasColumnType("date")
                         .HasColumnName("screenStart");
 
-                    b.HasKey("Sessiond", "MovieId", "HallId", "DemonstrationId")
+                    b.HasKey("SessionId", "MovieId", "HallId", "DemonstrationId")
                         .HasName("PK_Session_1");
 
                     b.HasIndex("DemonstrationId");
 
                     b.HasIndex("MovieId");
 
-                    b.HasIndex("HallId", "CinamaId");
+                    b.HasIndex("HallId", "CinemaId");
 
                     b.ToTable("Session");
                 });
@@ -1042,7 +1041,7 @@ namespace CinemaProject.Migrations
 
                     b.HasOne("CinemaProject.Data.Hall", "Hall")
                         .WithMany("Sessions")
-                        .HasForeignKey("HallId", "CinamaId")
+                        .HasForeignKey("HallId", "CinemaId")
                         .HasConstraintName("FK_Session_Hall")
                         .IsRequired();
 

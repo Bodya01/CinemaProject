@@ -5,18 +5,36 @@
 }
 
 <main>
-    <form method="post" asp-action="AddMovie" asp-controller="AdminControls">
-        <input type="text" placeholder="Movie name" asp-for="Movies.NameMovie"/>
-        <input type="text" placeholder="Age restrcition" asp-for="Movies.AgeRestriction" />
-        <input type="text" placeholder="Creation date" asp-for="Movies.CreateAt" />
-        <input type="text" placeholder="Movie photo url" asp-for="Movies.MoviePhotoPath" />
-        <input type="text" placeholder="Movie preview url" asp-for="Movies.MoviePreviewPath" />
-        <input type="text" placeholder="Movie trailer url" asp-for="Movies.MovieTrailerPath" />
+    <form method="post" asp-action="AddMovie" asp-controller="AdminControls" class="user-edit-form ">
+        <div class="form-group">
+            <label asp-for="Movies.NameMovie" class="control-label">Назва фільму</label>
+            <input type="text" asp-for="Movies.NameMovie" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Movies.AgeRestriction" class="control-label">Вікове обмеження</label>
+            <input type="text" asp-for="Movies.AgeRestriction" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Movies.CreateAt" class="control-label">Дата виходу</label>
+            <input type="text" asp-for="Movies.CreateAt"  class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Movies.MoviePhotoPath" class="control-label">Посилання на фото фільму</label>
+            <input type="text" asp-for="Movies.MoviePhotoPath" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Movies.MoviePreviewPath" class="control-label">Посилання на прев'ю фільму</label>
+            <input type="text"  asp-for="Movies.MoviePreviewPath" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Movies.MovieTrailerPath" class="control-label">Посилання на трейлер фільму</label>
+            <input type="text" asp-for="Movies.MovieTrailerPath" class="form-control" />
+        </div>
         <div id="SubcategorySelects">
             <select  asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" ></select>
         </div>
         <textarea placeholder="Movie description" asp-for="Movies.MovieDescription"></textarea>  
-        <input type="submit" value="Add"/>
+        <input type="submit" value="Add" class="btn btn-primary"/>
     </form>
 </main>
 <script src="~/js/AddMovie.js"></script>

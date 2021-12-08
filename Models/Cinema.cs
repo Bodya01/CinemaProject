@@ -18,8 +18,8 @@ namespace CinemaProject.Data
         [Column("cinemaId")]
         public long CinemaId { get; set; }
         [Required]
-        [StringLength(10)]
-        public string Adrees { get; set; }
+        [StringLength(100)]
+        public string Adress { get; set; }
         [Column("cityId")]
         public long CityId { get; set; }
 
