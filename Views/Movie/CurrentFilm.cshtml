@@ -1,0 +1,71 @@
+﻿@model CurentMovieViewModel
+
+ <main class="main-single-film-menu">
+      <article class="video"></article>
+      <article class="main-single-film-menu-h1">
+        <h1>@Model.Movie.NameMovie</h1>
+      </article>
+      <article class="main-single-film-menu-block">
+        <section class="main-single-film-menu-left">
+          <section class="main-single-film-menu-left-img"></section>
+        </section>
+
+        <article class="main-single-film-menu-center-info">
+          <ul>
+            <li>
+              <p class="key">Вік:</p>
+              <p class="val">@Model.Movie.AgeRestriction +</p>
+            </li>
+
+            <li>
+              <p class="key">Рік:</p>
+              <p class="val">@Model.Movie.CreateAt.Year</p>
+            </li>
+
+            <li>
+              <p class="key">Період прокату:</p>
+              <p class="val">
+                <span id="mvi_openingdate">@Model.Start</span> - @Model.End
+              </p>
+            </li>
+            <li>
+              <p class="key">Жанр:</p>
+              <p class="val">
+                <a>@Model.MovieSubcategories</a>
+              </p>
+            </li>
+            <li>
+              <p class="key">Тривалість:</p>
+              <p class="val">@Model.TimeDuration</p>
+            </li>
+            <li>
+            </li>
+          </ul>
+          <hr />
+          <div class="main-single-film-menu-center-info-story">
+            @Model.Movie.MovieDescription
+          </div>
+        </article>
+
+        <section class="main-single-film-menu-right-sessions">
+          <section class="main-single-film-menu-right-sessions-box">
+            <h1>Розклад сеансів</h1>
+            <div class="search">
+              <div class="text">Вибрати дату</div>
+              <div class="text-list">
+                @foreach (var item in Model.MovieSessions)
+                {
+                     <a asp-action = "" asp-controller="" asp-route-id =@item.SessionId class="text-list__link">@item.ScreenStart.Hour - @item.ScreenStart.Minute - @item.ScreenStart.Day - @item.ScreenStart.Month</a>
+                }
+        
+              </div>
+            </div>
+            @foreach(var item in @Model.SessionTimes)
+            {
+               <div class="choice"><a href="" class="choice__link">@item</a></div>
+            }
+
+          </section>
+        </section>
+      </article>
+    </main>

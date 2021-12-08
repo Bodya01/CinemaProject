@@ -18,9 +18,9 @@ namespace CinemaProject.Data
         [Key]
         [Column("sessionId")]
         public long SessionId { get; set; }
-        [Column("screenStart", TypeName = "date")]
+        [Column("screenStart")]
         public DateTime ScreenStart { get; set; }
-        [Column("screenEnd", TypeName = "date")]
+        [Column("screenEnd")]
         public DateTime ScreenEnd { get; set; }
         [Key]
         [Column("movieId")]

@@ -1,0 +1,45 @@
+﻿@model List<MovieViewModel>
+
+
+
+
+    <main class="main">
+      <article class="first-left-grid"></article>
+      <article class="first-right-grid"></article>
+
+      <!-- 1фільм -->
+
+    @foreach (var movie in Model)
+    {
+        <div class="main-first-film">
+        <div class="main-first-film-img">
+          <a asp-action = "CurrentFilm"  asp-controller = "Movie" asp-route-id =@movie.Movie.MovieId class="main-first-film-opacity">
+            <div title="Вікове обмеження">
+              <svg class="main-first-film-opacity-age">
+                <use href="/images/symbol.svg#icon-age-limit-12"></use>
+              </svg>
+            </div>
+            <div title="2D СЕАНСИ">
+              <svg class="main-first-film-opacity-2D">
+                <use href="/images/symbol.svg#icon-2"></use>
+              </svg>
+            </div>
+            <div title="3D СЕАНСИ">
+              <svg class="main-first-film-opacity-3D">
+                <use href="/images/symbol.svg#icon-3"></use>
+              </svg>
+            </div>
+            
+            <div class="main-first-film-opacity-info">@movie.Demonstration.DemonstrationName</div>
+            <div class="main-first-film-opacity-data">
+              <p>@movie.StartEnd</p> 
+            </div>
+            <div class="main-first-film-text">@movie.Movie.NameMovie</div>
+          </a>
+        </div>
+      </div>
+    }
+
+
+      <!-- 1фільм -->
+

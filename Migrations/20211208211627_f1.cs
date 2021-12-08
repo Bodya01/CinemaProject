@@ -509,7 +509,8 @@ namespace CinemaProject.Migrations
                 name: "Session",
                 columns: table => new
                 {
-                    sessionId = table.Column<long>(type: "bigint", nullable: false),
+                    sessionId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     movieId = table.Column<long>(type: "bigint", nullable: false),
                     hallId = table.Column<long>(type: "bigint", nullable: false),
                     demonstrationId = table.Column<long>(type: "bigint", nullable: false),

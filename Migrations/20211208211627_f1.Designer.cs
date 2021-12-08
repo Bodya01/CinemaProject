@@ -4,14 +4,16 @@ using CinemaProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211208211627_f1")]
+    partial class f1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -600,11 +602,11 @@ namespace CinemaProject.Migrations
                         .HasColumnName("CinemaId");
 
                     b.Property<DateTime>("ScreenEnd")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("date")
                         .HasColumnName("screenEnd");
 
                     b.Property<DateTime>("ScreenStart")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("date")
                         .HasColumnName("screenStart");
 
                     b.HasKey("SessionId", "MovieId", "HallId", "DemonstrationId")
