@@ -168,7 +168,7 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-image: url("../images/12345.png");
+  background-image: url("../images/folder/12345.png");
   transform: rotateY(calc(90deg * var(--i))) translateZ(150px);
 }
 
@@ -178,7 +178,7 @@
   left: 0;
   width: 300px;
   height: 300px;
-  background-image: url("../images/1234.jpg");
+  background-image: url("../images/folder/1234.jpg");
   transform: rotateX(90deg) translateZ(150px);
 }
 

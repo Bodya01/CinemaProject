@@ -72,10 +72,13 @@
       content: "";
       transition: width 0.3s ease-out;
     }
-
     &:hover:after,
     &:focus:after {
-      width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+      width: 100%;
+    }
+    &:hover,
+    &:focus {
+      color: $color-bondi-blue;
     }
   }
 }
@@ -94,11 +97,25 @@
     color: white;
     text-decoration: none;
     font-family: $Regular;
+    &:hover,
+    &:focus {
+      color: $color-bondi-blue;
+    }
   }
   .profile-sign-in {
     width: 30px;
     height: 30px;
     fill: white;
+    &:hover,
+    &:focus {
+      fill: $color-bondi-blue;
+    }
+  }
+  .menu__basket {
+    width: 40px;
+    height: 40px;
+    fill: white;
+    margin: 0 0 0 20px;
     &:hover,
     &:focus {
       fill: $color-bondi-blue;

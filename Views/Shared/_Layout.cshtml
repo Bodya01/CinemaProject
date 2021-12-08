@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link href="/css/main.css" rel="stylesheet" />
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+   <link href="/css/admin-page.css" rel="stylesheet"/>
   </head>
   <body>
     <header class="header">
@@ -30,17 +30,21 @@
         </ul>
       </nav>
       <div class="menu__login">
-        <ul>
+        <ul class="profile-sign-out">
           @if(User.Identity.IsAuthenticated)
-          { 
-              <li>@User.Identity.Name</li>
- 
-             <form method="post" asp-controller="Session" asp-action="Logout">
-                 <input type="submit" value="Вихід" />
-             </form>                
+                {
+                 
+             <li><a asp-action="Logout" asp-controller="Session">Вихід</a></li>
+             <li><p>|</p></li>
+             <li>
+                <a asp-action="UserInfoProfile" asp-controller="UserProfile">
+                    <img  class="profile-sign-in main-photo-user" >
+                </a>
+             </li>
           }
           else
           {
+
               <li><a asp-action="SignIn" asp-controller="Session">Вхід</a></li>
               <li><p>|</p></li>
               <li><a asp-action="SignUp" asp-controller="Session">Реєстрація</a></li>
@@ -53,7 +57,12 @@
     </header>
     <!-- RenderBody -->
     <div class="container">
-      <main role="main" class="pb-3">@RenderBody()</main>
+         
+      <main role="main" class="pb-3">
+         
+          @RenderBody()
+           
+      </main>
     </div>
     <!-- RenderBody -->
     <footer class="footer">
@@ -111,5 +120,51 @@
         </div>
       </div>
     </footer>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    @RenderSection("scriptsMain", required: false)
+
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+ 
+
+    <script>
+            
+         
+             const url = '/Home/GetListUsers';
+                
+  
+                $.getJSON(url, function (data)
+                {
+                  $.each(data, function (key, entry)
+                  {
+                      let elem =  document.getElementsByClassName('main-photo-user');
+                      console.log(elem)
+                      for(let i = 0; i < elem.length; i++)
+                      if(entry.photoPath != null)
+                      {
+                            
+                            elem[i].src = entry.photoPath
+                      }
+                      else
+                      {
+                           
+                           elem[i].src = "/images/user-defoult-image.png"
+                      }
+
+
+                  })
+
+                    });
+
+         
+    </script>
+
+
+}
+
+
   </body>
 </html>

@@ -29,6 +29,9 @@ namespace CinemaProject.Controllers
             _data = data;
         }
 
+
+        
+
         public IActionResult Index() => View(_userManager.Users);
         public IActionResult Create() => View();
 
@@ -56,6 +59,9 @@ namespace CinemaProject.Controllers
             return View(model);
         }
 
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditUserViewModel model, IFormFile uploadedFile)
@@ -73,25 +79,28 @@ namespace CinemaProject.Controllers
 
                     if (uploadedFile != null)
                     {
-                        string newPath = @"\images\user-images\" + uploadedFile.FileName;
-                        if (user.PhotoPath != string.Empty)
+                        string newPath = @$"\images\user-images\user-{model.Id}\" + uploadedFile.FileName;
+                        if (user.PhotoPath != string.Empty & user.PhotoPath != null)
                         {
-                            string path = user.PhotoPath;
-                            var bytes = System.IO.File.ReadAllBytes(@$"\{user.PhotoPath}");
-                            if (bytes.Length != 0)
-                            {
-                                System.IO.File.Delete(@$"\{user.PhotoPath}");
-                            }
-                            else
-                            {
-                                ModelState.AddModelError(string.Empty, "File not find");
-                            }
+                            string path = @$"{user.PhotoPath}";
+                            
+                            FileInfo file = new FileInfo(_appEnvironment.WebRootPath + path);
+                            if (file.Exists)
+                            {                       
+                                file.Delete();
+
+                                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + newPath, FileMode.Create))
+                                {
+                                    user.PhotoPath =  newPath;
+                                    await uploadedFile.CopyToAsync(fileStream);
+                                }
+                            }                            
                         }
                         else
-                        {
+                        {                          
                             using (var fileStream = new FileStream(_appEnvironment.WebRootPath + newPath, FileMode.Create))
                             {
-                                user.PhotoPath = @$"images\user-images\{uploadedFile.FileName}";
+                                user.PhotoPath =  newPath;
                                 await uploadedFile.CopyToAsync(fileStream);
                             }
                         }
@@ -100,6 +109,11 @@ namespace CinemaProject.Controllers
                   
                     if (result.Succeeded)
                     {
+                        if(model.Page == "userProfile")
+                        {
+                            return RedirectToAction("UserInfoProfile", "UserProfile");
+                        }
+
                         return RedirectToAction("ControlUsers","AdminControls");
                     }
                     else
@@ -134,20 +148,12 @@ namespace CinemaProject.Controllers
                 User user = await _userManager.FindByIdAsync(id.ToString());
                 if (user != null)
                 {
-                    if (user.PhotoPath != null) {
-                        string path = "/images/user-images/" + user.PhotoPath;
-                        var bytes = System.IO.File.ReadAllBytes(path);
-
-                        if(bytes.Length != 0)
-                        {
-                            System.IO.File.Delete(path);
-                        }
-                        else
-                        {
-                            ModelState.AddModelError(string.Empty, "File not find");
-                        }               
-                    }
+                   
                     IdentityResult result = await _userManager.DeleteAsync(user);
+                    string pathString = @$"\images\user-images\user-{id}";
+                    if(Directory.Exists(pathString)){
+                        Directory.Delete(pathString, true);
+                    };
                 }
                 return RedirectToAction("ControlUsers", "AdminControls");
             }
@@ -160,7 +166,31 @@ namespace CinemaProject.Controllers
             return m.Name.ToString();
         }
 
+        public async Task<IActionResult> UserInfoProfile()
+        {
+            User user = await _userManager.GetUserAsync(User);
+            return View(new EditUserViewModel()
+            {
+                Id = user.Id.ToString(),
+                UserName = user.UserName,
+                UserSurname = user.UserSurname,
+                UserPhone = user.UserPhone,
+                UserEmail = user.UserEmail,
+                Page = "userProfile"
+            });
+        }
 
+
+        public async Task<IActionResult> EditUserProfile()
+        {
+           
+            User user = await _userManager.GetUserAsync(User);
+            return View(user);
+        }
+
+
+
+     
 
     }
 

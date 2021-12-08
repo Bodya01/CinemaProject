@@ -346,4 +346,111 @@
     line-height: 16px;
 }
 
+
+
+
+#settings-user-profile-photo {
+    width:70px;
+    cursor:pointer;
+    align-self:flex-end;
+    
+}
+
+.settings-user-profile {
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-profile-edit-block input {
+    margin-top:10px;
+    width: 250px;
+    height: 38px;
+    border-width: 0.1px ;
+    
+}
+.user-profile-edit-block label{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.user-profile-edit-block {
+    display: flex;
+    flex-direction:column;
+    margin-bottom: 1rem;
+}
+
+.buttons-edit-profile-users{
+    margin-top: 15px;
+    display: flex;
+    width:250px;
+    justify-content:space-between;
+}
+.buttons-edit-profile-users input{
+    background: lightskyblue;
+}
+.user-profile-edit-form {
+    margin-top: 50px;
+    box-shadow: 0px 4px 28px #818181;
+    display: flex;
+    width: 350px;
+    height: 600px;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+    padding:10px;
+    border-radius:25px;
+}
+
+
+#warning-edit-profile {
+    color: white;
+    background: #33d9fb;
+    border: 1px solid white;
+    box-sizing: border-box;
+    padding: 8px 35px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#UserPhotoPath{
+    visibility:hidden;
+}
+
+
+.user-profile-edit-form{
+    visibility:hidden
+}
+
+
+#cansel-edit-button {
+    color: white;
+    background: #33d9fb;
+    border: 1px solid white;
+    box-sizing: border-box;
+    padding: 8px 35px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+
+
+.change-photo-profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background: #74ebd5; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    align-self: start;
+    margin-left: 45px;
+}
 /***/

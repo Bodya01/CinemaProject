@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+
+
+<main class="profile-main">
+      <nav class="profile-nav">
+        <h1>Налаштування</h1>
+        <a href=""
+          ><svg class="percent">
+            <use href="/images/symbol.svg#icon-percent"></use>
+          </svg>
+          <div class="profile-nav-percent-text-percent">Промокоди</div>
+        </a>
+        <a href=""
+          ><svg class="save">
+            <use href="/images/symbol.svg#icon-save"></use>
+          </svg>
+          <div class="profile-nav-percent-text-save">Збереженні фільми</div>
+        </a>
+        <a href=""
+          ><svg class="ticket">
+            <use href="/images/symbol.svg#icon-ticket"></use>
+          </svg>
+          <div class="profile-nav-percent-text-ticket">Історія покупок</div>
+        </a>
+        <a href=""
+          ><svg class="wallet">
+            <use href="/images/symbol.svg#icon-wallet"></use>
+          </svg>
+          <div class="profile-nav-percent-text-wallet">Гаманці</div>
+        </a>
+        <a href=""
+          ><svg class="mail">
+            <use href="/images/symbol.svg#icon-mail"></use>
+          </svg>
+          <div class="profile-nav-percent-text-mail">Сповіщення</div>
+        </a>
+        
+      </nav>
+       <section class="main-section">
+            @RenderBody()
+       </section>
+     </main>
+      @RenderSection("scriptsMainUserProfile", required: false)

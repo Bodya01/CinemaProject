@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Linq;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CinemaProject.Controllers
 {
@@ -20,16 +22,20 @@ namespace CinemaProject.Controllers
         private readonly UserManager<User> userManager;
 
         private readonly SignInManager<User> signInManager;
+        IWebHostEnvironment _appEnvironment;
 
         ApplicationDbContext data = new();
 
         public SessionController(UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            IWebHostEnvironment appEnvironment)
         {
             
             this.userManager = userManager;
             this.signInManager = signInManager;
-           
+            _appEnvironment = appEnvironment;
+
+
         }
 
 
@@ -110,6 +116,8 @@ namespace CinemaProject.Controllers
                 await data.SaveChangesAsync();
                 if (result.Succeeded)
                 {
+                    string pathString = _appEnvironment.WebRootPath + @$"\images\user-images\user-{id}";
+                    Directory.CreateDirectory(pathString);
                     await signInManager.SignInAsync(user,  false);
                     return RedirectToAction("Index", "Home");
                 }

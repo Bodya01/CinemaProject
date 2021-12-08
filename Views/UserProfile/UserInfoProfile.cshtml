@@ -1,0 +1,234 @@
+﻿@model EditUserViewModel
+
+
+ @{
+    Layout = "_UserProfileLayout";
+}
+
+  <form asp-action="Edit" asp-controller="UserProfile" class="user-profile-edit-form" enctype="multipart/form-data">
+        <div asp-validation-summary="All"></div>
+         <div class="form-group">
+            <input type="hidden" asp-for="Page" />
+        </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="Id" />
+        </div>
+        <div class="user-profile-edit-block">
+            <label asp-for="UserName" class="control-label">Ім'я</label>
+            <input type="text" asp-for="UserName" class="form-control" />
+        </div>
+        <div class="user-profile-edit-block">
+            <label asp-for="UserSurname" class="control-label">Прізвище</label>
+            <input type="text" asp-for="UserSurname" class="form-control" />
+        </div>
+         <div class="user-profile-edit-block">
+            <label asp-for="UserPhone" class="control-label">Телефон</label>
+            <input  type="text" asp-for="UserPhone" class="form-control" />
+        </div>
+         <div class="user-profile-edit-block">
+            <label asp-for="UserEmail" class="control-label">Пошта</label>
+            <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp"  asp-for="UserEmail" class="form-control" />
+        </div>
+
+        
+        <div class="user-profile-edit-block change-photo-profile">
+             <input type="file" asp-for="UserPhotoPath" name="uploadedFile" id = "file-upload"/>
+             <label for="file-upload" class="custom-file-upload">
+             <img  id="img_preview" src = "/images/adminPageImages/addPhoto.png">        
+            </label> 
+        </div>
+        <div class="buttons-edit-profile-users">
+
+            <div><input type="submit" value="Зберегти"  id ='warning-edit-profile' /></div>
+            <div><button style ='cursor: pointer;' id ="cansel-edit-button">Cansel</button></div>
+                     
+        </div>
+       
+    </form>
+
+
+
+
+
+        <article class="profile-article-first">
+          <h1>Профіль</h1>
+        </article>
+
+        <article class="profile-article-second-third">
+          <article class="profile-article-second">
+            <h1>Система бонусів</h1>
+            <hr />
+            <p>
+              За кожну гривню потрачену в нашому кінотеатрі(на сайті або касі),
+              ви получите 1(один) бонус.
+            </p>
+            <hr />
+            <p>
+              Щоб отримувати бонуси, (купуй квитки,або щось до фільму на сайті)
+              увійшовши до Особистого кабінету, або на касі щоразу перед
+              покупкою називай свій номер телефону, вказаний у Особистому
+              Кабінеті
+            </p>
+            <hr />
+            <h2><a href="">Перегляд кількість накопичених бонусів</a></h2>
+          </article>
+
+          <article class="profile-article-third">
+            <h1>Персональні дані</h1>
+            
+            <div><hr /></div>
+             
+             <article class="settings-user-profile">
+                <img class = "main-photo-user" width=70px />
+                <img id = "settings-user-profile-photo" src = "/images/settings.svg"  width=70px />
+             </article>
+           
+            <hr/>
+            <div>
+              <svg class="mail">
+                <use href="/images/symbol.svg#icon-mail"></use>
+              </svg>
+              <p>@Model.UserEmail</p>
+            </div>
+            <hr />
+            <div>
+              <svg class="phone">
+                <use href="/images/symbol.svg#icon-phone"></use>
+              </svg>
+              <p>@Model.UserPhone</p>
+            </div>
+            <hr />
+            <div>
+              <svg class="id">
+                <use href="/images/symbol.svg#icon-id"></use>
+              </svg>
+              <p>@Model.Id</p>
+            </div>
+            <hr />
+          </article>
+        </article>
+@section scriptsMainUserProfile{
+    <script >
+         
+        
+      let input;
+       var GetuserId
+        function showPreview(event) {
+           if(event.target.files.length>0){
+               let src = URL.createObjectURL(event.target.files[0]);
+               let preview = document.getElementById('img_preview');
+               
+               preview.src = src;
+               $("#img_preview").css('margin-bottom','0px'); 
+               document.getElementById('img_preview').classList.add("preview");
+               
+                $("#img_preview").css('width',"auto");
+
+             
+
+                //$(".user-profile-edit-form").attr("action", `/UserProfile/Edit/${IdInput.value}?uploadedFile=${formData}`)
+           }
+       }
+
+
+        $("#settings-user-profile-photo").on('click',function(e){
+             
+
+         
+
+             Confirm.open
+              ({ 
+                                              
+
+
+                                            
+                                             classblock:"container",
+                                             message: "Are you sure?",
+                                             title: "You are about to delete this user!",
+                                             yes:"Delete",
+                                             no: "Відмінити",
+                                             onok: () => 
+                                             {   
+                                                
+                                                
+                                             }
+                                           })
+                                     })
+
+
+   
+
+  var Confirm = {
+    open (options) {
+        options = Object.assign({}, {
+            iduser: '',
+            title: '',
+            message: '',
+            classblock: '',
+            okText: 'OK',
+            cancelText: 'Cancel',
+            yes: '',
+            no: '',
+            onok: function () {console.log("delete")},
+            oncancel: function () {console.log("cansel")}
+        }, options);
+        
+    
+  
+ 
+ 
+  
+         
+    
+   
+   
+    document.body.getElementsByClassName('user-profile-edit-form')[0].style = "visibility:visible"
+
+    input = document.getElementById("file-upload");
+    input.addEventListener("change", showPreview);
+   
+    Page = document.getElementById('Page');
+    IdInput = document.getElementById('Id');
+    nameInput = document.getElementById('UserName');
+    surnameInput = document.getElementById('UserSurname');
+    phoneInput = document.getElementById('UserPhone');
+    emailInput = document.getElementById('exampleInputEmail1');
+    imageUser = document.getElementById('img_preview');
+    
+    $('#cansel-edit-button').on('click',function(){
+        ocument.body.getElementsByClassName('user-profile-edit-form')[0].style = "visibility:hiden"
+    })
+     
+    
+      const url = '/Home/GetListUsers';   
+
+      $.getJSON(url, function (data) {
+      $.each(data, function (key, entry) {
+ 
+                                             IdInput.value = entry.id
+                                            
+                                             nameInput.value = entry.userName
+                                             surnameInput.value = entry.userSurname
+                                             phoneInput.value =  entry.userPhone
+                                             emailInput.value =  entry.userEmail
+                                             imageUser.src =    entry.photoPath                                                  
+                                             Page.value = "userProfile"
+                                            
+                                             })
+    });
+    
+   
+       
+  },
+
+  
+}   
+
+
+
+
+
+
+
+</script>
+}

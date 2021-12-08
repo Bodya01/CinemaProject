@@ -108,20 +108,21 @@
                $(document).on('click','.editor-edit',function(e) {
                   var row = $(this).closest('tr');         
                   var id = table.row( row ).data().id;
-                 
+                 console.log(table.row( row ).data())
 
                   var IdInput = document.getElementById('Id');  
                   var nameInput = document.getElementById('UserName');
                   var surnameInput = document.getElementById('UserSurname');
                   var phoneInput = document.getElementById('UserPhone');  
                   var emailInput = document.getElementById('exampleInputEmail1');  
-              
+                  var imageUser = document.getElementById('img_preview');
 
                  IdInput.value = table.row( row ).data().id
                  nameInput.value = table.row( row ).data().userName
                  surnameInput.value = table.row( row ).data().userSurname
                  phoneInput.value = table.row( row ).data().userPhone
                  emailInput.value =  table.row( row ).data().userEmail
+                 imageUser.src = table.row( row ).data().photoPath
                 });
 
                     $(document).on('click','.editor-role',function(e) {
