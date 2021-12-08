@@ -75,7 +75,7 @@ namespace CinemaProject.Migrations
                 {
                     cityId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cityName = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false)
+                    cityName = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,11 +102,13 @@ namespace CinemaProject.Migrations
                 {
                     movieId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nameMovie = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
+                    nameMovie = table.Column<string>(type: "nchar(50)", fixedLength: true, maxLength: 50, nullable: false),
                     ageRestriction = table.Column<int>(type: "int", nullable: false),
-                    movieDescription = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
+                    movieDescription = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: false),
                     createAt = table.Column<DateTime>(type: "date", nullable: false),
-                    MoviePhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    moviePhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    moviePreviewPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    movieTrailerPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -148,8 +150,8 @@ namespace CinemaProject.Migrations
                 {
                     promocodeId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    promocodeName = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
-                    promocodeDescription = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
+                    promocodeName = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
+                    promocodeDescription = table.Column<string>(type: "nchar(50)", fixedLength: true, maxLength: 50, nullable: false),
                     countUse = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -317,7 +319,7 @@ namespace CinemaProject.Migrations
                 {
                     cinemaId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Adrees = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
+                    Adress = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: false),
                     cityId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -507,17 +509,17 @@ namespace CinemaProject.Migrations
                 name: "Session",
                 columns: table => new
                 {
-                    sessiond = table.Column<long>(type: "bigint", nullable: false),
+                    sessionId = table.Column<long>(type: "bigint", nullable: false),
                     movieId = table.Column<long>(type: "bigint", nullable: false),
                     hallId = table.Column<long>(type: "bigint", nullable: false),
                     demonstrationId = table.Column<long>(type: "bigint", nullable: false),
                     screenStart = table.Column<DateTime>(type: "date", nullable: false),
                     screenEnd = table.Column<DateTime>(type: "date", nullable: false),
-                    cinamaId = table.Column<long>(type: "bigint", nullable: false)
+                    CinemaId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Session_1", x => new { x.sessiond, x.movieId, x.hallId, x.demonstrationId });
+                    table.PrimaryKey("PK_Session_1", x => new { x.sessionId, x.movieId, x.hallId, x.demonstrationId });
                     table.ForeignKey(
                         name: "FK_Session_Demonstration",
                         column: x => x.demonstrationId,
@@ -526,7 +528,7 @@ namespace CinemaProject.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Session_Hall",
-                        columns: x => new { x.hallId, x.cinamaId },
+                        columns: x => new { x.hallId, x.CinemaId },
                         principalTable: "Hall",
                         principalColumns: new[] { "hallId", "cinemaId" },
                         onDelete: ReferentialAction.Restrict);
@@ -573,7 +575,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Ticket_Session1",
                         columns: x => new { x.sessionId, x.movieId, x.hallId, x.demonstrationId },
                         principalTable: "Session",
-                        principalColumns: new[] { "sessiond", "movieId", "hallId", "demonstrationId" },
+                        principalColumns: new[] { "sessionId", "movieId", "hallId", "demonstrationId" },
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -694,9 +696,9 @@ namespace CinemaProject.Migrations
                 column: "demonstrationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Session_hallId_cinamaId",
+                name: "IX_Session_hallId_CinemaId",
                 table: "Session",
-                columns: new[] { "hallId", "cinamaId" });
+                columns: new[] { "hallId", "CinemaId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Session_movieId",

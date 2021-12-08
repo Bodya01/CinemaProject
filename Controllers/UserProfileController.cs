@@ -68,10 +68,10 @@ namespace CinemaProject.Controllers
                 if (user != null)
                 {
 
-                    user.UserName = model.UserName;
-                    user.UserEmail = model.UserEmail;
-                    user.UserSurname = model.UserSurname;
-                    user.UserPhone = model.UserPhone;
+                    user.UserName =    model.UserName.Replace(" ","");
+                    user.UserEmail =   model.UserEmail.Replace(" ", "");
+                    user.UserSurname = model.UserSurname.Replace(" ", "");
+                    user.UserPhone =   model.UserPhone.Replace(" ", "");
 
                     if (uploadedFile != null)
                     {
@@ -102,7 +102,7 @@ namespace CinemaProject.Controllers
                         }
                     }
                     var result = await _userManager.UpdateAsync(user);
-
+                    
                     if (result.Succeeded)
                     {
                         if(model.Page == "userProfile")

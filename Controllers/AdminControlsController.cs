@@ -163,13 +163,13 @@ namespace CinemaProject.Controllers
                     MovieId = newSession.MovieId,
                     ScreenStart = DateTime.Parse($"{newSession.SessionDate} {newSession.SessionTime}"),
                     ScreenEnd = GetSessionEndTime(newSession.SessionDate, newSession.SessionTime, newSession.SessionLasts),
-                    Hall = data.Halls.FirstOrDefault(x=> x.HallId == newSession.HallId),
+                    Hall = data.Halls.FirstOrDefault(x => x.HallId == newSession.HallId),
                     Demonstration = data.Demonstrations.FirstOrDefault(x => x.DemonstrationId == newSession.DemonstrationId),
                     Movie = data.Movies.FirstOrDefault(x => x.MovieId == newSession.MovieId)
                 };
                 data.Sessions.Add(session);
                 await data.SaveChangesAsync();
-                return RedirectToAction("ControlMovies", "AdminControls");
+                return RedirectToAction("ControlSessions", "AdminControls");
             }
             return View();
         }
