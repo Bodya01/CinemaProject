@@ -139,7 +139,6 @@ namespace CinemaProject.Controllers
             model.Users = data.Users.ToList();
             return View(model);
         }
-
         public IActionResult AddSession()
         {
             FillSessionTime();
