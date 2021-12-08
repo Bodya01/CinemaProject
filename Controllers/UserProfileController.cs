@@ -1,14 +1,12 @@
 ﻿using CinemaProject.Data;
 using CinemaProject.Models.AdminModels;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using Microsoft.AspNetCore.Http;
-using CinemaProject.Models.ModelViews;
 
 namespace CinemaProject.Controllers
 {
@@ -17,7 +15,7 @@ namespace CinemaProject.Controllers
         private readonly UserManager<User> _userManager;
         ApplicationDbContext _data = new();
         IWebHostEnvironment _appEnvironment;
-      
+
         public UserProfileController(UserManager<User> userManager, IWebHostEnvironment appEnvironment, ApplicationDbContext data)
         {
             _userManager = userManager;
@@ -26,7 +24,7 @@ namespace CinemaProject.Controllers
         }
 
 
-        
+
 
         public IActionResult Index() => View(_userManager.Users);
         public IActionResult Create() => View();
@@ -68,10 +66,10 @@ namespace CinemaProject.Controllers
                 if (user != null)
                 {
 
-                    user.UserName =    model.UserName.Replace(" ","");
-                    user.UserEmail =   model.UserEmail.Replace(" ", "");
+                    user.UserName = model.UserName.Replace(" ", "");
+                    user.UserEmail = model.UserEmail.Replace(" ", "");
                     user.UserSurname = model.UserSurname.Replace(" ", "");
-                    user.UserPhone =   model.UserPhone.Replace(" ", "");
+                    user.UserPhone = model.UserPhone.Replace(" ", "");
 
                     if (uploadedFile != null)
                     {
@@ -79,43 +77,43 @@ namespace CinemaProject.Controllers
                         if (user.PhotoPath != string.Empty & user.PhotoPath != null)
                         {
                             string path = @$"{user.PhotoPath}";
-                            
+
                             FileInfo file = new FileInfo(_appEnvironment.WebRootPath + path);
                             if (file.Exists)
-                            {                       
+                            {
                                 file.Delete();
 
                                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + newPath, FileMode.Create))
                                 {
-                                    user.PhotoPath =  newPath;
+                                    user.PhotoPath = newPath;
                                     await uploadedFile.CopyToAsync(fileStream);
                                 }
-                            }                            
+                            }
                         }
                         else
-                        {                          
+                        {
                             using (var fileStream = new FileStream(_appEnvironment.WebRootPath + newPath, FileMode.Create))
                             {
-                                user.PhotoPath =  newPath;
+                                user.PhotoPath = newPath;
                                 await uploadedFile.CopyToAsync(fileStream);
                             }
                         }
                     }
                     var result = await _userManager.UpdateAsync(user);
-                    
+
                     if (result.Succeeded)
                     {
-                        if(model.Page == "userProfile")
+                        if (model.Page == "userProfile")
                         {
                             return RedirectToAction("UserInfoProfile", "UserProfile");
                         }
 
-                        return RedirectToAction("ControlUsers","AdminControls");
+                        return RedirectToAction("ControlUsers", "AdminControls");
                     }
                     else
                     {
                         foreach (var error in result.Errors)
-                        {                                                   
+                        {
                             ModelState.AddModelError(string.Empty, error.Description);
                         }
                     }
@@ -124,7 +122,7 @@ namespace CinemaProject.Controllers
             return RedirectToAction("ControlUsers", "AdminControls");
         }
 
-       
+
 
 
 
@@ -144,10 +142,11 @@ namespace CinemaProject.Controllers
                 User user = await _userManager.FindByIdAsync(id.ToString());
                 if (user != null)
                 {
-                   
+
                     IdentityResult result = await _userManager.DeleteAsync(user);
                     string pathString = @$"\images\user-images\user-{id}";
-                    if(Directory.Exists(pathString)){
+                    if (Directory.Exists(pathString))
+                    {
                         Directory.Delete(pathString, true);
                     };
                 }
@@ -179,14 +178,14 @@ namespace CinemaProject.Controllers
 
         public async Task<IActionResult> EditUserProfile()
         {
-           
+
             User user = await _userManager.GetUserAsync(User);
             return View(user);
         }
 
 
 
-     
+
 
     }
 

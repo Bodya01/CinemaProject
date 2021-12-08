@@ -18,7 +18,7 @@ namespace CinemaProject.Controllers
             return View(listMovies);
         }
 
-         
+
 
 
 

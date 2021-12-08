@@ -2,13 +2,12 @@
 using CinemaProject.Models.ModelViews;
 using CinemaProject.Models.SessionModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Linq;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 
 namespace CinemaProject.Controllers
 {
@@ -114,7 +113,7 @@ namespace CinemaProject.Controllers
                 {
                     string pathString = _appEnvironment.WebRootPath + @$"\images\user-images\user-{id}";
                     Directory.CreateDirectory(pathString);
-                    await signInManager.SignInAsync(user,  false);
+                    await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else

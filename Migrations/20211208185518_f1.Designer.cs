@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211208172952_f1")]
+    [Migration("20211208185518_f1")]
     partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,6 @@ namespace CinemaProject.Migrations
                         .HasColumnName("endAt");
 
                     b.Property<string>("PaymentType")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nchar(100)")
                         .HasColumnName("paymentType")

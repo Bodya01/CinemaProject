@@ -46,7 +46,7 @@ namespace CinemaProject.Data
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server= DESKTOP-GL1TEJO;Database=CinemaProject;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server= DESKTOP-MBGGAE3;Database=CinemaProject;Trusted_Connection=True;");
             }
         }
 
@@ -301,7 +301,7 @@ namespace CinemaProject.Data
 
                 entity.HasOne(d => d.Hall)
                     .WithMany(p => p.Sessions)
-                    .HasForeignKey(d => new { d.HallId, d.CinemaId})
+                    .HasForeignKey(d => new { d.HallId, d.CinemaId })
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Session_Hall");
             });

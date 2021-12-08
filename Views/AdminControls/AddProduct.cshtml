@@ -1,7 +1,22 @@
 ﻿@model Product
+@{
+    Layout = "_AdminLayout";
+}
 
-    <form method="post" asp-action="AddProduct" asp-controller="AdminControls">
-        <input type="text" placeholder="Product name" asp-for="ProductName"/>
-        <input type="submit" value="Add"/>
+<main>
+    <form method="post" asp-action="AddProduct" asp-controller="AdminControls" class="user-edit-form ">
+        <div class="form-group">
+            <label asp-for="ProductName" class="control-label">Назва продукту</label>
+            <input type="text" asp-for="ProductName" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductPrice" class="control-label">Вартість продукту</label>
+            <input type="text" asp-for="ProductPrice" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductPhotoPath" class="control-label">Фото продукту</label>
+            <input type="text" asp-for="ProductPhotoPath" class="form-control"/>
+        </div>
+        <input type="submit" value="Add" class="btn btn-primary"/>
     </form>
-
+</main>

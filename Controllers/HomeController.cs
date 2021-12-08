@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CinemaProject.Data;
 using Microsoft.AspNetCore.Identity;
-using CinemaProject.Data;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using CinemaProject.Models.ModelViews;
-using System.Linq;
 namespace CinemaProject.Controllers
 {
     //[Authorize(Roles = "admin")]
@@ -12,7 +10,7 @@ namespace CinemaProject.Controllers
     {
         // GET: HomeController
         private readonly UserManager<User> _userManager;
-        private readonly ApplicationDbContext data = new ();
+        private readonly ApplicationDbContext data = new();
         public HomeController(UserManager<User> userManager)
         {
             _userManager = userManager;

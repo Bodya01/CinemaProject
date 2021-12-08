@@ -39,7 +39,6 @@ namespace CinemaProject.Migrations
                         .HasColumnName("endAt");
 
                     b.Property<string>("PaymentType")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nchar(100)")
                         .HasColumnName("paymentType")

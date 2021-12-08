@@ -1,6 +1,4 @@
-﻿using CinemaProject.Data;
-
-namespace CinemaProject.Models.AdminModels
+﻿namespace CinemaProject.Models.AdminModels
 {
     public class AddSession
     {
