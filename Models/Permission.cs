@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
@@ -11,7 +10,7 @@ namespace CinemaProject.Data
     {
         public Permission()
         {
-            
+
         }
 
         [Key]
@@ -26,6 +25,6 @@ namespace CinemaProject.Data
         [StringLength(40)]
         public string PermissionDescription { get; set; }
 
-       
+
     }
 }

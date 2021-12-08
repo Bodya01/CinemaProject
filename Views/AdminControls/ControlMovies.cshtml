@@ -1,0 +1,233 @@
+﻿@model ControlMovies
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div><a asp-action="AddMovie" class="add-movie-link">Add new movie</a></div>
+
+<div class = "control-users-page movie-controls">
+    <form asp-action="EditMovie" asp-controller="AdminControls" class="user-edit-form ">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NameMovie" class="control-label">Назва</label>
+        <input type="text" asp-for="NameMovie" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="AgeRestriction" class="control-label">Вікове обмеження</label>
+        <input type="text" asp-for="AgeRestriction" class="form-control" />
+    </div>
+     <div class="form-group">
+        <label asp-for="MovieDescription" class="control-label">Опис</label>
+        <input  type="text" asp-for="MovieDescription" class="form-control" />
+    </div>
+     <div class="form-group">
+        <label asp-for="CreateAt" class="control-label">Дата створення</label>
+        <input type="text" asp-for="CreateAt" class="form-control" />
+    </div>
+         <div class="form-group">
+        <label asp-for="MoviePhotoPath" class="control-label">Зображення фільму</label>
+        <input type="text" asp-for="MoviePhotoPath" class="form-control" />
+    </div>
+         <div class="form-group">
+        <label asp-for="MoviePreviewPath" class="control-label">Прев'ю фільму</label>
+        <input type="text" asp-for="MoviePreviewPath" class="form-control" />
+    </div>
+         <div class="form-group">
+        <label asp-for="MovieTrailerPath" class="control-label">Трейлер фільму</label>
+        <input type="text" asp-for="MovieTrailerPath" class="form-control" />
+    </div>
+    <div class="form-group">
+        <select  asp-for="SubcategoryId" asp-items="ViewBag.Subcategories" ></select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Зберегти"  class="btn btn-primary"/>
+    </div>
+</form>
+<table class="table table-dark" id="movieTable">
+    <thead>
+        <tr>
+            <th>movieId</th>
+            <th>nameMovie</th>
+            <th>ageRestriction</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+</div>
+
+@section scripts{
+ 
+  <script>
+        $(document).ready(function()
+        {
+           {
+             let table = $("#movieTable").DataTable(
+             {
+                processing: true,
+                serverSide: true,
+                searching: true,
+                paging: false,
+                info: false,
+                "ajax": 
+                {
+                   "url": "/AdminControls/GetMovieList",
+                   "type": "GET",
+                   "datatype": "json"
+                },
+                "columns":
+                [
+                   {"data": "movieId"},
+                   {"data": "nameMovie"},
+                   {"data": "ageRestriction"},
+                   {
+                    "data": null,
+                    "className": "dt-center movie-edit",
+                    "defaultContent": '<button>Оновити</button>',
+                    "orderable": false
+                   },
+                   {
+                    "data": null,
+                    "className": "dt-center editor-delete",
+                    "defaultContent": '<a>Видалити</a>',
+                    "orderable": false
+                   }
+                ]
+             });
+             $(document).on('click','.editor-delete',function(e) 
+               {
+                    var row = $(this).closest('tr');
+                    console.log(table.row( row ).data().movieId);
+                    var id = table.row( row ).data().movieId;
+                    console.log(id)
+                    Confirm.open(
+                    {
+                        classblock:"right-admin-page",
+                        message: "Are you sure?",
+                        title: "You are about to delete this user!",
+                        yes:"Delete",
+                        no: "Cansel",
+                        onok: () => 
+                        {
+                            var row = $(this).closest('tr');
+                            var id = table.row( row ).data().movieId.toString();
+                            let form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = `/AdminControls/DeleteMovie/${id}`;
+                            form.style = "display: none;";
+                            let methodInput = document.createElement("input");
+                            methodInput.value = "DELETE";
+                            methodInput.name = "Delete";
+                            form.appendChild(methodInput);
+                            document.body.appendChild(form);
+                            form.submit();
+                         }
+                    })
+                });
+
+               $(document).on('click','.movie-edit',function(e)
+               {
+                  var row = $(this).closest('tr');         
+                  var id = table.row( row ).data().movieId;
+                 
+
+                  var IdInput = document.getElementById('Id');
+                  var nameInput = document.getElementById('NameMovie');
+                  var ageRestrictionInput = document.getElementById('AgeRestriction');
+                  var descriptionInput = document.getElementById('MovieDescription');
+                  var createAtInput = document.getElementById('CreateAt');
+                  var moviePhotoPath = document.getElementById('MoviePhotoPath');
+                  var moviePreviewPath = document.getElementById('MoviePreviewPath');
+                  var movieTrailerPath = document.getElementById('MovieTrailerPath');
+              
+
+                 IdInput.value = table.row( row ).data().movieId
+                 nameInput.value = table.row( row ).data().nameMovie
+                 ageRestrictionInput.value = table.row( row ).data().ageRestriction
+                 descriptionInput.value = table.row( row ).data().movieDescription
+                 createAtInput.value =  table.row( row ).data().createAt
+                 moviePhotoPath.value = table.row( row ).data().moviePhotoPath
+                 moviePreviewPath.value = table.row( row ).data().moviePreviewPath
+                 movieTrailerPath.value =  table.row( row ).data().movieTrailerPath
+               });
+               
+
+
+           }
+        });
+
+       var Confirm = {
+    open (options) {
+        options = Object.assign({}, {
+            title: '',
+            message: '',
+            classblock: '',
+            okText: 'OK',
+            cancelText: 'Cancel',
+            yes: '',
+            no: '',
+            onok: function () {console.log("delete")},
+            oncancel: function () {console.log("cansel")}
+        }, options);
+
+    const html = `
+         <div class="user-alert-warning">
+                <img src = "/images/youWontDelete.svg"></img>
+                <p class="warning-text"><span>${options.title}</span>${options.message}</p>
+                <div class="warning-buttons">
+                    <a style ='cursor: pointer;' id = warning-cansel>${options.no}</a>
+                    <a style ='cursor: pointer;' id = warning-delete>${options.yes}</a>
+                </div>
+    `;
+
+    const template = document.createElement('template')
+    
+    template.innerHTML = html;
+
+   
+    const confirmEl  = template.content.querySelector('.user-alert-warning');
+    const bntNo      = template.content.querySelector('#warning-cansel');
+    const bntYes     = template.content.querySelector('#warning-delete');
+
+
+    confirmEl.addEventListener('click', e => {
+            if (e.target === confirmEl) {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            }
+        });
+
+        
+    bntYes.addEventListener('click', () => {
+            options.onok();
+            this._close(confirmEl,options.classblock);
+        });
+
+    bntNo.addEventListener('click', () => {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            });
+    let main_page = document.body.getElementsByClassName(options.classblock)[0];
+    
+    main_page.appendChild(template.content);
+  },
+
+  _close(confirmEl,classname){
+    confirmEl.classList.add('confirm--close');
+
+        confirmEl.addEventListener('animationend', () => {
+
+           
+            let main_page = document.body.getElementsByClassName(classname)[0];
+            
+            main_page.removeChild(confirmEl);
+        });
+  }
+}
+</script>
+}

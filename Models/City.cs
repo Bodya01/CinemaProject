@@ -20,7 +20,7 @@ namespace CinemaProject.Data
         public long CityId { get; set; }
         [Required]
         [Column("cityName")]
-        [StringLength(10)]
+        [StringLength(20)]
         public string CityName { get; set; }
 
         [InverseProperty(nameof(Cinema.City))]

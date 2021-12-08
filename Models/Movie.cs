@@ -22,19 +22,26 @@ namespace CinemaProject.Data
         public long MovieId { get; set; }
         [Required]
         [Column("nameMovie")]
-        [StringLength(20)]
+        [StringLength(50)]
         public string NameMovie { get; set; }
         [Column("ageRestriction")]
         public int AgeRestriction { get; set; }
         [Required]
         [Column("movieDescription")]
-        [StringLength(10)]
+        [StringLength(100)]
         public string MovieDescription { get; set; }
         [Column("createAt", TypeName = "date")]
         public DateTime CreateAt { get; set; }
 
         [Required]
+        [Column("moviePhotoPath")]
         public string MoviePhotoPath { get; set; }
+        [Required]
+        [Column("moviePreviewPath")]
+        public string MoviePreviewPath { get; set; }
+        [Required]
+        [Column("movieTrailerPath")]
+        public string MovieTrailerPath { get; set; }
 
         [InverseProperty(nameof(MovieRating.Movie))]
         public virtual ICollection<MovieRating> MovieRatings { get; set; }

@@ -9,7 +9,7 @@ namespace CinemaProject.Models.ModelViews
         [Required]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
-        
+
         [Required]
         [Display(Name = "UserSurname")]
         public string Surname { get; set; }

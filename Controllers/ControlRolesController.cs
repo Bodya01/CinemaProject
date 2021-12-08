@@ -2,9 +2,9 @@
 using CinemaProject.Models.AdminModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
@@ -28,9 +28,9 @@ namespace CinemaProject.Controllers
         {
             if (!string.IsNullOrEmpty(name))
             {
-            
+
                 var newRole = new Role(name);
-                
+
 
 
                 IdentityResult result = await _roleManager.CreateAsync(newRole);
@@ -69,11 +69,11 @@ namespace CinemaProject.Controllers
         [Route("/ControlRoles/Edit/{id:int}")]
         public async Task<IActionResult> Edit(int id)
         {
-            
+
             User user = await _userManager.FindByIdAsync(id.ToString());
             if (user != null)
             {
-               
+
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var allRoles = _roleManager.Roles.ToList();
                 ChangeRoleViewModel model = new ChangeRoleViewModel
@@ -127,18 +127,18 @@ namespace CinemaProject.Controllers
         [Route("/ControlRoles/Edit/{id:int}")]
         public async Task<IActionResult> Edit(int? id, List<string>? roles)
         {
-           
+
             User user = await _userManager.FindByIdAsync(id.ToString());
-            user.UserName = user.UserName.Replace(" ",""); 
+            user.UserName = user.UserName.Replace(" ", "");
             if (user != null)
             {
 
                 var userRoles = await _userManager.GetRolesAsync(user);
-               
+
                 var allRoles = _roleManager.Roles.ToList();
-               
+
                 var addedRoles = roles.Except(userRoles);
-              
+
                 var removedRoles = userRoles.Except(roles);
 
                 IdentityResult result = await _userManager.AddToRolesAsync(user, addedRoles);
@@ -158,9 +158,9 @@ namespace CinemaProject.Controllers
                 }
 
 
-               
 
-               
+
+
             }
 
             return NotFound();

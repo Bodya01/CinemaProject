@@ -19,11 +19,11 @@ namespace CinemaProject.Data
         public long PromocodeId { get; set; }
         [Required]
         [Column("promocodeName")]
-        [StringLength(10)]
+        [StringLength(20)]
         public string PromocodeName { get; set; }
         [Required]
         [Column("promocodeDescription")]
-        [StringLength(10)]
+        [StringLength(50)]
         public string PromocodeDescription { get; set; }
         [Column("countUse")]
         public int CountUse { get; set; }

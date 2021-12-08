@@ -1,0 +1,32 @@
+﻿@using CinemaProject.Models.AdminModels
+@model AddSession;
+@{
+    Layout = "_AdminLayout";
+}
+
+<main>
+    <form method="post" asp-action="AddSession" asp-controller="AdminControls" class="user-edit-form ">
+        <div class="form-group">
+            <label asp-for="SessionDate" class="control-label">Дата сеансу</label>
+            <input type="text" asp-for="SessionDate"  class="form-control"/>
+        </div>
+        <div class="form-group">
+            <select  asp-for="SessionTime" asp-items="ViewBag.SessionTimes" ></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="SessionLasts" class="control-label">Тривалість сеансу</label>
+            <input type="text" asp-for="SessionLasts"  class="form-control"/>
+        </div>
+        <div class="form-group">
+            <select  asp-for="MovieId" asp-items="ViewBag.Movies" ></select>
+        </div>
+        <div class="form-group">
+            <select  asp-for="HallId" asp-items="ViewBag.Halls" ></select>
+        </div>
+        <div class="form-group">
+            <select  asp-for="DemonstrationId" asp-items="ViewBag.Demonstrations" ></select>
+        </div>
+        <input type="submit" value="Add" class="btn btn-primary"/>
+    </form>
+</main>
+<script src="~/js/AddMovie.js"></script>

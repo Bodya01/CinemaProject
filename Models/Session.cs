@@ -16,8 +16,8 @@ namespace CinemaProject.Data
         }
 
         [Key]
-        [Column("sessiond")]
-        public long Sessiond { get; set; }
+        [Column("sessionId")]
+        public long SessionId { get; set; }
         [Column("screenStart", TypeName = "date")]
         public DateTime ScreenStart { get; set; }
         [Column("screenEnd", TypeName = "date")]
@@ -28,8 +28,8 @@ namespace CinemaProject.Data
         [Key]
         [Column("hallId")]
         public long HallId { get; set; }
-        [Column("cinamaId")]
-        public long CinamaId { get; set; }
+        [Column("CinemaId")]
+        public long CinemaId { get; set; }
         [Key]
         [Column("demonstrationId")]
         public long DemonstrationId { get; set; }
@@ -37,7 +37,7 @@ namespace CinemaProject.Data
         [ForeignKey(nameof(DemonstrationId))]
         [InverseProperty("Sessions")]
         public virtual Demonstration Demonstration { get; set; }
-        [ForeignKey("HallId,CinamaId")]
+        [ForeignKey("HallId, CinemaId")]
         [InverseProperty("Sessions")]
         public virtual Hall Hall { get; set; }
         [ForeignKey(nameof(MovieId))]

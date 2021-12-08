@@ -15,4 +15,4 @@ namespace CinemaProject.Models.AdminModels
             UserRoles = new List<string>();
         }
     }
-}   
+}
