@@ -140,9 +140,6 @@ namespace CinemaProject.Controllers
             return View(model);
         }
 
-
-
-
         public IActionResult AddSession()
         {
             FillSessionTime();
@@ -176,7 +173,7 @@ namespace CinemaProject.Controllers
             }
             return View();
         }
-        public DateTime GetSessionEndTime(string dateStart, string timeStart, string lastTime)
+        private DateTime GetSessionEndTime(string dateStart, string timeStart, string lastTime)
         {
             string temp = string.Empty;
             string newTimeStart = "0";
@@ -202,6 +199,62 @@ namespace CinemaProject.Controllers
             sessionTimes.Add("16:00");
             sessionTimes.Add("19:00");
             sessionTimes.Add("22:00");
+        }
+        public ActionResult GetSessionList()
+        {
+            var sessionList = data.Sessions.ToList();
+            return Json(new { data = sessionList });
+        }
+        public IActionResult ControlSessions()
+        {
+            FillSessionTime();
+            ViewBag.SessionTimes = new SelectList(sessionTimes);
+            ViewBag.Demonstrations = new SelectList(data.Demonstrations.ToList(), "DemonstrationId", "DemonstrationName");
+            ViewBag.Halls = new SelectList(data.Halls.ToList(), "HallId", "HallName");
+            ViewBag.Movies = new SelectList(data.Movies.ToList(), "MovieId", "NameMovie");
+            ControlSessions model = new ControlSessions();
+            model.Sessions = data.Sessions.ToList();
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditSession(ControlSessions model)
+        {
+            Session session = data.Sessions.FirstOrDefault(x => x.SessionId == model.SessionId);
+            if (session != null)
+            {
+                Session newSession = new Session
+                {
+                    SessionId = model.SessionId,
+                    DemonstrationId = model.DemonstrationId,
+                    Demonstration = data.Demonstrations.FirstOrDefault(x => x.DemonstrationId == model.DemonstrationId),
+                    HallId = model.HallId,
+                    Hall = data.Halls.FirstOrDefault(x => x.HallId == model.HallId),
+                    MovieId = model.MovieId,
+                    Movie = data.Movies.FirstOrDefault(x => x.MovieId == model.MovieId),
+                    CinemaId = model.CinemaId,
+                    ScreenEnd = DateTime.Parse(model.SessionEnds),
+                    ScreenStart = DateTime.Parse(model.SessionTime),
+                };
+                data.Sessions.Remove(session);
+                await data.Sessions.AddAsync(newSession);
+                await data.SaveChangesAsync();
+            }
+            return RedirectToAction("ControlSessions", "AdminControls");
+        }
+
+        [HttpPost]
+        [Route("AdminControls/DeleteSession/{id:int}")]
+        public async Task<IActionResult> DeleteSession(int? id)
+        {
+            var session = data.Sessions.FirstOrDefault(x => x.SessionId == id);
+            if (session != null)
+            {
+                data.Sessions.Remove(session);
+                await data.SaveChangesAsync();
+            }
+            return RedirectToAction("ControlSessions", "AdminControls");
         }
     }
 }

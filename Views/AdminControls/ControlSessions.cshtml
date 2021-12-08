@@ -1,0 +1,212 @@
+﻿@model ControlSessions
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div><a asp-action="AddSession" class="add-movie-link">Add new session</a></div>
+
+<div class = "control-users-page movie-controls">
+ <form asp-action="EditSession" asp-controller="AdminControls" class="user-edit-form ">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <input type="hidden" asp-for="SessionId" />
+        </div>
+        <div class="form-group">
+            <label asp-for="SessionDate" class="control-label">Дата сеансу</label>
+            <input type="text" asp-for="SessionDate" class="form-control" />
+        </div>
+        <div class="form-group">
+            <select  asp-for="SessionTime" asp-items="ViewBag.SessionTimes" ></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="SessionEnds" class="control-label">Час завершення сеансу</label>
+            <input type="text" asp-for="SessionEnds"  class="form-control"/>
+        </div>
+        <div class="form-group">
+            <select  asp-for="MovieId" asp-items="ViewBag.Movies" ></select>
+        </div>
+        <div class="form-group">
+            <select  asp-for="HallId" asp-items="ViewBag.Halls" ></select>
+        </div>
+        <div class="form-group">
+            <select  asp-for="DemonstrationId" asp-items="ViewBag.Demonstrations" ></select>
+        </div>
+
+    <div class="form-group">
+        <input type="submit" value="Зберегти"  class="btn btn-primary"/>
+    </div>
+</form>
+<table class="table table-dark" id="sessionTable">
+    <thead>
+        <tr>
+            <th>movieId</th>
+            <th>nameMovie</th>
+            <th>ageRestriction</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+</div>
+
+@section scripts{
+ 
+  <script>
+        $(document).ready(function()
+        {
+           {
+             let table = $("#sessionTable").DataTable(
+             {
+                processing: true,
+                serverSide: true,
+                searching: true,
+                paging: false,
+                info: false,
+                "ajax": 
+                {
+                   "url": "/AdminControls/GetSessionList",
+                   "type": "GET",
+                   "datatype": "json"
+                },
+                "columns":
+                [
+                   {"data": "sessionId"},
+                   {"data": "screenStart"},
+                   {"data": "screenEnd"},
+                   {
+                    "data": null,
+                    "className": "dt-center session-edit",
+                    "defaultContent": '<button>Оновити</button>',
+                    "orderable": false
+                   },
+                   {
+                    "data": null,
+                    "className": "dt-center editor-delete",
+                    "defaultContent": '<a>Видалити</a>',
+                    "orderable": false
+                   }
+                ]
+             });
+             $(document).on('click','.editor-delete',function(e) 
+               {
+                    var row = $(this).closest('tr');
+                    console.log(table.row( row ).data().sessionId);
+                    var id = table.row( row ).data().sessionId;
+                    console.log(id)
+                    Confirm.open(
+                    {
+                        classblock:"right-admin-page",
+                        message: "Are you sure?",
+                        title: "You are about to delete this user!",
+                        yes:"Delete",
+                        no: "Cansel",
+                        onok: () => 
+                        {
+                            var row = $(this).closest('tr');
+                            var id = table.row( row ).data().sessionId.toString();
+                            let form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = `/AdminControls/DeleteSession/${id}`;
+                            form.style = "display: none;";
+                            let methodInput = document.createElement("input");
+                            methodInput.value = "DELETE";
+                            methodInput.name = "Delete";
+                            form.appendChild(methodInput);
+                            document.body.appendChild(form);
+                            form.submit();
+                         }
+                    })
+                });
+
+               $(document).on('click','.session-edit',function(e)
+               {
+                  var row = $(this).closest('tr');         
+                  var id = table.row( row ).data().sessionId;
+                 
+
+                  var IdInput = document.getElementById('SessionId');
+                  var sessionDateInput = document.getElementById('SessionDate');
+                  var sessionLastsInput = document.getElementById('SessionEnds');
+              
+
+                 IdInput.value = table.row( row ).data().sessionId
+                 sessionDateInput.value = table.row( row ).data().screenStart
+                 sessionLastsInput.value = table.row( row ).data().screenEnd
+               });
+               
+
+
+           }
+        });
+
+       var Confirm = {
+    open (options) {
+        options = Object.assign({}, {
+            title: '',
+            message: '',
+            classblock: '',
+            okText: 'OK',
+            cancelText: 'Cancel',
+            yes: '',
+            no: '',
+            onok: function () {console.log("delete")},
+            oncancel: function () {console.log("cansel")}
+        }, options);
+
+    const html = `
+         <div class="user-alert-warning">
+                <img src = "/images/youWontDelete.svg"></img>
+                <p class="warning-text"><span>${options.title}</span>${options.message}</p>
+                <div class="warning-buttons">
+                    <a style ='cursor: pointer;' id = warning-cansel>${options.no}</a>
+                    <a style ='cursor: pointer;' id = warning-delete>${options.yes}</a>
+                </div>
+    `;
+
+    const template = document.createElement('template')
+    
+    template.innerHTML = html;
+
+   
+    const confirmEl  = template.content.querySelector('.user-alert-warning');
+    const bntNo      = template.content.querySelector('#warning-cansel');
+    const bntYes     = template.content.querySelector('#warning-delete');
+
+
+    confirmEl.addEventListener('click', e => {
+            if (e.target === confirmEl) {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            }
+        });
+
+        
+    bntYes.addEventListener('click', () => {
+            options.onok();
+            this._close(confirmEl,options.classblock);
+        });
+
+    bntNo.addEventListener('click', () => {
+                options.oncancel();
+                this._close(confirmEl,options.classblock);
+            });
+    let main_page = document.body.getElementsByClassName(options.classblock)[0];
+    
+    main_page.appendChild(template.content);
+  },
+
+  _close(confirmEl,classname){
+    confirmEl.classList.add('confirm--close');
+
+        confirmEl.addEventListener('animationend', () => {
+
+           
+            let main_page = document.body.getElementsByClassName(classname)[0];
+            
+            main_page.removeChild(confirmEl);
+        });
+  }
+}
+</script>
+}
