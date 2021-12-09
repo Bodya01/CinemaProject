@@ -283,7 +283,7 @@ namespace CinemaProject.Controllers
                     Movie = data.Movies.FirstOrDefault(x => x.MovieId == model.MovieId),
                     CinemaId = model.CinemaId,
                     ScreenEnd = DateTime.Parse(model.SessionEnds),
-                    ScreenStart = DateTime.Parse(model.SessionTime),
+                    ScreenStart = DateTime.Parse(model.SessionDate),
                 };
                 data.Sessions.Remove(session);
                 await data.Sessions.AddAsync(newSession);

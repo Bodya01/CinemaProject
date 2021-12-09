@@ -577,8 +577,10 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Session", b =>
                 {
                     b.Property<long>("SessionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("sessionId");
+                        .HasColumnName("sessionId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("MovieId")
                         .HasColumnType("bigint")
@@ -601,7 +603,7 @@ namespace CinemaProject.Migrations
                         .HasColumnName("screenEnd");
 
                     b.Property<DateTime>("ScreenStart")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime2")
                         .HasColumnName("screenStart");
 
                     b.HasKey("SessionId", "MovieId", "HallId", "DemonstrationId")

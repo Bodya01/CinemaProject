@@ -434,7 +434,7 @@ table {
   -ms-grid-row: 2;
       grid-row-start: 2;
   grid-row-end: 2;
-  background-image: url("../images/folder/Bitmap.png");
+  background-image: url("/images/Bitmap.png");
   background-repeat: no-repeat;
 }
 
@@ -629,7 +629,7 @@ table {
 .main-menu-first {
   height: 858px;
   width: 320px;
-  background-image: url("../images/1.png");
+  background-image: url("/images/1.png");
   background-position: center;
 }
 
@@ -819,7 +819,7 @@ table {
   -ms-grid-row: 1;
       grid-row-start: 1;
   grid-row-end: 4;
-  background-image: url("../images/folder/left.jpg");
+  background-image: url("/images/left.jpg");
   background-position: center;
   -webkit-box-shadow: 0 0 70px 50px rgba(0, 141, 193, 0.3);
           box-shadow: 0 0 70px 50px rgba(0, 141, 193, 0.3);
@@ -832,25 +832,20 @@ table {
   -ms-grid-row: 1;
       grid-row-start: 1;
   grid-row-end: 4;
-  background-image: url("../images/folder/right.jpg");
+  background-image: url("/images/right.jpg");
   background-position: center;
   -webkit-box-shadow: 0 0 70px 50px rgba(0, 141, 193, 0.3);
           box-shadow: 0 0 70px 50px rgba(0, 141, 193, 0.3);
 }
 
 .main-first-film {
-  -ms-grid-column: 2;
-      grid-column-start: 2;
-  grid-column-end: 3;
-  -ms-grid-row: 1;
-      grid-row-start: 1;
-  grid-row-end: 1;
+ 
 }
 
 .main-first-film .main-first-film-img {
   width: 269px;
   height: 340px;
-  background-image: url("../images/folder/1.jpg");
+  background-image: url("/images/1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -988,7 +983,7 @@ table {
 .main-second-film .main-second-film-img {
   width: 269px;
   height: 340px;
-  background-image: url("../images/folder/4.jpg");
+  background-image: url("/images/4.jpg");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
@@ -1391,7 +1386,7 @@ table {
 .main-single-film-menu .main-single-film-menu-block .main-single-film-menu-left .main-single-film-menu-left-img {
   width: 269px;
   height: 340px;
-  background-image: url("../images/folder/1.jpg");
+  background-image: url("/images/1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

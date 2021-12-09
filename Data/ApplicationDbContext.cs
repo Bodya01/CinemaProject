@@ -46,7 +46,7 @@ namespace CinemaProject.Data
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server= DESKTOP-MBGGAE3;Database=CinemaProject;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server= DESKTOP-GL1TEJO;Database=CinemaProject;Trusted_Connection=True;");
             }
         }
 
@@ -284,6 +284,7 @@ namespace CinemaProject.Data
 
             modelBuilder.Entity<Session>(entity =>
             {
+                entity.Property(e => e.SessionId).ValueGeneratedOnAdd();
                 entity.HasKey(e => new { e.SessionId, e.MovieId, e.HallId, e.DemonstrationId })
                     .HasName("PK_Session_1");
 
