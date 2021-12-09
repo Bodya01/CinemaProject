@@ -1,11 +1,13 @@
-
+@model IndexMoviesViewModel
  
 
  <main class="main-menu">
-      <div class="main-menu-first">
+      @for(int i = 0; i < @Model.Movies.Count; i++)
+    {
+        <div class="main-menu-first" style="background-image: url(@Model.Movies[i].MoviePreviewPath)">
         <div class="main-menu-first-opacity">
           <div class="left">
-            <a href=""
+            <a href="@Model.Movies[i].MovieTrailerPath"
               ><svg class="main-menu-first-uper-ico">
                 <use href="./images/symbol.svg#icon-play"></use>
               </svg>
@@ -13,7 +15,7 @@
             </a>
           </div>
           <div class="right">
-            <a href=""
+            <a href="#"
               ><svg class="main-menu-second-uper-ico">
                 <use href="./images/symbol.svg#icon-information"></use>
               </svg>
@@ -21,17 +23,13 @@
             </a>
           </div>
           <svg class="main-menu-category-age">
-            <use href="./images/symbol.svg#icon-age-limit-12"></use>
+            <use href="./images/symbol.svg#icon-age-limit-@Model.Movies[i].AgeRestriction"></use>
           </svg>
           <div class="main-menu-category">Топ продаж</div>
-          <a href="" class="main-menu-bottom-text">Людина павук</a>
+          <a href="" class="main-menu-bottom-text">@Model.Movies[i].NameMovie</a>
         </div>
       </div>
-      <div class="main-menu-2"></div>
-      <div class="main-menu-3"></div>
-      <div class="main-menu-4"></div>
-      <div class="main-menu-5"></div>
-      <div class="main-menu-6"></div>
+    }
 
 
 

@@ -71,11 +71,16 @@ namespace CinemaProject.Controllers
             var movie = data.Movies.FirstOrDefault(x => x.MovieId == id);
             if (movie != null)
             {
-                data.Movies.Remove(movie);
                 foreach (var subcategory in data.MovieSubcategories.Where(x => x.MovieId == id))
                 {
                     data.MovieSubcategories.Remove(subcategory);
                 }
+                foreach(var session in data.Sessions.Where(x => x.MovieId == id))
+                {
+                    data.Sessions.Remove(session);
+                }
+                await data.SaveChangesAsync();
+                data.Movies.Remove(movie);
                 await data.SaveChangesAsync();
             }
             return RedirectToAction("ControlMovies", "AdminControls");

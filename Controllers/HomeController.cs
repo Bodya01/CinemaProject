@@ -1,6 +1,8 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Models.ModelViews;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 namespace CinemaProject.Controllers
 {
@@ -18,7 +20,9 @@ namespace CinemaProject.Controllers
         public async Task<ActionResult> Index()
         {
             User user = await _userManager.GetUserAsync(User);
-            return View();
+            IndexMoviesViewModel indexMovies = new IndexMoviesViewModel();
+            indexMovies.Movies = data.Movies.OrderBy(x => x.MovieId).Take(6).ToList();
+            return View(indexMovies);
         }
 
         [HttpGet]
