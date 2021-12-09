@@ -79,5 +79,39 @@ namespace CinemaProject.Controllers
           
             return View(model);
         }
+
+
+
+
+        [HttpGet]
+        [Route("/Movie/GetTicketSession/{id:int}")]
+        public IActionResult GetTicketSession(int id)
+        {
+            Session  session = _data.Sessions.FirstOrDefault(x => x.SessionId == id);
+            SeatModelView model = new SeatModelView();
+            model.Session = session;
+
+            return View(model);
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult CreateSeat(SeatModelView model)
+        {
+
+            return View();
+        }
+
+
+        public IActionResult CheckModel()
+        {
+            List<SeatModelView> list = new();
+            
+            return Json(new { data = list });
+          
+        }
+
     }
 }

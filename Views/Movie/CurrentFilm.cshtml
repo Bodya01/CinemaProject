@@ -55,7 +55,7 @@
               <div class="text-list">
                 @foreach (var item in Model.MovieSessions)
                 {
-                     <a asp-action = "" asp-controller="" asp-route-id =@item.SessionId class="text-list__link">@item.ScreenStart.Hour - @item.ScreenStart.Minute - @item.ScreenStart.Day - @item.ScreenStart.Month</a>
+                     <a asp-action = "GetTicketSession" asp-controller="Movie" asp-route-id =@item.SessionId class="text-list__link">@item.ScreenStart.Hour - @item.ScreenStart.Minute - @item.ScreenStart.Day - @item.ScreenStart.Month</a>
                 }
         
               </div>

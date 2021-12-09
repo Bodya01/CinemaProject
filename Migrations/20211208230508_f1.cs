@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CinemaProject.Migrations
 {
@@ -509,12 +509,13 @@ namespace CinemaProject.Migrations
                 name: "Session",
                 columns: table => new
                 {
-                    sessionId = table.Column<long>(type: "bigint", nullable: false),
+                    sessionId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     movieId = table.Column<long>(type: "bigint", nullable: false),
                     hallId = table.Column<long>(type: "bigint", nullable: false),
                     demonstrationId = table.Column<long>(type: "bigint", nullable: false),
-                    screenStart = table.Column<DateTime>(type: "date", nullable: false),
-                    screenEnd = table.Column<DateTime>(type: "date", nullable: false),
+                    screenStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    screenEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CinemaId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
