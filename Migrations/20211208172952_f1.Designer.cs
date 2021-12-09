@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211208211627_f1")]
+    [Migration("20211208172952_f1")]
     partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -580,10 +580,8 @@ namespace CinemaProject.Migrations
             modelBuilder.Entity("CinemaProject.Data.Session", b =>
                 {
                     b.Property<long>("SessionId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("sessionId")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("sessionId");
 
                     b.Property<long>("MovieId")
                         .HasColumnType("bigint")

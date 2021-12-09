@@ -1,8 +1,6 @@
-﻿using CinemaProject.Data;
-
-namespace CinemaProject.Models.ModelViews
+﻿namespace CinemaProject.Models.ModelViews
 {
-    public class LayoutModel 
+    public class LayoutModel
     {
         public LayoutModel(string title)
         {

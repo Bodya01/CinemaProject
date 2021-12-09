@@ -28,7 +28,6 @@ namespace CinemaProject.Data
         public DateTime CreateAt { get; set; }
         [Column("promocodeId")]
         public long? PromocodeId { get; set; }
-        [Required]
         [Column("paymentType")]
         [StringLength(100)]
         public string PaymentType { get; set; }

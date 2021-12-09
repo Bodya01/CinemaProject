@@ -37,7 +37,7 @@ namespace CinemaProject.Controllers
         public async Task<IActionResult> EditMovie(ControlMovies movies)
         {
             Movie movie = data.Movies.FirstOrDefault(x => x.MovieId == movies.Id);
-            
+
             if (movie != null)
             {
                 movie.NameMovie = movies.NameMovie;
@@ -125,8 +125,52 @@ namespace CinemaProject.Controllers
                 await data.SaveChangesAsync();
             }
 
-            return View(model);
+            return RedirectToAction("ControlProducts", "AdminControls");
         }
+
+        public IActionResult ControlProducts()
+        {
+            GetProductList();
+            ControlProducts controlProducts = new ControlProducts();
+            controlProducts.Products = data.Products.ToList();
+            return View(controlProducts);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(ControlProducts model)
+        {
+            if(model != null)
+            {
+                data.Remove(data.Products.FirstOrDefault(x => x.ProductId == model.ProductId));
+                await data.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ControlProducts", "AdminControls");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(ControlProducts model)
+        {
+            if (model != null)
+            {
+                Product product = data.Products.FirstOrDefault(x => x.ProductId == model.ProductId);
+                product.ProductName = model.ProductName;
+                product.ProductPrice = model.ProductPrice;
+                product.ProductPhotoPath = model.ProductPhotoPath;
+                data.Update(product);
+                await data.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ControlProducts", "AdminControls");
+        }
+
+        [HttpGet]
+        public ActionResult GetProductList()
+        {
+            var productList = data.Products.ToList();
+            return Json(new { data = productList });
+        }
+
+
         [HttpGet]
         public ActionResult GetListUsers()
         {

@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace CinemaProject.Migrations
 {
@@ -390,7 +390,7 @@ namespace CinemaProject.Migrations
                     totalPrice = table.Column<int>(type: "int", nullable: false),
                     createAt = table.Column<DateTime>(type: "date", nullable: false),
                     promocodeId = table.Column<long>(type: "bigint", nullable: true),
-                    paymentType = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: false),
+                    paymentType = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: true),
                     endAt = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
@@ -509,8 +509,7 @@ namespace CinemaProject.Migrations
                 name: "Session",
                 columns: table => new
                 {
-                    sessionId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    sessionId = table.Column<long>(type: "bigint", nullable: false),
                     movieId = table.Column<long>(type: "bigint", nullable: false),
                     hallId = table.Column<long>(type: "bigint", nullable: false),
                     demonstrationId = table.Column<long>(type: "bigint", nullable: false),

@@ -1,48 +1,33 @@
-﻿@model ControlSessions
-
+﻿@model ControlProducts
 @{
     Layout = "_AdminLayout";
 }
 
-<div><a asp-action="AddSession" class="add-movie-link">Add new session</a></div>
+<div><a asp-action="AddProduct" class="add-movie-link">Add new movie</a></div>
 
 <div class = "control-users-page movie-controls">
- <form asp-action="EditSession" asp-controller="AdminControls" class="user-edit-form ">
-        <div asp-validation-summary="All"></div>
+        <form method="post" asp-action="EditProduct" asp-controller="AdminControls" class="user-edit-form ">
+            <input type="hidden" asp-for="ProductId" />
         <div class="form-group">
-            <input type="hidden" asp-for="SessionId" />
+            <label asp-for="ProductName" class="control-label">Назва продукту</label>
+            <input type="text" asp-for="ProductName" class="form-control"/>
         </div>
         <div class="form-group">
-            <label asp-for="SessionDate" class="control-label">Дата сеансу</label>
-            <input type="text" asp-for="SessionDate" class="form-control" />
+            <label asp-for="ProductPrice" class="control-label">Вартість продукту</label>
+            <input type="text" asp-for="ProductPrice" class="form-control" />
         </div>
         <div class="form-group">
-            <select  asp-for="SessionTime" asp-items="ViewBag.SessionTimes" ></select>
+            <label asp-for="ProductPhotoPath" class="control-label">Фото продукту</label>
+            <input type="text" asp-for="ProductPhotoPath" class="form-control"/>
         </div>
-        <div class="form-group">
-            <label asp-for="SessionEnds" class="control-label">Час завершення сеансу</label>
-            <input type="text" asp-for="SessionEnds"  class="form-control"/>
-        </div>
-        <div class="form-group">
-            <select  asp-for="MovieId" asp-items="ViewBag.Movies" ></select>
-        </div>
-        <div class="form-group">
-            <select  asp-for="HallId" asp-items="ViewBag.Halls" ></select>
-        </div>
-        <div class="form-group">
-            <select  asp-for="DemonstrationId" asp-items="ViewBag.Demonstrations" ></select>
-        </div>
-
-    <div class="form-group">
-        <input type="submit" value="Зберегти"  class="btn btn-primary"/>
-    </div>
-</form>
-<table class="table table-dark" id="sessionTable">
+        <input type="submit" value="Add" class="btn btn-primary"/>
+    </form>
+<table class="table table-dark" id="productTable">
     <thead>
         <tr>
-            <th>movieId</th>
-            <th>nameMovie</th>
-            <th>ageRestriction</th>
+            <th>productId</th>
+            <th>productName</th>
+            <th>productPrice</th>
             <th></th>
             <th></th>
         </tr>
@@ -56,7 +41,7 @@
         $(document).ready(function()
         {
            {
-             let table = $("#sessionTable").DataTable(
+             let table = $("#productTable").DataTable(
              {
                 processing: true,
                 serverSide: true,
@@ -65,18 +50,18 @@
                 info: false,
                 "ajax": 
                 {
-                   "url": "/AdminControls/GetSessionList",
+                   "url": "/AdminControls/GetProductList",
                    "type": "GET",
                    "datatype": "json"
                 },
                 "columns":
                 [
-                   {"data": "sessionId"},
-                   {"data": "screenStart"},
-                   {"data": "screenEnd"},
+                   {"data": "productId"},
+                   {"data": "productName"},
+                   {"data": "productPrice"},
                    {
                     "data": null,
-                    "className": "dt-center session-edit",
+                    "className": "dt-center product-edit",
                     "defaultContent": '<button>Оновити</button>',
                     "orderable": false
                    },
@@ -91,8 +76,8 @@
              $(document).on('click','.editor-delete',function(e) 
                {
                     var row = $(this).closest('tr');
-                    console.log(table.row( row ).data().sessionId);
-                    var id = table.row( row ).data().sessionId;
+                    console.log(table.row( row ).data().productId);
+                    var id = table.row( row ).data().productId;
                     console.log(id)
                     Confirm.open(
                     {
@@ -104,10 +89,10 @@
                         onok: () => 
                         {
                             var row = $(this).closest('tr');
-                            var id = table.row( row ).data().sessionId.toString();
+                            var id = table.row( row ).data().productId.toString();
                             let form = document.createElement("form");
                             form.method = "POST";
-                            form.action = `/AdminControls/DeleteSession/${id}`;
+                            form.action = `/AdminControls/DeleteProduct/${id}`;
                             form.style = "display: none;";
                             let methodInput = document.createElement("input");
                             methodInput.value = "DELETE";
@@ -119,21 +104,26 @@
                     })
                 });
 
-               $(document).on('click','.session-edit',function(e)
+               $(document).on('click','.product-edit',function(e)
                {
                   var row = $(this).closest('tr');         
-                  var id = table.row( row ).data().sessionId;
+                  var id = table.row( row ).data().productId;
                  
 
-                  var IdInput = document.getElementById('SessionId');
-                  var sessionDateInput = document.getElementById('SessionDate');
-                  var sessionLastsInput = document.getElementById('SessionEnds');
+                  var IdInput = document.getElementById('ProductId');
+                  var nameInput = document.getElementById('ProductName');
+                  var productPriceInput = document.getElementById('ProductPrice');
+                  var productPhotoPathInput = document.getElementById('ProductPhotoPath');
               
 
-                 IdInput.value = table.row( row ).data().sessionId
-                 sessionDateInput.value = table.row( row ).data().screenStart
-                 sessionLastsInput.value = table.row( row ).data().screenEnd
+                 IdInput.value = table.row( row ).data().productId
+                 nameInput.value = table.row( row ).data().productName
+                 productPriceInput.value = table.row( row ).data().productPrice
+                 productPhotoPathInput.value = table.row( row ).data().productPhotoPath
                });
+               
+
+
            }
         });
 
