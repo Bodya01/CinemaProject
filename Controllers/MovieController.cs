@@ -94,9 +94,6 @@ namespace CinemaProject.Controllers
             return View(model);
         }
 
-
-
-
         [HttpPost]
         public IActionResult CreateSeat(SeatModelView model)
         {

@@ -33,8 +33,10 @@
         <ul class="profile-sign-out">
           @if(User.Identity.IsAuthenticated)
                 {
-                 
-             <li><a asp-action="Logout" asp-controller="Session">Вихід</a></li>
+              <form method="post" asp-controller="Session" asp-action="Logout">
+                            <li><input type="submit" value="Вихід" /></li>
+            </form>    
+
              <li><p>|</p></li>
              <li>
                 <a asp-action="UserInfoProfile" asp-controller="UserProfile">
