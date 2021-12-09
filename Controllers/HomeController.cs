@@ -32,5 +32,20 @@ namespace CinemaProject.Controllers
             return Json(new { data = user });
         }
 
+        public async Task<IActionResult> Shop()
+        {
+            return View();
+        }
+        
+        public async Task<IActionResult> PromotionsAndDiscounts()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Cart()
+        {
+            return View();
+        }
+
     }
 }

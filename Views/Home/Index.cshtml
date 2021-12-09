@@ -26,7 +26,7 @@
             <use href="./images/symbol.svg#icon-age-limit-@Model.Movies[i].AgeRestriction"></use>
           </svg>
           <div class="main-menu-category">Топ продаж</div>
-          <a href="" class="main-menu-bottom-text">@Model.Movies[i].NameMovie</a>
+          <a asp-action="CurrentFilm" asp-controller="Movie" asp-route-id=@Model.Movies[i].MovieId class="main-menu-bottom-text">@Model.Movies[i].NameMovie</a>
         </div>
       </div>
     }

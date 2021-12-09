@@ -1,7 +1,12 @@
-﻿@model CurentMovieViewModel
+﻿@using CinemaProject.Models.MovieModels
+@model CurentMovieViewModel
 
  <main class="main-single-film-menu">
-      <article class="video"></article>
+      <iframe
+        class="video"
+        src="@Model.Movie.MovieTrailerPath"
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+      ></iframe>
       <article class="main-single-film-menu-h1">
         <h1>@Model.Movie.NameMovie</h1>
       </article>

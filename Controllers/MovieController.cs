@@ -3,7 +3,6 @@ using CinemaProject.Models.MovieModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
@@ -17,7 +16,7 @@ namespace CinemaProject.Controllers
             _data = data;
         }
 
-     
+
         private void FillSessionTime(List<string> list)
         {
             list.Add("10:00");
@@ -30,36 +29,36 @@ namespace CinemaProject.Controllers
 
         public IActionResult Index()
         {
-            List <MovieViewModel > movies = new();
-            
+            List<MovieViewModel> movies = new();
+
             foreach (var movie in _data.Movies.ToList())
             {
                 MovieViewModel model = new MovieViewModel();
-               
+
                 var sessions = _data.Sessions.Where(x => x.MovieId == movie.MovieId).ToList();
 
-                if(sessions != null)
+                if (sessions != null)
                 {
                     model.Demonstration = _data.Demonstrations.FirstOrDefault(x => x.DemonstrationId == sessions.FirstOrDefault().DemonstrationId);
                     model.Movie = movie;
-                    var start =  sessions.Min(x => x.ScreenStart);
-                    var end   =  sessions.Max(x => x.ScreenEnd);
-                    
-                    model.StartEnd  = $"{start.Day} {start.Month} + - {end.Day} {end.Month}";
+                    var start = sessions.Min(x => x.ScreenStart);
+                    var end = sessions.Max(x => x.ScreenEnd);
+
+                    model.StartEnd = $"{start.Day} {start.Month} + - {end.Day} {end.Month}";
                     movies.Add(model);
                 }
-               
-                
+
+
             }
             return View(movies);
-          
+
         }
         [HttpGet]
         [Route("/Movie/CurrentFilm/{id:int}")]
         public IActionResult CurrentFilm(int id)
         {
             CurentMovieViewModel model = new CurentMovieViewModel();
-            model.Movie = _data.Movies.FirstOrDefault(x=>x.MovieId == id);
+            model.Movie = _data.Movies.FirstOrDefault(x => x.MovieId == id);
             model.MovieSessions = _data.Sessions.Where(x => x.MovieId == model.Movie.MovieId).ToList();
             var start = model.MovieSessions.Min(x => x.ScreenStart);
             var end = model.MovieSessions.Max(x => x.ScreenEnd);
@@ -72,11 +71,11 @@ namespace CinemaProject.Controllers
 
             foreach (var item in _data.MovieSubcategories.Where(x => x.MovieId == model.Movie.MovieId).ToList())
             {
-                
+
                 model.MovieSubcategories += _data.Subcategories.FirstOrDefault(x => x.SubcategoryId == item.SubcategoryId).SubcategoryName + " ";
             }
 
-          
+
             return View(model);
         }
 
@@ -87,7 +86,7 @@ namespace CinemaProject.Controllers
         [Route("/Movie/GetTicketSession/{id:int}")]
         public IActionResult GetTicketSession(int id)
         {
-            Session  session = _data.Sessions.FirstOrDefault(x => x.SessionId == id);
+            Session session = _data.Sessions.FirstOrDefault(x => x.SessionId == id);
             SeatModelView model = new SeatModelView();
             model.Session = session;
 
@@ -105,9 +104,9 @@ namespace CinemaProject.Controllers
         public IActionResult CheckModel()
         {
             List<SeatModelView> list = new();
-            
+
             return Json(new { data = list });
-          
+
         }
 
     }

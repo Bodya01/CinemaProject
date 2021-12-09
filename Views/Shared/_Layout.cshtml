@@ -11,7 +11,7 @@
   </head>
   <body>
     <header class="header">
-       <a name="start" href="Index.html" class="logo">
+       <a name="start" asp-controller="Home" asp-action="Index" class="logo">
         <div class="logo-gray">My&nbsp;</div>
         <div class="logo-c">c</div>
         <div class="logo-i">i</div>
@@ -25,8 +25,8 @@
         <ul>
           <li><a asp-action ="Index" asp-controller="Movie">Фільми</a></li>
           <li><a href="#">Сеанси</a></li>
-          <li><a href="#">Магазин</a></li>
-          <li><a href="#">Акції та знижки</a></li>
+          <li><a asp-action="Shop" asp-controller="Home">Магазин</a></li>
+          <li><a asp-action="PromotionsAndDiscounts" asp-controller="Home">Акції та знижки</a></li>
         </ul>
       </nav>
       <div class="menu__login">

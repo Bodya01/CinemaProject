@@ -131,7 +131,7 @@ namespace CinemaProject.Controllers
 
 
         [HttpPost]
-      
+
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();

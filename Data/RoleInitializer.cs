@@ -1,6 +1,6 @@
 ﻿
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace CinemaProject.Data
 {
@@ -20,7 +20,14 @@ namespace CinemaProject.Data
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                User admin = new User { Email = adminEmail, UserName = adminEmail };
+                User admin = new User
+                {
+                    Email = adminEmail,
+                    UserName = adminEmail,
+                    UserEmail = adminEmail,
+                    UserPhone = adminEmail,
+                    UserSurname = adminEmail
+                };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {

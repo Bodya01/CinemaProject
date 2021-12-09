@@ -1,4 +1,5 @@
-﻿@model SeatModelView
+﻿@using CinemaProject.Models.MovieModels
+@model SeatModelView
 
  <main class = "main-block-session-by-ticket">
 <form asp-action="CreateSeat" asp-controller="Movie"  method="post">
@@ -8,7 +9,7 @@
   </div>
   <div class='cinemaHall zal1'></div>
  <div id = "form-tickets"></div>
- <input type="submit" value="Добавить" />
+ <input type="submit" value="Додати у кошик" />
  </form>
   </main>
 @section scriptsMain{
@@ -21,8 +22,7 @@
     
   
 
-        // план зала по рядам общая вместительность 300 мест
-// планов может быть и больше... и разные...
+
 var cinemaHall1 = {
     row: [10, 20, 30, 30, 30, 30, 30, 30, 30, 30, 30]
   },
@@ -30,23 +30,16 @@ var cinemaHall1 = {
 $.each(cinemaHall1.row, function(row, numberOfSeats) {
   cinemaHallRow = '';
   for (i = 1; i <= numberOfSeats; i++) {
-    // собираем ряды
     cinemaHallRow += '<div class="seat" data-row="' +
       row + '" data-seat="' +
       i + '">&nbsp;</div>';
   }
-  //собираем зал с проходами между рядами
   cinemaHallMap += cinemaHallRow + '<div class="passageBetween">&nbsp;</div>';
 });
 
-//заполняем в html зал номер 1
 $('.zal1').html(cinemaHallMap);
-// тут по клику определяем что место выкуплено
 $('.seat').on('click', function(e) {
-  // если первый раз кликнули билет выкупили, 
-  // если повторно значит вернули билет
   $(e.currentTarget).toggleClass('bay');
-  //показываем сколько билетов выкуплено
   showBaySeat();
 });
 
@@ -55,7 +48,6 @@ function showBaySeat() {
   result = '';
   sq = []
   var html2Add= ''
-  //ищем все места купленные и показываем список выкупленных мест
   $.each($('.seat.bay'), function(key, item) {
       
     i++;

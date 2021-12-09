@@ -57,7 +57,7 @@ namespace CinemaProject.Controllers
         {
             if (model.ticket != null)
             {
-                User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName== User.Identity.Name);
+                User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
                 Cart cart;
                 if (data.Carts.Where(x => x.UserId == currentUser.Id).Count() == 0)
                 {
@@ -76,11 +76,11 @@ namespace CinemaProject.Controllers
         [HttpPost]
         public async Task<IActionResult> ClearCart(int? id)
         {
-            if(id != null)
+            if (id != null)
             {
                 User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
                 Cart cart = await data.Carts.FirstOrDefaultAsync(x => x.User == currentUser);
-                foreach (var ticket in data.Tickets.Where(x =>  x.CartId == cart.CartId))
+                foreach (var ticket in data.Tickets.Where(x => x.CartId == cart.CartId))
                 {
                     data.Tickets.Remove(ticket);
                 }
@@ -91,7 +91,7 @@ namespace CinemaProject.Controllers
                 data.Carts.Remove(cart);
                 await data.SaveChangesAsync();
             }
-            
+
             return View();
         }
     }

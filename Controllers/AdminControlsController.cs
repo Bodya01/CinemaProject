@@ -75,7 +75,7 @@ namespace CinemaProject.Controllers
                 {
                     data.MovieSubcategories.Remove(subcategory);
                 }
-                foreach(var session in data.Sessions.Where(x => x.MovieId == id))
+                foreach (var session in data.Sessions.Where(x => x.MovieId == id))
                 {
                     data.Sessions.Remove(session);
                 }
@@ -143,7 +143,7 @@ namespace CinemaProject.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(ControlProducts model)
         {
-            if(model != null)
+            if (model != null)
             {
                 data.Remove(data.Products.FirstOrDefault(x => x.ProductId == model.ProductId));
                 await data.SaveChangesAsync();

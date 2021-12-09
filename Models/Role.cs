@@ -11,7 +11,7 @@ namespace CinemaProject.Data
     {
         public Role(string name)
         {
-            Name = name;         
+            Name = name;
             RoleDescription = name;
             RoleName = name;
         }
