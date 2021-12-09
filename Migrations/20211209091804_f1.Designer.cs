@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211208185518_f1")]
+    [Migration("20211209091804_f1")]
     partial class f1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -599,7 +599,7 @@ namespace CinemaProject.Migrations
                         .HasColumnName("CinemaId");
 
                     b.Property<DateTime>("ScreenEnd")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime2")
                         .HasColumnName("screenEnd");
 
                     b.Property<DateTime>("ScreenStart")

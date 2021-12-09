@@ -597,7 +597,7 @@ namespace CinemaProject.Migrations
                         .HasColumnName("CinemaId");
 
                     b.Property<DateTime>("ScreenEnd")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime2")
                         .HasColumnName("screenEnd");
 
                     b.Property<DateTime>("ScreenStart")
