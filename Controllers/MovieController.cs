@@ -37,7 +37,7 @@ namespace CinemaProject.Controllers
 
                 var sessions = _data.Sessions.Where(x => x.MovieId == movie.MovieId).ToList();
 
-                if (sessions != null)
+                if (sessions != null & sessions.Count > 0)
                 {
                     model.Demonstration = _data.Demonstrations.FirstOrDefault(x => x.DemonstrationId == sessions.FirstOrDefault().DemonstrationId);
                     model.Movie = movie;

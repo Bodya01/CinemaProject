@@ -22,10 +22,6 @@ namespace CinemaProject.Controllers
             _appEnvironment = appEnvironment;
             _data = data;
         }
-
-
-
-
         public IActionResult Index() => View(_userManager.Users);
         public IActionResult Create() => View();
 
@@ -122,13 +118,6 @@ namespace CinemaProject.Controllers
             return RedirectToAction("ControlUsers", "AdminControls");
         }
 
-
-
-
-
-
-
-
         [HttpPost]
         [Route("/UserProfile/Delete/{id:int}")]
         public async Task<IActionResult> Delete(int? id)
@@ -182,8 +171,6 @@ namespace CinemaProject.Controllers
             User user = await _userManager.GetUserAsync(User);
             return View(user);
         }
-
-
 
 
 

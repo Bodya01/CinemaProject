@@ -34,10 +34,10 @@
           @if(User.Identity.IsAuthenticated)
                 {
               <form method="post" asp-controller="Session" asp-action="Logout">
-                            <li><input type="submit" value="Вихід" /></li>
+                            <li style="margin-top: 5px; text-align:center"><input type="submit" value="Вихід" /></li>
             </form>    
 
-             <li><p>|</p></li>
+             <li><p>&nbsp&nbsp | &nbsp&nbsp</p></li>
              <li>
                 <a asp-action="UserInfoProfile" asp-controller="UserProfile">
                     <img  class="profile-sign-in main-photo-user" >
@@ -47,7 +47,7 @@
           else
           {
 
-              <li><a asp-action="SignIn" asp-controller="Session">Вхід</a></li>
+              <li ><a asp-action="SignIn" asp-controller="Session">Вхід</a></li>
               <li><p>|</p></li>
               <li><a asp-action="SignUp" asp-controller="Session">Реєстрація</a></li>
           }
