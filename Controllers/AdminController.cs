@@ -2,6 +2,7 @@
 
 namespace CinemaProject.Controllers
 {
+    [Route("admin")]
     public class AdminController : Controller
     {
         // GET: AdminController
