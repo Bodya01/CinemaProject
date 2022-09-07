@@ -29,7 +29,7 @@ namespace CinemaProject.Controllers
         {
             if (model.product != null)
             {
-                User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+                var currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
                 Cart cart;
                 if (data.Carts.Where(x => x.UserId == currentUser.Id).Count() == 0)
                 {
