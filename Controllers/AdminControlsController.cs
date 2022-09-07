@@ -18,7 +18,7 @@ namespace CinemaProject.Controllers
         private List<Subcategory> subcategories = new List<Subcategory>();
         private List<string> sessionTimes = new List<string>();
 
-        [HttpGet]
+        [HttpGet("Movies/All")]
         public ActionResult GetMovieList()
         {
             var movieList = data.Movies.ToList();
