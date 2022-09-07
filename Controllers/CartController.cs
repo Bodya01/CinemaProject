@@ -57,8 +57,8 @@ namespace CinemaProject.Controllers
         {
             if (model.ticket != null)
             {
-                User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
-                Cart cart;
+                var currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+                var cart;
                 if (data.Carts.Where(x => x.UserId == currentUser.Id).Count() == 0)
                 {
                     cart = CreateNewCart(currentUser);
