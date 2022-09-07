@@ -13,7 +13,7 @@ namespace CinemaProject.Controllers
 
         private Cart CreateNewCart(User currentUser)
         {
-            Cart cart = new Cart
+            var cart = new Cart
             {
                 UserId = currentUser.Id,
                 User = currentUser
