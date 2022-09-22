@@ -7,6 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.Web.UI", "Cin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.UI", "CinemaProject.UI", "{68BED1EB-BE22-4BC2-A213-E98B957FEEC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.Handlers", "CinemaProject.Handlers", "{2A78E081-F31E-473A-BD79-9C92D3197875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.CommandHandlers", "CinemaProject.Commands\CinemaProject.CommandHandlers.csproj", "{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.QueryHandlers", "CinemaProject.Queries\CinemaProject.QueryHandlers.csproj", "{8BA5AB16-51E8-456A-999C-DAD254902C27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.Models", "CinemaProject.Models", "{B74A73E8-F48B-4FBA-857E-833913F7330A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Modlels.Requests", "CinemaProject.Requests\CinemaProject.Modlels.Requests.csproj", "{A6595951-CA95-45AC-B110-4A98C0C48476}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +27,27 @@ Global
 		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA5AB16-51E8-456A-999C-DAD254902C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA5AB16-51E8-456A-999C-DAD254902C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA5AB16-51E8-456A-999C-DAD254902C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA5AB16-51E8-456A-999C-DAD254902C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6595951-CA95-45AC-B110-4A98C0C48476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6595951-CA95-45AC-B110-4A98C0C48476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6595951-CA95-45AC-B110-4A98C0C48476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6595951-CA95-45AC-B110-4A98C0C48476}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2818C22F-0AD7-4F85-B766-9C88A72B4A57} = {68BED1EB-BE22-4BC2-A213-E98B957FEEC2}
+		{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9} = {2A78E081-F31E-473A-BD79-9C92D3197875}
+		{8BA5AB16-51E8-456A-999C-DAD254902C27} = {2A78E081-F31E-473A-BD79-9C92D3197875}
+		{A6595951-CA95-45AC-B110-4A98C0C48476} = {B74A73E8-F48B-4FBA-857E-833913F7330A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB0D7A42-9277-45AD-842B-0E1B0413ADC0}
