@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject", "CinemaProject.csproj", "{C55501C7-7CAF-4251-ABA1-55CED8A002AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.Web.UI", "CinemaProject.Web.UI\CinemaProject.Web.UI.csproj", "{2818C22F-0AD7-4F85-B766-9C88A72B4A57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.UI", "CinemaProject.UI", "{68BED1EB-BE22-4BC2-A213-E98B957FEEC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +13,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C55501C7-7CAF-4251-ABA1-55CED8A002AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C55501C7-7CAF-4251-ABA1-55CED8A002AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C55501C7-7CAF-4251-ABA1-55CED8A002AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C55501C7-7CAF-4251-ABA1-55CED8A002AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2818C22F-0AD7-4F85-B766-9C88A72B4A57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2818C22F-0AD7-4F85-B766-9C88A72B4A57} = {68BED1EB-BE22-4BC2-A213-E98B957FEEC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB0D7A42-9277-45AD-842B-0E1B0413ADC0}
