@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("Location")]
-    public partial class Location
+    public partial class Location : IEntity
     {
         [Key]
         public long LocationId { get; set; }

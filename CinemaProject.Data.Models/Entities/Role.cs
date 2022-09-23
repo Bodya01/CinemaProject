@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("Role")]
-    public partial class Role : IdentityRole<long>
+    public partial class Role : IdentityRole<long>, IEntity
     {
         public Role(string name)
         {

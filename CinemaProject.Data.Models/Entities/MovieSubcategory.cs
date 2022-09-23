@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CinemaProject.Data.Models.Entities
 {
-    public partial class MovieSubcategory
+    public partial class MovieSubcategory : IEntity
     {
         [Key]
         [Column("movieSubcategoriesId")]

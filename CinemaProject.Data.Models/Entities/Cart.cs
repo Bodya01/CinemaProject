@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("Cart")]
-    public partial class Cart
+    public partial class Cart  : IEntity
     {
         public Cart()
         {

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("Subcategory")]
-    public partial class Subcategory
+    public partial class Subcategory : IEntity
     {
         public Subcategory()
         {

@@ -10,7 +10,7 @@ namespace CinemaProject.Data.Models.Entities
 {
     [Table("Seat")]
     [Microsoft.EntityFrameworkCore.Index(nameof(SeatId), nameof(HallId), Name = "FK_Seat", IsUnique = true)]
-    public partial class Seat
+    public partial class Seat : IEntity
     {
         public Seat()
         {

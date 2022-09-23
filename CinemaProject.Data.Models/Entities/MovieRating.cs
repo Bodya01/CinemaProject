@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("MovieRating")]
-    public partial class MovieRating
+    public partial class MovieRating : IEntity
     {
         [Key]
         [Column("movieRattingtId")]

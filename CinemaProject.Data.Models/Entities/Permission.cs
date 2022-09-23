@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("Permission")]
-    public partial class Permission
+    public partial class Permission : IEntity
     {
         public Permission()
         {

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("Promocode")]
-    public partial class Promocode
+    public partial class Promocode : IEntity
     {
         public Promocode()
         {

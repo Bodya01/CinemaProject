@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CinemaProject.Data.Models.Entities
 {
     [Table("City")]
-    public partial class City
+    public partial class City : IEntity
     {
         public City()
         {

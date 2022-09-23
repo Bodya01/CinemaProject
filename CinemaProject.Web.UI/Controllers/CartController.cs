@@ -1,9 +1,6 @@
-﻿using CinemaProject.Data;
-using CinemaProject.Data.Infrastructure.Context;
+﻿using CinemaProject.Data.Infrastructure.Context;
 using CinemaProject.Data.Models.Entities;
 using CinemaProject.Models.CartModels;
-using CinemaProject.Modlels.Requests.Queries.Requests;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

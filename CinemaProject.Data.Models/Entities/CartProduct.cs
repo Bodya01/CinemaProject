@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CinemaProject.Data.Models.Entities
 {
-    public partial class CartProduct
+    public partial class CartProduct : IEntity
     {
         [Key]
         [Column("cartProductId")]

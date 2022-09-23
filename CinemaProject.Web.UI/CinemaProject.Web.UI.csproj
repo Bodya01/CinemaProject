@@ -33,6 +33,7 @@
     <ProjectReference Include="..\CinemaProject.Data.Infrastructure\CinemaProject.Data.Infrastructure.csproj" />
     <ProjectReference Include="..\CinemaProject.Data.Models\CinemaProject.Data.Models.csproj" />
     <ProjectReference Include="..\CinemaProject.Handlers.Query\CinemaProject.Handlers.Query.csproj" />
+    <ProjectReference Include="..\CinemaProject.Installelrs\CinemaProject.Installers.csproj" />
     <ProjectReference Include="..\CinemaProject.Requests\CinemaProject.Models.Requests.csproj" />
     <ProjectReference Include="..\CinemaProject.Requests\CinemaProject.Models.Requests.csproj" />
   </ItemGroup>

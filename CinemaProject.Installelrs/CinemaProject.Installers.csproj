@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CinemaProject.Data.Infrastructure\CinemaProject.Data.Infrastructure.csproj" />
     <ProjectReference Include="..\CinemaProject.Handlers.Command\CinemaProject.Handlers.Command.csproj" />
     <ProjectReference Include="..\CinemaProject.Handlers.Query\CinemaProject.Handlers.Query.csproj" />
   </ItemGroup>

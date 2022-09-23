@@ -3,7 +3,7 @@ using CinemaProject.Handlers.Query.Installers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CinemaProject.Installelrs
+namespace CinemaProject.Installelrs.ServiceInstallers
 {
     public static class MediatRInstallerExtensions
     {

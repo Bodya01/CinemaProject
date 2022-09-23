@@ -1,8 +1,6 @@
-using CinemaProject.Data;
 using CinemaProject.Data.Infrastructure.Context;
 using CinemaProject.Data.Models.Entities;
-using CinemaProject.Handlers.Query;
-using CinemaProject.Web.UI.ServiceExtenstion;
+using CinemaProject.Installers.ServiceInstallers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

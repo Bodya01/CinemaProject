@@ -11,7 +11,7 @@ namespace CinemaProject.Data.Models.Entities
 {
     [Table("User")]
     [Microsoft.EntityFrameworkCore.Index(nameof(UserEmail), IsUnique = true)]
-    public class User : IdentityUser<long>
+    public class User : IdentityUser<long>, IEntity
     {
 
 

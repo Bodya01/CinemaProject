@@ -1,15 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 
-namespace CinemaProject.Web.UI.ServiceExtenstion
+namespace CinemaProject.Installers.ServiceInstallers
 {
     public static class InstallerExtensions
     {
         public static void InstallAllServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var installers = typeof(Startup).Assembly.ExportedTypes
+            var installers = typeof(InstallerExtensions).Assembly.ExportedTypes
                 .Where(x => typeof(IServiceInstaller).IsAssignableFrom(x)
                             && !x.IsInterface
                             && !x.IsAbstract)
@@ -21,3 +19,4 @@ namespace CinemaProject.Web.UI.ServiceExtenstion
         }
     }
 }
+
