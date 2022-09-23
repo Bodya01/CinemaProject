@@ -15,7 +15,10 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Queries\Responses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CinemaProject.Data.Models\CinemaProject.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

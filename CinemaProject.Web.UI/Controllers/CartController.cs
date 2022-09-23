@@ -2,6 +2,7 @@
 using CinemaProject.Data.Infrastructure.Context;
 using CinemaProject.Data.Models.Entities;
 using CinemaProject.Models.CartModels;
+using CinemaProject.Modlels.Requests.Queries.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ namespace CinemaProject.Controllers
         [HttpGet]
         public async Task<IActionResult> AddProductToCart(CartModelView model)
         {
+            var a = await _mediator.Send(new GetAllItemsInCartQuery());
             if (model.product != null)
             {
                 User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
