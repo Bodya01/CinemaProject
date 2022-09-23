@@ -13,13 +13,7 @@ namespace CinemaProject.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IMediator _mediator;
         private ApplicationDbContext data = new ApplicationDbContext();
-
-        public CartController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
 
         private Cart CreateNewCart(User currentUser)
         {
@@ -37,7 +31,6 @@ namespace CinemaProject.Controllers
         [HttpGet]
         public async Task<IActionResult> AddProductToCart(CartModelView model)
         {
-            var a = await _mediator.Send(new GetAllItemsInCartQuery());
             if (model.product != null)
             {
                 User currentUser = await data.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
