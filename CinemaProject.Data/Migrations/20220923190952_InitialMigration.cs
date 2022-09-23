@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CinemaProject.Migrations
+#nullable disable
+
+namespace CinemaProject.Data.Infrastructure.Migrations
 {
-    public partial class f1 : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -309,8 +311,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Subcategory_Category",
                         column: x => x.categoryId,
                         principalTable: "Category",
-                        principalColumn: "categoryId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "categoryId");
                 });
 
             migrationBuilder.CreateTable(
@@ -329,8 +330,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Cinema_City",
                         column: x => x.cityId,
                         principalTable: "City",
-                        principalColumn: "cityId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "cityId");
                 });
 
             migrationBuilder.CreateTable(
@@ -350,8 +350,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Location_City",
                         column: x => x.cityId,
                         principalTable: "City",
-                        principalColumn: "cityId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "cityId");
                 });
 
             migrationBuilder.CreateTable(
@@ -371,14 +370,12 @@ namespace CinemaProject.Migrations
                         name: "FK_MovieRating_Movie",
                         column: x => x.movieId,
                         principalTable: "Movie",
-                        principalColumn: "movieId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "movieId");
                     table.ForeignKey(
                         name: "FK_MovieRating_User",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -400,14 +397,12 @@ namespace CinemaProject.Migrations
                         name: "FK_Cart_Promocode",
                         column: x => x.promocodeId,
                         principalTable: "Promocode",
-                        principalColumn: "promocodeId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "promocodeId");
                     table.ForeignKey(
                         name: "FK_Cart_User",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -425,14 +420,12 @@ namespace CinemaProject.Migrations
                         name: "FK_MovieSubcategories_Movie",
                         column: x => x.movieId,
                         principalTable: "Movie",
-                        principalColumn: "movieId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "movieId");
                     table.ForeignKey(
                         name: "FK_MovieSubcategories_Subcategory",
                         column: x => x.subcategoryId,
                         principalTable: "Subcategory",
-                        principalColumn: "subcategoryId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "subcategoryId");
                 });
 
             migrationBuilder.CreateTable(
@@ -452,8 +445,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Hall_Cinema",
                         column: x => x.cinemaId,
                         principalTable: "Cinema",
-                        principalColumn: "cinemaId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "cinemaId");
                 });
 
             migrationBuilder.CreateTable(
@@ -472,14 +464,12 @@ namespace CinemaProject.Migrations
                         name: "FK_CartProducts_Cart",
                         columns: x => new { x.cartId, x.userId },
                         principalTable: "Cart",
-                        principalColumns: new[] { "cartId", "userId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "cartId", "userId" });
                     table.ForeignKey(
                         name: "FK_CartProducts_Product",
                         column: x => x.productId,
                         principalTable: "Product",
-                        principalColumn: "productId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "productId");
                 });
 
             migrationBuilder.CreateTable(
@@ -501,8 +491,7 @@ namespace CinemaProject.Migrations
                         name: "FK_Seat_Hall",
                         columns: x => new { x.hallId, x.cinemaId },
                         principalTable: "Hall",
-                        principalColumns: new[] { "hallId", "cinemaId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "hallId", "cinemaId" });
                 });
 
             migrationBuilder.CreateTable(
@@ -525,20 +514,17 @@ namespace CinemaProject.Migrations
                         name: "FK_Session_Demonstration",
                         column: x => x.demonstrationId,
                         principalTable: "Demonstration",
-                        principalColumn: "demonstrationId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "demonstrationId");
                     table.ForeignKey(
                         name: "FK_Session_Hall",
                         columns: x => new { x.hallId, x.CinemaId },
                         principalTable: "Hall",
-                        principalColumns: new[] { "hallId", "cinemaId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "hallId", "cinemaId" });
                     table.ForeignKey(
                         name: "FK_Session_Movie",
                         column: x => x.movieId,
                         principalTable: "Movie",
-                        principalColumn: "movieId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "movieId");
                 });
 
             migrationBuilder.CreateTable(
@@ -564,20 +550,17 @@ namespace CinemaProject.Migrations
                         name: "FK_Ticket_Cart",
                         columns: x => new { x.cartId, x.userId },
                         principalTable: "Cart",
-                        principalColumns: new[] { "cartId", "userId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "cartId", "userId" });
                     table.ForeignKey(
                         name: "FK_Ticket_Seat1",
                         columns: x => new { x.seatId, x.hallId },
                         principalTable: "Seat",
-                        principalColumns: new[] { "seatId", "hallId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "seatId", "hallId" });
                     table.ForeignKey(
                         name: "FK_Ticket_Session1",
                         columns: x => new { x.sessionId, x.movieId, x.hallId, x.demonstrationId },
                         principalTable: "Session",
-                        principalColumns: new[] { "sessionId", "movieId", "hallId", "demonstrationId" },
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumns: new[] { "sessionId", "movieId", "hallId", "demonstrationId" });
                 });
 
             migrationBuilder.CreateIndex(
