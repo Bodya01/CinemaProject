@@ -1,5 +1,8 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Data.Infrastructure.Context;
+using CinemaProject.Data.Models.Entities;
 using CinemaProject.Models.CartModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,7 +12,13 @@ namespace CinemaProject.Controllers
 {
     public class CartController : Controller
     {
+        private readonly IMediator _mediator;
         private ApplicationDbContext data = new ApplicationDbContext();
+
+        public CartController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         private Cart CreateNewCart(User currentUser)
         {
@@ -24,7 +33,7 @@ namespace CinemaProject.Controllers
             return cart;
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> AddProductToCart(CartModelView model)
         {
             if (model.product != null)

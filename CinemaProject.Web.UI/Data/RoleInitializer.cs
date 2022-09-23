@@ -1,4 +1,4 @@
-﻿
+﻿using CinemaProject.Data.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 

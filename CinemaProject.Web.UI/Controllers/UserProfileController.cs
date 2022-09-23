@@ -1,4 +1,6 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Data.Infrastructure.Context;
+using CinemaProject.Data.Models.Entities;
 using CinemaProject.Models.AdminModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

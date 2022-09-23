@@ -29,4 +29,9 @@
     <Folder Include="wwwroot\datatables\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CinemaProject.Data.Models\CinemaProject.Data.Models.csproj" />
+    <ProjectReference Include="..\CinemaProject.Data\CinemaProject.Data.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

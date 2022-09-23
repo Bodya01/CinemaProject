@@ -1,4 +1,5 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Data.Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaProject.Controllers

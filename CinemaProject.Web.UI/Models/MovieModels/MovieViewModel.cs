@@ -1,4 +1,5 @@
 ﻿using CinemaProject.Data;
+using CinemaProject.Data.Models.Entities;
 
 namespace CinemaProject.Models.MovieModels
 {

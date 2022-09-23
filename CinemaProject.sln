@@ -9,13 +9,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.UI", "CinemaP
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.Handlers", "CinemaProject.Handlers", "{2A78E081-F31E-473A-BD79-9C92D3197875}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.CommandHandlers", "CinemaProject.Commands\CinemaProject.CommandHandlers.csproj", "{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.CommandHandlers", "CinemaProject.Commands\CinemaProject.CommandHandlers.csproj", "{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.QueryHandlers", "CinemaProject.Queries\CinemaProject.QueryHandlers.csproj", "{8BA5AB16-51E8-456A-999C-DAD254902C27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.QueryHandlers", "CinemaProject.Queries\CinemaProject.QueryHandlers.csproj", "{8BA5AB16-51E8-456A-999C-DAD254902C27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.Models", "CinemaProject.Models", "{B74A73E8-F48B-4FBA-857E-833913F7330A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Modlels.Requests", "CinemaProject.Requests\CinemaProject.Modlels.Requests.csproj", "{A6595951-CA95-45AC-B110-4A98C0C48476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.Modlels.Requests", "CinemaProject.Requests\CinemaProject.Modlels.Requests.csproj", "{A6595951-CA95-45AC-B110-4A98C0C48476}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.Data", "CinemaProject.Data", "{5CE6E1DC-4A54-44CD-95CD-1FFCB7300918}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Data.Infrastructure", "CinemaProject.Data\CinemaProject.Data.Infrastructure.csproj", "{D37A3902-AC78-4995-82A0-C785ED7A03FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Data.Models", "CinemaProject.Data.Models\CinemaProject.Data.Models.csproj", "{0481EA60-9359-4DD2-BEEC-130AA1229351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Data.Configurations", "CinemaProject.Data.EntitiesConfigurations\CinemaProject.Data.Configurations.csproj", "{46507928-09B5-443F-8918-5EB6F68BFE93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CinemaProject.Installers", "CinemaProject.Installers", "{5657E8DE-0229-483E-9F38-8FE322D48DE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Installers", "CinemaProject.Installelrs\CinemaProject.Installers.csproj", "{900681BF-CEC7-45C7-B196-72F95749B781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +51,22 @@ Global
 		{A6595951-CA95-45AC-B110-4A98C0C48476}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6595951-CA95-45AC-B110-4A98C0C48476}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6595951-CA95-45AC-B110-4A98C0C48476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D37A3902-AC78-4995-82A0-C785ED7A03FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D37A3902-AC78-4995-82A0-C785ED7A03FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D37A3902-AC78-4995-82A0-C785ED7A03FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D37A3902-AC78-4995-82A0-C785ED7A03FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0481EA60-9359-4DD2-BEEC-130AA1229351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0481EA60-9359-4DD2-BEEC-130AA1229351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0481EA60-9359-4DD2-BEEC-130AA1229351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0481EA60-9359-4DD2-BEEC-130AA1229351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46507928-09B5-443F-8918-5EB6F68BFE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46507928-09B5-443F-8918-5EB6F68BFE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46507928-09B5-443F-8918-5EB6F68BFE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46507928-09B5-443F-8918-5EB6F68BFE93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{900681BF-CEC7-45C7-B196-72F95749B781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900681BF-CEC7-45C7-B196-72F95749B781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900681BF-CEC7-45C7-B196-72F95749B781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900681BF-CEC7-45C7-B196-72F95749B781}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +76,10 @@ Global
 		{C86FD7FF-21BF-4DE0-BFE9-99A28F8AEBB9} = {2A78E081-F31E-473A-BD79-9C92D3197875}
 		{8BA5AB16-51E8-456A-999C-DAD254902C27} = {2A78E081-F31E-473A-BD79-9C92D3197875}
 		{A6595951-CA95-45AC-B110-4A98C0C48476} = {B74A73E8-F48B-4FBA-857E-833913F7330A}
+		{D37A3902-AC78-4995-82A0-C785ED7A03FD} = {5CE6E1DC-4A54-44CD-95CD-1FFCB7300918}
+		{0481EA60-9359-4DD2-BEEC-130AA1229351} = {5CE6E1DC-4A54-44CD-95CD-1FFCB7300918}
+		{46507928-09B5-443F-8918-5EB6F68BFE93} = {5CE6E1DC-4A54-44CD-95CD-1FFCB7300918}
+		{900681BF-CEC7-45C7-B196-72F95749B781} = {5657E8DE-0229-483E-9F38-8FE322D48DE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB0D7A42-9277-45AD-842B-0E1B0413ADC0}

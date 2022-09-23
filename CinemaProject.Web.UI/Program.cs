@@ -1,4 +1,5 @@
 using CinemaProject.Data;
+using CinemaProject.Data.Models.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
