@@ -1,33 +1,24 @@
-﻿using CinemaProject.Data;
-using CinemaProject.Data.Infrastructure.Context;
+﻿using CinemaProject.Data.Infrastructure.Context;
 using CinemaProject.Data.Models.Entities;
 using CinemaProject.Models.MovieModels;
+using CinemaProject.Models.Requests.Queries.Requests.Movie;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CinemaProject.Controllers
 {
     public class MovieController : Controller
     {
+        private readonly IMediator _mediator;
         private readonly ApplicationDbContext _data = new ApplicationDbContext();
 
-
-        public MovieController(ApplicationDbContext data)
+        public MovieController(IMediator mediator)
         {
-            _data = data;
+            _mediator = mediator;
         }
-
-
-        private void FillSessionTime(List<string> list)
-        {
-            list.Add("10:00");
-            list.Add("13:00");
-            list.Add("16:00");
-            list.Add("19:00");
-            list.Add("22:00");
-        }
-
 
         public IActionResult Index()
         {
@@ -55,34 +46,29 @@ namespace CinemaProject.Controllers
             return View(movies);
 
         }
+
         [HttpGet]
         [Route("/Movie/CurrentFilm/{id:int}")]
-        public IActionResult CurrentFilm(int id)
+        public async Task<IActionResult> CurrentFilm(int id)
         {
-            CurentMovieViewModel model = new CurentMovieViewModel();
-            model.Movie = _data.Movies.FirstOrDefault(x => x.MovieId == id);
-            model.MovieSessions = _data.Sessions.Where(x => x.MovieId == model.Movie.MovieId).ToList();
-            var start = model.MovieSessions.Min(x => x.ScreenStart);
-            var end = model.MovieSessions.Max(x => x.ScreenEnd);
-            model.Start = $" {start.Day}{start.Month}{start.Year}";
-            model.End = $" {end.Day}{end.Month}{end.Year}";
-            model.TimeDuration = model.MovieSessions[0].ScreenEnd.Subtract(model.MovieSessions[0].ScreenStart).ToString();
-
-            FillSessionTime(model.SessionTimes);
-
-
-            foreach (var item in _data.MovieSubcategories.Where(x => x.MovieId == model.Movie.MovieId).ToList())
+            var request = new GetMovieByIdQuery
             {
+                MovieId = id,
+                Includes = new List<string> { "Sessions", "MovieSubcategories" }
+            };
 
-                model.MovieSubcategories += _data.Subcategories.FirstOrDefault(x => x.SubcategoryId == item.SubcategoryId).SubcategoryName + " ";
+            var reponse = await _mediator.Send(request);
+            CurentMovieViewModel model = null; 
+
+            if (reponse is not null)
+            {
+                model = new CurentMovieViewModel(reponse.Movie);
+
+                FillSessionTime(model.SessionTimes);
             }
-
 
             return View(model);
         }
-
-
-
 
         [HttpGet]
         [Route("/Movie/GetTicketSession/{id:int}")]
@@ -102,14 +88,13 @@ namespace CinemaProject.Controllers
             return View();
         }
 
-
-        public IActionResult CheckModel()
+        private void FillSessionTime(List<string> list)
         {
-            List<SeatModelView> list = new();
-
-            return Json(new { data = list });
-
+            list.Add("10:00");
+            list.Add("13:00");
+            list.Add("16:00");
+            list.Add("19:00");
+            list.Add("22:00");
         }
-
     }
 }
